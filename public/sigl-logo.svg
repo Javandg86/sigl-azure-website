@@ -1,0 +1,9 @@
+<svg width="420" height="120" viewBox="0 0 420 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="SIGL">
+  <rect width="420" height="120" fill="transparent"/>
+  <text x="18" y="78" font-family="Arial Black, Arial, Helvetica, sans-serif" font-size="70" font-weight="900" letter-spacing="-4" fill="white">S</text>
+  <text x="103" y="78" font-family="Arial Black, Arial, Helvetica, sans-serif" font-size="70" font-weight="900" letter-spacing="-4" fill="white">I</text>
+  <text x="154" y="78" font-family="Arial Black, Arial, Helvetica, sans-serif" font-size="70" font-weight="900" letter-spacing="-4" fill="white">G</text>
+  <text x="270" y="78" font-family="Arial Black, Arial, Helvetica, sans-serif" font-size="70" font-weight="900" letter-spacing="-4" fill="white">L</text>
+  <line x1="68" y1="56" x2="141" y2="56" stroke="white" stroke-width="8" stroke-linecap="square"/>
+  <line x1="118" y1="31" x2="118" y2="82" stroke="white" stroke-width="8" stroke-linecap="square"/>
+</svg>
