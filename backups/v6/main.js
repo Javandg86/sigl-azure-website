@@ -33,28 +33,6 @@ document.querySelector('#app').innerHTML = `
             <a class="btn secondary" href="#command">Enter Command Center</a>
           </div>
         </div>
-
-        <aside class="hero-cockpit" aria-label="SIGL AI assurance cockpit">
-          <div class="cockpit-top">
-            <span></span><span></span><span></span>
-            <strong>LIVE AI ASSURANCE VIEW</strong>
-          </div>
-
-          <div class="cockpit-core">
-            <div class="core-pulse"></div>
-            <div class="core-label">
-              <b>AI SYSTEM</b>
-              <em>UNDER REVIEW</em>
-            </div>
-          </div>
-
-          <div class="cockpit-grid">
-            <div><small>Threat Paths</small><strong>17</strong><span>mapped</span></div>
-            <div><small>Controls</small><strong>42</strong><span>validated</span></div>
-            <div><small>Evidence</small><strong>Ready</strong><span>audit trail</span></div>
-            <div><small>Status</small><strong>Active</strong><span>monitoring</span></div>
-          </div>
-        </aside>
       </section>
 
       <section id="command" class="command-center">
