@@ -4,7 +4,7 @@ document.querySelector('#app').innerHTML = `
   <div class="site-shell">
     <header class="nav">
       <a class="brand" href="#home" aria-label="SIGL home">
-        <img src="/sigl-logo.svg" alt="SIGL logo" />
+        <img src="/sigl-hero-logo.png" alt="SIGL logo" />
       </a>
 
       <nav class="nav-links">
@@ -25,7 +25,7 @@ document.querySelector('#app').innerHTML = `
 
         <div class="hero-content">
           <div class="hero-logo-lockup">
-            <img src="/sigl-logo.svg" alt="SIGL logo" />
+            <img src="/sigl-hero-logo.png" alt="SIGL logo" />
             <span>Independent AI Assurance</span>
           </div>
 
@@ -45,7 +45,7 @@ document.querySelector('#app').innerHTML = `
 
         <aside class="mission-panel" aria-label="SIGL AI assurance command panel">
           <div class="panel-top">
-            <img src="/sigl-logo.svg" alt="" />
+            <img src="/sigl-hero-logo.png" alt="" />
             <span>ASSURANCE OPS</span>
           </div>
 
@@ -184,7 +184,7 @@ document.querySelector('#app').innerHTML = `
       </section>
 
       <section id="contact" class="contact-section">
-        <img src="/sigl-logo.svg" alt="SIGL logo" />
+        <img src="/sigl-hero-logo.png" alt="SIGL logo" />
         <p class="eyebrow">Start Before The Risk Is Public</p>
         <h2>Bring SIGL in before your AI system is tested by the wrong audience.</h2>
         <p>Schedule an AI security review, AI penetration test, governance verification, or evidence readiness session.</p>
@@ -193,7 +193,7 @@ document.querySelector('#app').innerHTML = `
     </main>
 
     <footer>
-      <img src="/sigl-logo.svg" alt="SIGL logo" />
+      <img src="/sigl-hero-logo.png" alt="SIGL logo" />
       <span>AI Security • Governance • Evidence • Trust Verification</span>
     </footer>
   </div>
