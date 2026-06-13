@@ -24,7 +24,6 @@ document.querySelector('#app').innerHTML = `
         <div id="trustNetwork" class="trust-network" aria-hidden="true"></div>
 
         <div class="hero-copy">
-          <img class="hero-logo" src="${logo}" alt="SIGL logo" />
           <p class="eyebrow">SIGL — The AI Assurance Company</p>
           <h1>Verify trust in AI systems before the world tests them for you.</h1>
           <p>
