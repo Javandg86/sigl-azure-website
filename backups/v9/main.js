@@ -7,14 +7,11 @@ document.querySelector('#app').innerHTML = `
   <div class="site-shell">
     <header class="nav">
       <a class="brand" href="#home"><img src="${logo}" alt="SIGL logo" /></a>
-      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open navigation menu">☰</button>
-      <nav class="nav-links" id="siteNav">
+      <nav class="nav-links">
         <a href="#command">Command Center</a>
         <a href="#threats">Threats</a>
         <a href="#assurance">Assurance</a>
         <a href="#proof">Proof</a>
-        <a href="#careers">Careers</a>
-        <a href="#partnerships">Partnerships</a>
       </nav>
       <a class="nav-cta" href="#contact">Request Assessment</a>
     </header>
@@ -90,11 +87,9 @@ document.querySelector('#app').innerHTML = `
 
         <div class="threat-console">
           <div class="console-row"><b>Prompt Injection</b><span>Detected</span></div>
-          <div class="console-row"><b>LLM Output Manipulation</b><span>Tested</span></div>
-          <div class="console-row"><b>Sensitive Data Exposure</b><span>Mapped</span></div>
-          <div class="console-row"><b>Model Evasion</b><span>Validated</span></div>
-          <div class="console-row"><b>Autonomous Agent Abuse</b><span>Contained</span></div>
-          <div class="console-row"><b>AI Privacy Failure</b><span>Reviewed</span></div>
+          <div class="console-row"><b>Agent Tool Abuse</b><span>Contained</span></div>
+          <div class="console-row"><b>Data Exposure</b><span>Mapped</span></div>
+          <div class="console-row"><b>RAG Failure Mode</b><span>Validated</span></div>
           <div class="console-row"><b>Evidence Package</b><span>Generated</span></div>
         </div>
       </section>
@@ -110,28 +105,6 @@ document.querySelector('#app').innerHTML = `
           <article><h3>Governance Verification</h3><p>Policies, ownership, approvals, controls, documentation, and deployment readiness.</p></article>
           <article><h3>Architecture Review</h3><p>Cloud AI design, identity boundaries, logging, monitoring, and secure tool-use patterns.</p></article>
           <article><h3>Evidence Vault</h3><p>Findings, controls, remediation, logs, reports, and executive-ready assurance records.</p></article>
-          <article><h3>AI Adversarial Validation</h3><p>Evaluate AI systems against prompt injection, output manipulation, privacy exposure, model evasion, agent abuse, and advanced adversarial techniques before deployment.</p></article>
-        </div>
-      </section>
-
-      <section class="testing-section">
-        <div class="section-head center">
-          <p class="eyebrow">What SIGL Tests</p>
-          <h2>Advanced AI attack categories translated into business risk.</h2>
-          <p>
-            SIGL validates whether AI systems can resist the failure modes that matter most before they reach customers, employees, sensitive workflows, or executive review.
-          </p>
-        </div>
-
-        <div class="testing-grid">
-          <article><strong>Prompt Injection Resilience</strong><p>Test whether attackers can manipulate system behavior through direct or indirect prompt attacks.</p></article>
-          <article><strong>Output Manipulation Resistance</strong><p>Evaluate unsafe, misleading, unauthorized, or policy-breaking AI responses.</p></article>
-          <article><strong>Sensitive Data Protection</strong><p>Assess exposure risk across prompts, retrieval systems, logs, memory, files, and connected tools.</p></article>
-          <article><strong>Autonomous Agent Security</strong><p>Validate tool-use boundaries, privilege escalation paths, action controls, and human approval gates.</p></article>
-          <article><strong>Model Evasion Resistance</strong><p>Test adversarial techniques designed to bypass AI safety, detection, classification, or control logic.</p></article>
-          <article><strong>AI Privacy Controls</strong><p>Review privacy risks, data minimization, leakage paths, retention, and user-facing exposure.</p></article>
-          <article><strong>Human Oversight Validation</strong><p>Check whether humans can detect, intervene, approve, and document high-risk AI actions.</p></article>
-          <article><strong>Evidence Readiness</strong><p>Confirm the organization can prove what was tested, what failed, what changed, and what remains exposed.</p></article>
         </div>
       </section>
 
@@ -151,44 +124,6 @@ document.querySelector('#app').innerHTML = `
         </div>
       </section>
 
-
-      <section id="careers" class="careers-section">
-        <div class="split-copy">
-          <p class="eyebrow">Careers at SIGL</p>
-          <h2>Help build the future of AI Assurance.</h2>
-          <p>
-            SIGL is interested in connecting with AI security researchers, AI red teamers,
-            cloud security professionals, governance specialists, and AI engineers who want
-            to help organizations deploy AI responsibly and securely.
-          </p>
-          <a class="btn secondary" href="mailto:info@siglaicompliance.com?subject=SIGL%20Future%20Career%20Opportunities">Future Opportunities</a>
-        </div>
-      </section>
-
-      <section id="partnerships" class="partnerships-section">
-        <div class="split-copy">
-          <p class="eyebrow">Partnerships</p>
-          <h2>Partner with SIGL to help clients secure and verify AI systems.</h2>
-          <p>
-            SIGL collaborates with organizations that help clients deploy secure,
-            governed, and defensible AI systems.
-          </p>
-        </div>
-
-        <div class="partner-grid">
-          <article>Technology Consultants</article>
-          <article>Compliance Advisors</article>
-          <article>Managed Service Providers</article>
-          <article>Managed Security Service Providers</article>
-          <article>AI Startups</article>
-          <article>Cloud Solution Providers</article>
-          <article>Industry Associations</article>
-          <article>Technology Incubators & Accelerators</article>
-        </div>
-
-        <a class="btn primary" href="mailto:info@siglaicompliance.com?subject=SIGL%20Partnership%20Opportunity">Explore Partnership Opportunities</a>
-      </section>
-
       <section id="contact" class="contact-section">
         <img src="${logo}" alt="SIGL logo" />
         <p class="eyebrow">Start Before The Risk Is Public</p>
@@ -206,15 +141,3 @@ document.querySelector('#app').innerHTML = `
 `
 
 initAiTrustNetwork(document.getElementById('trustNetwork'))
-
-
-const mobileMenuBtn = document.getElementById('mobileMenuBtn')
-const siteNav = document.getElementById('siteNav')
-
-mobileMenuBtn?.addEventListener('click', () => {
-  siteNav?.classList.toggle('open')
-})
-
-siteNav?.querySelectorAll('a').forEach((link) => {
-  link.addEventListener('click', () => siteNav.classList.remove('open'))
-})
