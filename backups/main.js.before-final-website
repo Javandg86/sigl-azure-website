@@ -9,13 +9,13 @@ document.querySelector('#app').innerHTML = `
 
       <nav class="nav-links">
         <a href="#command">Command Center</a>
-        <a href="#outcomes">Outcomes</a>
         <a href="#services">Capabilities</a>
-        <a href="#why">Why SIGL</a>
+        <a href="#method">Method</a>
         <a href="#proof">Proof</a>
+        <a href="#contact">Contact</a>
       </nav>
 
-      <a class="nav-cta" href="#contact">Request Assessment</a>
+      <a class="nav-cta" href="#contact">Schedule Assessment</a>
     </header>
 
     <main id="home">
@@ -30,19 +30,20 @@ document.querySelector('#app').innerHTML = `
           </div>
 
           <p class="eyebrow">AI Security • Governance • Evidence</p>
-          <h1>Independent verification for high-risk AI systems.</h1>
+          <h1>Secure AI before the world tests it for you.</h1>
           <p class="hero-lead">
-            SIGL helps organizations prove their AI systems are secure, governed,
-            and defensible before attackers, customers, auditors, or regulators expose the risk.
+            SIGL independently verifies AI systems through adversarial testing,
+            governance validation, and audit-ready evidence for organizations where
+            trust, security, and accountability matter.
           </p>
 
           <div class="hero-actions">
-            <a class="btn primary" href="#contact">Request an AI Assurance Assessment</a>
-            <a class="btn secondary" href="#command">See the SIGL Method</a>
+            <a class="btn primary" href="#contact">Start an AI Security Review</a>
+            <a class="btn secondary" href="#services">Explore Capabilities</a>
           </div>
         </div>
 
-        <aside class="mission-panel">
+        <aside class="mission-panel" aria-label="SIGL AI assurance command panel">
           <div class="panel-top">
             <img src="/sigl-hero-logo.png" alt="" />
             <span>ASSURANCE OPS</span>
@@ -57,14 +58,15 @@ document.querySelector('#app').innerHTML = `
 
           <div class="status-grid">
             <div><strong>AI Surface</strong><span>Mapped</span></div>
-            <div><strong>Abuse Paths</strong><span>Tested</span></div>
-            <div><strong>Controls</strong><span>Verified</span></div>
-            <div><strong>Evidence</strong><span>Ready</span></div>
+            <div><strong>Prompt Risk</strong><span>Tested</span></div>
+            <div><strong>Agent Tools</strong><span>Bounded</span></div>
+            <div><strong>Evidence</strong><span>Collected</span></div>
           </div>
         </aside>
       </section>
 
-      <section id="command" class="threat-command">
+
+      <section class="threat-command" aria-label="AI assurance command center">
         <div class="threat-copy">
           <p class="eyebrow">AI Assurance Command Center</p>
           <h2>From attack surface to defensible trust.</h2>
@@ -79,6 +81,7 @@ document.querySelector('#app').innerHTML = `
             <strong>AI SYSTEM</strong>
             <span>Agents • Prompts • Data • Tools</span>
           </div>
+
           <div class="threat-node n1"><strong>Threats</strong><span>Injection • Leakage • Abuse</span></div>
           <div class="threat-node n2"><strong>Testing</strong><span>Adversarial validation</span></div>
           <div class="threat-node n3"><strong>Controls</strong><span>Guardrails • Monitoring</span></div>
@@ -93,17 +96,23 @@ document.querySelector('#app').innerHTML = `
         </div>
       </section>
 
-      <section id="outcomes" class="outcomes-section">
-        <div class="section-heading">
-          <p class="eyebrow">Executive Outcomes</p>
-          <h2>What leadership gets from SIGL.</h2>
+      <section id="command" class="command-section">
+        <div class="command-copy">
+          <p class="eyebrow">Built For</p>
+          <h2>Organizations that cannot afford AI failure.</h2>
+          <p>
+            SIGL is designed for teams operating AI systems in environments where
+            security, trust, accountability, and evidence matter.
+          </p>
         </div>
 
-        <div class="dashboard">
-          <article><span>01</span><strong>Risk Visibility</strong><p>Know where AI systems can fail, leak data, be abused, or create business exposure.</p></article>
-          <article><span>02</span><strong>Defensible Evidence</strong><p>Show what was tested, what was found, what changed, and what remains unresolved.</p></article>
-          <article><span>03</span><strong>Deployment Confidence</strong><p>Reduce uncertainty before AI systems reach customers, employees, or sensitive workflows.</p></article>
-          <article><span>04</span><strong>Customer Readiness</strong><p>Prepare for security reviews, enterprise procurement, vendor risk, and board-level questions.</p></article>
+        <div class="orbit-grid">
+          <article><span>01</span><h3>AI-Enabled Products</h3><p>Validate AI features before they reach production users.</p></article>
+          <article><span>02</span><h3>Trust-Critical Systems</h3><p>Reduce uncertainty where decisions or workflows rely on AI outputs.</p></article>
+          <article><span>03</span><h3>Sensitive Data Environments</h3><p>Test for leakage, exposure, misuse, and weak retrieval boundaries.</p></article>
+          <article><span>04</span><h3>Regulated Operations</h3><p>Connect AI risks to controls, governance, and audit-readiness.</p></article>
+          <article><span>05</span><h3>Executive Accountability</h3><p>Give leaders clear risk visibility before issues become public.</p></article>
+          <article><span>06</span><h3>Evidence-Driven Teams</h3><p>Turn findings, remediation, and control validation into defensible records.</p></article>
         </div>
       </section>
 
@@ -118,8 +127,8 @@ document.querySelector('#app').innerHTML = `
             <span>01</span>
             <h3>AI Penetration Testing</h3>
             <p>
-              Real-world testing for LLM apps, autonomous agents, prompts, APIs,
-              RAG pipelines, tool integrations, data exposure, and workflow abuse paths.
+              Real-world testing for LLM apps, agents, prompts, APIs, RAG pipelines,
+              tool integrations, data exposure, and workflow abuse paths.
             </p>
           </article>
 
@@ -143,21 +152,17 @@ document.querySelector('#app').innerHTML = `
         </div>
       </section>
 
-      <section id="why" class="why-section">
-        <div>
-          <p class="eyebrow">Why SIGL</p>
-          <h2>Most firms test. SIGL helps you prove.</h2>
+      <section id="method" class="method-section">
+        <div class="method-head">
+          <p class="eyebrow">The SIGL Method</p>
+          <h2>Proof over promises.</h2>
         </div>
 
-        <div class="why-copy">
-          <p>
-            AI risk does not stop at a vulnerability report. Organizations need security testing,
-            governance validation, remediation visibility, and evidence that can stand up to scrutiny.
-          </p>
-          <p>
-            SIGL connects those pieces into a single assurance model built for organizations that
-            cannot afford weak AI controls, unclear ownership, or undocumented risk decisions.
-          </p>
+        <div class="method-rail">
+          <div><span>Assess</span><p>Map systems, data flows, AI workflows, integrations, identities, and risk owners.</p></div>
+          <div><span>Attack</span><p>Test realistic abuse paths across prompts, agents, APIs, retrieval, and automation layers.</p></div>
+          <div><span>Control</span><p>Connect findings to guardrails, monitoring, policy, and remediation actions.</p></div>
+          <div><span>Prove</span><p>Deliver executive-ready evidence for customer reviews, audits, and risk decisions.</p></div>
         </div>
       </section>
 
@@ -181,9 +186,9 @@ document.querySelector('#app').innerHTML = `
       <section id="contact" class="contact-section">
         <img src="/sigl-hero-logo.png" alt="SIGL logo" />
         <p class="eyebrow">Start Before The Risk Is Public</p>
-        <h2>Evaluate your AI risk exposure before someone else does.</h2>
+        <h2>Bring SIGL in before your AI system is tested by the wrong audience.</h2>
         <p>Schedule an AI security review, AI penetration test, governance verification, or evidence readiness session.</p>
-        <a class="btn primary" href="mailto:info@siglaicompliance.com?subject=SIGL%20AI%20Assurance%20Assessment%20Request">Request Assessment</a>
+        <a class="btn primary" href="mailto:info@siglaicompliance.com?subject=SIGL%20AI%20Security%20Review%20Request">Contact SIGL</a>
       </section>
     </main>
 
