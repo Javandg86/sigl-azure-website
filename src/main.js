@@ -63,15 +63,6 @@ document.querySelector('#app').innerHTML = `
 
       <section id="pulse" class="pulse-section">
         <div class="pulse-shell">
-          <div class="pulse-topbar">
-            <img src="${logo}" alt="SIGL logo" />
-            <div class="pulse-security">
-              <span>Enterprise Grade Security</span>
-              <span>Your data is secure</span>
-              <span>Help</span>
-            </div>
-          </div>
-
           <div class="pulse-bg-orb"></div>
           <div class="pulse-bg-net"></div>
 
@@ -87,11 +78,44 @@ document.querySelector('#app').innerHTML = `
             </div>
             <div class="pulse-actions">
               <button class="pulse-btn primary" data-next>Start Assessment →</button>
-              <button class="pulse-btn ghost">Learn More →</button>
+              <button class="pulse-btn ghost" data-learn>Learn More →</button>
             </div>
             <div class="pulse-notes">
               <span>✓ No technical expertise required</span>
               <span>⚡ Instant results</span>
+            </div>
+          </div>
+
+          <div class="pulse-screen pulse-learn-screen" data-step="learn">
+            <h2>What is the AI Risk Pulse Check?</h2>
+            <p>
+              The AI Risk Pulse Check is a quick assessment designed to help organizations
+              identify potential gaps in AI governance, testing, documentation, oversight,
+              and vendor exposure.
+            </p>
+
+            <div class="pulse-learn-grid">
+              <article>
+                <h3>Why it matters</h3>
+                <p>AI systems can introduce business, privacy, security, legal, and operational risk faster than traditional review processes can detect. A pulse check gives leadership early visibility before those gaps become public issues.</p>
+              </article>
+              <article>
+                <h3>What it reviews</h3>
+                <p>The assessment reviews AI usage, customer-facing exposure, sensitive data handling, vendor reliance, governance maturity, documentation, testing, oversight, and audit evidence readiness.</p>
+              </article>
+              <article>
+                <h3>What they’ll get</h3>
+                <p>Participants receive a risk pulse score, key exposure signals, and a recommended next step based on their responses. It is not a full audit, but it helps identify where deeper review is needed.</p>
+              </article>
+              <article>
+                <h3>The benefits</h3>
+                <p>Organizations can quickly understand AI risk posture, prepare for customer security reviews, strengthen governance, prioritize remediation, and decide whether they need AI pentesting or an AI assurance review.</p>
+              </article>
+            </div>
+
+            <div class="pulse-actions">
+              <button class="pulse-btn ghost" data-home>← Back</button>
+              <button class="pulse-btn primary" data-start>Take Assessment →</button>
             </div>
           </div>
 
@@ -179,7 +203,7 @@ document.querySelector('#app').innerHTML = `
 
           <div class="pulse-screen" data-step="6">
             <h2>Your AI Risk Pulse Checker Results</h2>
-            <p>Your organization shows identifiable AI risk that should be reviewed.</p>
+            <p>Your score is calculated based on your answers across AI usage, data exposure, governance, documentation, testing, and oversight.</p>
             <div class="pulse-results">
               <div class="risk-ring"><span id="riskScore">0</span><small>/100</small><em>Elevated Risk</em></div>
               <div class="result-card">🛡️<strong>62%</strong><span>Governance</span></div>
@@ -377,8 +401,10 @@ siteNav?.querySelectorAll('a').forEach((link) => {
 })
 
 
+
 const pulseScreens = [...document.querySelectorAll('.pulse-screen')]
 let pulseStep = 0
+let lastPulseStep = 0
 
 function showPulseStep(nextStep) {
   pulseStep = Math.max(0, Math.min(nextStep, pulseScreens.length - 1))
@@ -386,21 +412,68 @@ function showPulseStep(nextStep) {
     screen.classList.toggle('active', index === pulseStep)
   })
 
-  if (pulseStep === 6) {
-    const score = document.getElementById('riskScore')
-    if (score && !score.dataset.done) {
-      score.dataset.done = 'true'
-      let n = 0
-      const timer = setInterval(() => {
-        n += 2
-        score.textContent = n
-        if (n >= 68) {
-          score.textContent = '68'
-          clearInterval(timer)
-        }
-      }, 22)
-    }
+  if (pulseStep === 7) {
+    animateRiskScore(calculateRiskScore())
   }
+}
+
+function showPulseLearn() {
+  lastPulseStep = pulseStep
+  pulseScreens.forEach((screen) => screen.classList.remove('active'))
+  document.querySelector('.pulse-learn-screen')?.classList.add('active')
+}
+
+function showPulseHome() {
+  pulseScreens.forEach((screen) => screen.classList.remove('active'))
+  pulseScreens[0]?.classList.add('active')
+  pulseStep = 0
+}
+
+function calculateRiskScore() {
+  let risk = 18
+
+  const selectedTexts = [...document.querySelectorAll('#pulse .selected')]
+    .map((el) => el.textContent.trim().toLowerCase())
+
+  const addIf = (condition, points) => {
+    if (condition) risk += points
+  }
+
+  addIf(selectedTexts.some(t => t.includes('yes, actively')), 8)
+  addIf(selectedTexts.some(t => t.includes('customer support chatbot')), 6)
+  addIf(selectedTexts.some(t => t.includes('workflow automation')), 8)
+  addIf(selectedTexts.some(t => t.includes('decision support')), 10)
+  addIf(selectedTexts.some(t => t.includes('yes')), 8)
+  addIf(selectedTexts.some(t => t.includes('not sure')), 9)
+  addIf(selectedTexts.some(t => t.includes('not in place')), 12)
+  addIf(selectedTexts.some(t => t.includes('partial')), 7)
+  addIf(selectedTexts.some(t => t.includes('not yet')), 13)
+  addIf(selectedTexts.some(t => t.includes('sometimes')), 7)
+
+  const selectedCount = selectedTexts.length
+  if (selectedCount > 10) risk += 4
+  if (selectedCount > 14) risk += 5
+
+  return Math.max(12, Math.min(96, risk))
+}
+
+function animateRiskScore(finalScore) {
+  const score = document.getElementById('riskScore')
+  if (!score) return
+
+  score.dataset.done = String(finalScore)
+  let n = 0
+  const step = Math.max(1, Math.ceil(finalScore / 34))
+
+  const timer = setInterval(() => {
+    n += step
+    if (n >= finalScore) {
+      score.textContent = String(finalScore)
+      clearInterval(timer)
+    } else {
+      score.textContent = String(n)
+    }
+  }, 24)
 }
 
 document.querySelectorAll('[data-next]').forEach((btn) => {
@@ -409,6 +482,18 @@ document.querySelectorAll('[data-next]').forEach((btn) => {
 
 document.querySelectorAll('[data-prev]').forEach((btn) => {
   btn.addEventListener('click', () => showPulseStep(pulseStep - 1))
+})
+
+document.querySelectorAll('[data-learn]').forEach((btn) => {
+  btn.addEventListener('click', () => showPulseLearn())
+})
+
+document.querySelectorAll('[data-home]').forEach((btn) => {
+  btn.addEventListener('click', () => showPulseHome())
+})
+
+document.querySelectorAll('[data-start]').forEach((btn) => {
+  btn.addEventListener('click', () => showPulseStep(1))
 })
 
 document.querySelectorAll('.pulse-options button, .pulse-use-grid button, .pulse-governance button').forEach((btn) => {
