@@ -9,6 +9,7 @@ document.querySelector('#app').innerHTML = `
       <a class="brand" href="#home"><img src="${logo}" alt="SIGL logo" /></a>
       <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open navigation menu">☰</button>
       <nav class="nav-links" id="siteNav">
+        <a href="#pulse">Pulse Check</a>
         <a href="#command">Command Center</a>
         <a href="#threats">Threats</a>
         <a href="#assurance">Assurance</a>
@@ -57,6 +58,163 @@ document.querySelector('#app').innerHTML = `
             <div><small>Status</small><strong>Active</strong><span>monitoring</span></div>
           </div>
         </aside>
+      </section>
+
+
+      <section id="pulse" class="pulse-section">
+        <div class="pulse-shell">
+          <div class="pulse-topbar">
+            <img src="${logo}" alt="SIGL logo" />
+            <div class="pulse-security">
+              <span>Enterprise Grade Security</span>
+              <span>Your data is secure</span>
+              <span>Help</span>
+            </div>
+          </div>
+
+          <div class="pulse-bg-orb"></div>
+          <div class="pulse-bg-net"></div>
+
+          <div class="pulse-screen active" data-step="0">
+            <h2>Free AI Risk<br/>Pulse Check</h2>
+            <h3>Find out if your organization is audit-ready.</h3>
+            <p>This quick 3-minute assessment helps identify gaps in AI governance, testing, documentation, and oversight.</p>
+            <div class="pulse-feature-grid">
+              <div>🛡️<span>AI Governance</span></div>
+              <div>📋<span>Testing</span></div>
+              <div>📄<span>Documentation</span></div>
+              <div>👁️<span>Oversight</span></div>
+            </div>
+            <div class="pulse-actions">
+              <button class="pulse-btn primary" data-next>Start Assessment →</button>
+              <button class="pulse-btn ghost">Learn More →</button>
+            </div>
+            <div class="pulse-notes">
+              <span>✓ No technical expertise required</span>
+              <span>⚡ Instant results</span>
+            </div>
+          </div>
+
+          <div class="pulse-screen" data-step="1">
+            <p class="pulse-step">STEP 1 OF 5</p>
+            <h2>About Your Organization</h2>
+            <p>Help us understand your organization so we can tailor your AI Risk Pulse Check.</p>
+            <div class="pulse-form-card">
+              <label>Company name <input value="Acme Corp" /></label>
+              <label>Industry <select><option>Healthcare</option><option>Technology</option><option>Financial Services</option><option>Government</option><option>Other</option></select></label>
+              <label>Company size <select><option>11–50 employees</option><option>51–200 employees</option><option>201–1,000 employees</option><option>1,000+ employees</option></select></label>
+              <label>Your role <select><option>Founder / Operator</option><option>CISO / Security Leader</option><option>Compliance / Risk</option><option>Executive</option></select></label>
+              <div class="pulse-wide">
+                <strong>Are you currently using AI in your business?</strong>
+                <div class="pulse-options"><button class="selected">Yes, actively</button><button>Piloting / exploring</button><button>Not yet</button></div>
+              </div>
+              <button class="pulse-btn ghost" data-prev>← Back</button>
+              <button class="pulse-btn primary" data-next>Continue →</button>
+            </div>
+          </div>
+
+          <div class="pulse-screen" data-step="2">
+            <p class="pulse-step">STEP 2 OF 5</p>
+            <h2>How Are You Using AI?</h2>
+            <p>Select the ways your organization is currently using or planning to use AI.</p>
+            <div class="pulse-use-grid">
+              <button class="selected">💬 Customer support chatbot</button>
+              <button class="selected">📄 Content generation</button>
+              <button>📈 Data analysis / forecasting</button>
+              <button class="selected">👤 Internal copilot</button>
+              <button class="selected">🔗 Workflow automation</button>
+              <button>⚖️ Decision support</button>
+            </div>
+            <h3>Is any of this AI customer-facing?</h3>
+            <div class="pulse-options"><button class="selected">Yes</button><button>No</button><button>Not sure</button></div>
+            <div class="pulse-actions"><button class="pulse-btn ghost" data-prev>← Back</button><button class="pulse-btn primary" data-next>Continue →</button></div>
+          </div>
+
+          <div class="pulse-screen" data-step="3">
+            <p class="pulse-step">STEP 3 OF 5</p>
+            <h2>Data & Vendor Exposure</h2>
+            <p>These questions help us understand data handling and external AI dependency risk.</p>
+            <div class="pulse-question-layout">
+              <div class="pulse-governance">
+                <div><b>1</b><span>Does your AI process personal, confidential, or sensitive business data?</span><button class="selected">Yes</button><button>No</button><button>Not sure</button></div>
+                <div><b>2</b><span>Do you rely on third-party AI vendors or models?</span><button class="selected">Yes</button><button>No</button><button>Not sure</button></div>
+                <div><b>3</b><span>Does AI influence recommendations or decisions affecting people?</span><button class="selected">Yes</button><button>No</button><button>Not sure</button></div>
+                <div><b>4</b><span>Do you know which data is being sent to external AI tools?</span><button>Yes</button><button>No</button><button class="selected">Not sure</button></div>
+              </div>
+              <aside class="pulse-signal-card">
+                <h3>Current Exposure Signals</h3>
+                <p>🛡️ Sensitive data <em>Elevated</em></p>
+                <p>👥 Vendor reliance <em>Elevated</em></p>
+                <p>🎯 Decision impact <em>Elevated</em></p>
+              </aside>
+            </div>
+            <div class="pulse-actions"><button class="pulse-btn ghost" data-prev>← Back</button><button class="pulse-btn primary" data-next>Continue →</button></div>
+          </div>
+
+          <div class="pulse-screen" data-step="4">
+            <p class="pulse-step">STEP 4 OF 5</p>
+            <h2>Governance & Documentation</h2>
+            <p>Strong governance and documentation help demonstrate AI due diligence.</p>
+            <div class="pulse-governance">
+              <div><b>1</b><span>Do you have a written AI use policy?</span><button>In place</button><button class="selected">Partial</button><button>Not in place</button></div>
+              <div><b>2</b><span>Has someone been assigned accountability for AI oversight?</span><button class="selected">In place</button><button>Partial</button><button>Not in place</button></div>
+              <div><b>3</b><span>Do you maintain an inventory of AI tools and systems?</span><button>In place</button><button>Partial</button><button class="selected">Not in place</button></div>
+              <div><b>4</b><span>Do you document AI decisions, approvals, or evidence?</span><button>In place</button><button class="selected">Partial</button><button>Not in place</button></div>
+            </div>
+            <div class="pulse-actions"><button class="pulse-btn ghost" data-prev>← Back</button><button class="pulse-btn primary" data-next>Continue →</button></div>
+          </div>
+
+          <div class="pulse-screen" data-step="5">
+            <p class="pulse-step">STEP 5 OF 5</p>
+            <h2>Testing & Oversight</h2>
+            <p>Testing and human oversight help ensure AI systems are safe, reliable, and accountable.</p>
+            <div class="pulse-governance">
+              <div><b>1</b><span>Do you test AI systems for harmful outputs, prompt issues, or misuse?</span><button>Regularly</button><button>Sometimes</button><button class="selected">Not yet</button></div>
+              <div><b>2</b><span>Is there human review for important AI outputs?</span><button>Regularly</button><button class="selected">Sometimes</button><button>Not yet</button></div>
+              <div><b>3</b><span>Do you retain audit evidence, reports, or supporting files?</span><button>Regularly</button><button class="selected">Sometimes</button><button>Not yet</button></div>
+              <div><b>4</b><span>Do you have a process for AI incidents or failures?</span><button>Regularly</button><button>Sometimes</button><button class="selected">Not yet</button></div>
+            </div>
+            <div class="pulse-actions"><button class="pulse-btn ghost" data-prev>← Back</button><button class="pulse-btn primary" data-next>See My Results →</button></div>
+          </div>
+
+          <div class="pulse-screen" data-step="6">
+            <h2>Your AI Risk Pulse Checker Results</h2>
+            <p>Your organization shows identifiable AI risk that should be reviewed.</p>
+            <div class="pulse-results">
+              <div class="risk-ring"><span id="riskScore">0</span><small>/100</small><em>Elevated Risk</em></div>
+              <div class="result-card">🛡️<strong>62%</strong><span>Governance</span></div>
+              <div class="result-card">📋<strong>38%</strong><span>Testing</span></div>
+              <div class="result-card">📄<strong>49%</strong><span>Documentation</span></div>
+              <div class="result-card">👁️<strong>57%</strong><span>Oversight</span></div>
+            </div>
+            <div class="pulse-results-grid">
+              <div><h3>Top Risk Signals</h3><p>• No formal testing program</p><p>• Incomplete AI inventory</p><p>• Limited audit evidence</p><p>• Sensitive data and vendor exposure</p></div>
+              <div><h3>Recommended Service Path</h3><strong>AI Risk & Audit Readiness Review</strong><p>Get a prioritized assessment of your AI risk posture, control gaps, and audit readiness.</p></div>
+            </div>
+            <button class="pulse-btn primary" data-next>Next Step →</button>
+          </div>
+
+          <div class="pulse-screen" data-step="7">
+            <h2>Take the Next Step</h2>
+            <p>Your results show AI risk areas that may need attention.</p>
+            <div class="pulse-next">
+              <div>
+                <h3>Recommended Service Path</h3>
+                <div class="recommended">🛡️ <strong>AI Risk & Audit Readiness Review</strong><p>A focused review to confirm governance, documentation, testing, and oversight gaps.</p></div>
+                <p>✓ Review your risk snapshot</p><p>✓ Get tailored next-step recommendations</p><p>✓ Learn how to secure and document your AI systems</p>
+              </div>
+              <form class="pulse-lead-form">
+                <h3>Schedule Your Free Consultation</h3>
+                <input placeholder="Name" />
+                <input placeholder="Company" />
+                <input placeholder="Work Email" />
+                <select><option>Preferred Timeframe</option><option>This week</option><option>Next week</option><option>This month</option></select>
+                <a class="pulse-btn primary" href="mailto:info@siglaicompliance.com?subject=SIGL%20AI%20Risk%20Pulse%20Check%20Consultation">Schedule Free Consultation →</a>
+                <a class="pulse-btn ghost" href="mailto:info@siglaicompliance.com?subject=Email%20My%20AI%20Risk%20Pulse%20Results">Email Results to Me</a>
+              </form>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section id="command" class="command-center">
@@ -217,3 +375,49 @@ mobileMenuBtn?.addEventListener('click', () => {
 siteNav?.querySelectorAll('a').forEach((link) => {
   link.addEventListener('click', () => siteNav.classList.remove('open'))
 })
+
+
+const pulseScreens = [...document.querySelectorAll('.pulse-screen')]
+let pulseStep = 0
+
+function showPulseStep(nextStep) {
+  pulseStep = Math.max(0, Math.min(nextStep, pulseScreens.length - 1))
+  pulseScreens.forEach((screen, index) => {
+    screen.classList.toggle('active', index === pulseStep)
+  })
+
+  if (pulseStep === 6) {
+    const score = document.getElementById('riskScore')
+    if (score && !score.dataset.done) {
+      score.dataset.done = 'true'
+      let n = 0
+      const timer = setInterval(() => {
+        n += 2
+        score.textContent = n
+        if (n >= 68) {
+          score.textContent = '68'
+          clearInterval(timer)
+        }
+      }, 22)
+    }
+  }
+}
+
+document.querySelectorAll('[data-next]').forEach((btn) => {
+  btn.addEventListener('click', () => showPulseStep(pulseStep + 1))
+})
+
+document.querySelectorAll('[data-prev]').forEach((btn) => {
+  btn.addEventListener('click', () => showPulseStep(pulseStep - 1))
+})
+
+document.querySelectorAll('.pulse-options button, .pulse-use-grid button, .pulse-governance button').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    const group = btn.parentElement
+    if (!group.classList.contains('pulse-use-grid')) {
+      group.querySelectorAll('button').forEach((b) => b.classList.remove('selected'))
+    }
+    btn.classList.toggle('selected')
+  })
+})
+
