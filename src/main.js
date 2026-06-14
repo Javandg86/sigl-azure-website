@@ -227,13 +227,13 @@ document.querySelector('#app').innerHTML = `
                 <div class="recommended">🛡️ <strong>AI Risk & Audit Readiness Review</strong><p>A focused review to confirm governance, documentation, testing, and oversight gaps.</p></div>
                 <p>✓ Review your risk snapshot</p><p>✓ Get tailored next-step recommendations</p><p>✓ Learn how to secure and document your AI systems</p>
               </div>
-              <form class="pulse-lead-form">
+              <form class="pulse-lead-form" id="pulseLeadForm">
                 <h3>Schedule Your Free Consultation</h3>
                 <input placeholder="Name" />
                 <input placeholder="Company" />
                 <input placeholder="Work Email" />
                 <select><option>Preferred Timeframe</option><option>This week</option><option>Next week</option><option>This month</option></select>
-                <a class="pulse-btn primary" href="mailto:info@siglaicompliance.com?subject=SIGL%20AI%20Risk%20Pulse%20Check%20Consultation">Schedule Free Consultation →</a>
+                <button class="pulse-btn primary" type="submit">Schedule Free Consultation →</button>
                 <a class="pulse-btn ghost" href="mailto:info@siglaicompliance.com?subject=Email%20My%20AI%20Risk%20Pulse%20Results">Email Results to Me</a>
               </form>
             </div>
@@ -520,3 +520,71 @@ document.addEventListener('click', (event) => {
   firstAssessmentScreen?.classList.add('active')
   pulseStep = 1
 }, true)
+
+
+const pulseLeadForm = document.getElementById('pulseLeadForm')
+
+pulseLeadForm?.addEventListener('submit', async (event) => {
+  event.preventDefault()
+
+  const inputs = pulseLeadForm.querySelectorAll('input')
+  const timeframe = pulseLeadForm.querySelector('select')?.value || ''
+  const finalScore = calculateRiskScore()
+
+  const selectedSignals = [...document.querySelectorAll('#pulse .selected')]
+    .map((el) => el.textContent.trim())
+    .filter(Boolean)
+
+  const orgScreen = document.querySelector('.pulse-screen[data-step="1"]')
+  const orgInputs = orgScreen?.querySelectorAll('input, select') || []
+
+  const payload = {
+    name: inputs[0]?.value || '',
+    company: inputs[1]?.value || orgInputs[0]?.value || '',
+    email: inputs[2]?.value || '',
+    timeframe,
+    score: finalScore,
+    industry: orgInputs[1]?.value || '',
+    companySize: orgInputs[2]?.value || '',
+    role: orgInputs[3]?.value || '',
+    selectedSignals
+  }
+
+  const submitButton = pulseLeadForm.querySelector('button[type="submit"]')
+  const originalText = submitButton?.textContent || 'Schedule Free Consultation →'
+
+  if (submitButton) {
+    submitButton.textContent = 'Sending...'
+    submitButton.disabled = true
+  }
+
+  try {
+    const response = await fetch('/api/pulse-lead', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+
+    if (!response.ok) throw new Error('API request failed')
+
+    if (submitButton) {
+      submitButton.textContent = 'Request Sent ✓'
+    }
+
+    const status = document.createElement('p')
+    status.className = 'pulse-submit-status'
+    status.textContent = 'Your request was received. SIGL will follow up using the email you provided.'
+    pulseLeadForm.appendChild(status)
+  } catch (error) {
+    if (submitButton) {
+      submitButton.textContent = 'Try Again'
+      submitButton.disabled = false
+    }
+
+    const status = document.createElement('p')
+    status.className = 'pulse-submit-status error'
+    status.textContent = 'Something went wrong. Please email info@siglaicompliance.com directly.'
+    pulseLeadForm.appendChild(status)
+  }
+})
+
