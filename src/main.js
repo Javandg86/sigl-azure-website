@@ -510,3 +510,20 @@ document.querySelectorAll('.pulse-options button, .pulse-use-grid button, .pulse
   })
 })
 
+
+// Final Pulse Checker start-flow override
+document.addEventListener('click', (event) => {
+  const startButton = event.target.closest('[data-start]')
+  if (!startButton) return
+
+  event.preventDefault()
+  event.stopImmediatePropagation()
+
+  document.querySelectorAll('.pulse-screen').forEach((screen) => {
+    screen.classList.remove('active')
+  })
+
+  const firstAssessmentScreen = document.querySelector('.pulse-screen[data-step="1"]')
+  firstAssessmentScreen?.classList.add('active')
+  pulseStep = 1
+}, true)
