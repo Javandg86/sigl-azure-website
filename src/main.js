@@ -125,7 +125,7 @@ document.querySelector('#app').innerHTML = `
             <p>Help us understand your organization so we can tailor your AI Risk Pulse Check.</p>
             <div class="pulse-form-card">
               <label>Company name <input value="Acme Corp" /></label>
-              <label>Industry <select><option>Healthcare</option><option>Technology</option><option>Financial Services</option><option>Government</option><option>Other</option></select></label>
+              <label>Industry <select><option>Healthcare</option><option>Technology</option><option>Law Firms</option><option>Startups</option><option>Financial Services</option><option>Government</option><option>Other</option></select></label>
               <label>Company size <select><option>11–50 employees</option><option>51–200 employees</option><option>201–1,000 employees</option><option>1,000+ employees</option></select></label>
               <label>Your role <select><option>Founder / Operator</option><option>CISO / Security Leader</option><option>Compliance / Risk</option><option>Executive</option></select></label>
               <div class="pulse-wide">
