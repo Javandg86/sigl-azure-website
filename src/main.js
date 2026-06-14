@@ -17,7 +17,7 @@ document.querySelector('#app').innerHTML = `
         <a href="#careers">Careers</a>
         <a href="#partnerships">Partnerships</a>
       </nav>
-      <a class="nav-cta" href="#contact">Request Assessment</a>
+      <a class="nav-cta" href="#pulse">Pulse Check</a>
     </header>
 
     <main id="home">
@@ -370,13 +370,6 @@ document.querySelector('#app').innerHTML = `
         <a class="btn primary" href="mailto:info@siglaicompliance.com?subject=SIGL%20Partnership%20Opportunity">Explore Partnership Opportunities</a>
       </section>
 
-      <section id="contact" class="contact-section">
-        <img src="${logo}" alt="SIGL logo" />
-        <p class="eyebrow">Start Before The Risk Is Public</p>
-        <h2>Evaluate your AI risk exposure before someone else does.</h2>
-        <p>Request AI penetration testing, governance verification, architecture review, or evidence readiness support.</p>
-        <a class="btn primary" href="mailto:info@siglaicompliance.com?subject=SIGL%20AI%20Assurance%20Assessment%20Request">Request Assessment</a>
-      </section>
     </main>
 
     <footer>
