@@ -77,7 +77,7 @@ document.querySelector('#app').innerHTML = `
               <div>👁️<span>Oversight</span></div>
             </div>
             <div class="pulse-actions">
-              <button class="pulse-btn primary" data-next>Start Assessment →</button>
+              <button class="pulse-btn primary" data-start>Start Assessment →</button>
               <button class="pulse-btn ghost" data-learn>Learn More →</button>
             </div>
             <div class="pulse-notes">
@@ -493,7 +493,11 @@ document.querySelectorAll('[data-home]').forEach((btn) => {
 })
 
 document.querySelectorAll('[data-start]').forEach((btn) => {
-  btn.addEventListener('click', () => showPulseStep(1))
+  btn.addEventListener('click', () => {
+    pulseScreens.forEach((screen) => screen.classList.remove('active'))
+    pulseStep = 1
+    pulseScreens[1]?.classList.add('active')
+  })
 })
 
 document.querySelectorAll('.pulse-options button, .pulse-use-grid button, .pulse-governance button').forEach((btn) => {
