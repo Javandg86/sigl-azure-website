@@ -49,6 +49,7 @@ export default async function contextHandler(context, req) {
           industryBreakdown
         },
         leads: leads.slice(0, 50).map((lead) => ({
+          rowKey: lead.rowKey,
           receivedAt: lead.receivedAt,
           name: lead.name,
           company: lead.company,
@@ -58,7 +59,11 @@ export default async function contextHandler(context, req) {
           score: lead.score,
           timeframe: lead.timeframe,
           reportBlob: lead.reportBlob,
-          selectedSignals: lead.selectedSignals
+          selectedSignals: lead.selectedSignals,
+          status: lead.status || "New Lead",
+          notes: lead.notes || "",
+          estimatedValue: lead.estimatedValue || 0,
+          priority: lead.priority || ""
         }))
       }
     }

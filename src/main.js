@@ -784,6 +784,21 @@ async function loadDashboard() {
             <summary>Signals</summary>
             <ul>${signals.slice(0, 20).map((s) => `<li>${s}</li>`).join('')}</ul>
           </details>
+          <div class="lead-crm">
+            <label>Status
+              <select data-row="${lead.rowKey}" class="lead-status">
+                ${["New Lead","Qualified","Consultation Scheduled","Proposal Sent","Negotiation","Won","Lost"].map((status) => `<option ${status === (lead.status || "New Lead") ? "selected" : ""}>${status}</option>`).join("")}
+              </select>
+            </label>
+            <label>Estimated Value
+              <input data-row="${lead.rowKey}" class="lead-value" type="number" min="0" value="${lead.estimatedValue || 0}" />
+            </label>
+            <label>Notes
+              <textarea data-row="${lead.rowKey}" class="lead-notes">${lead.notes || ""}</textarea>
+            </label>
+            <button class="pulse-btn primary save-lead" data-row="${lead.rowKey}">Save Lead</button>
+          </div>
+          ${lead.priority ? `<p class="report-ref">Priority: ${lead.priority}</p>` : ''}
           ${lead.reportBlob ? `<p class="report-ref">PDF: ${lead.reportBlob}</p>` : ''}
         </article>
       `
@@ -796,4 +811,31 @@ async function loadDashboard() {
 if (window.location.pathname === '/sigl-dashboard') {
   renderDashboard()
 }
+
+
+
+document.addEventListener('click', async (event) => {
+  const btn = event.target.closest('.save-lead')
+  if (!btn) return
+
+  const rowKey = btn.dataset.row
+  const status = document.querySelector(`.lead-status[data-row="${rowKey}"]`)?.value || "New Lead"
+  const estimatedValue = document.querySelector(`.lead-value[data-row="${rowKey}"]`)?.value || 0
+  const notes = document.querySelector(`.lead-notes[data-row="${rowKey}"]`)?.value || ""
+
+  btn.textContent = "Saving..."
+
+  try {
+    const res = await fetch('/api/update-lead-status', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ rowKey, status, notes, estimatedValue })
+    })
+
+    if (!res.ok) throw new Error('Save failed')
+    btn.textContent = "Saved ✓"
+  } catch {
+    btn.textContent = "Save Failed"
+  }
+})
 
