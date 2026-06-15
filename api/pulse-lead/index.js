@@ -140,15 +140,19 @@ function generatePdfReport(lead) {
     doc.on("error", reject)
 
     const signals = JSON.parse(lead.selectedSignals || "[]")
+    const services = JSON.parse(lead.recommendedServices || "[]")
+    const actions = JSON.parse(lead.recommendedActions || "[]")
+    const findings = JSON.parse(lead.findings || "[]")
     const label = riskLabel(lead.score)
 
-    doc.fontSize(22).text("SIGL AI Risk Pulse Report", { align: "center" })
+    doc.fontSize(22).fillColor("#0f172a").text("SIGL AI Risk Pulse Report", { align: "center" })
     doc.moveDown()
+
     doc.fontSize(13).fillColor("#0f172a").text("Executive Summary")
     doc.moveDown(.4)
     doc.fontSize(10).fillColor("#111").text(
-      `This report summarizes the AI Risk Pulse Check submitted by ${lead.company || lead.name || "the organization"}. ` +
-      `The score is based on AI usage, data exposure, governance, documentation, testing, oversight, and vendor exposure signals.`
+      `This report summarizes the AI Risk Pulse Check submitted by ${lead.company || lead.name || "the organization"}. The score is based on AI usage, data exposure, governance, documentation, testing, oversight, and vendor exposure signals.`,
+      { width: 500 }
     )
 
     doc.moveDown()
@@ -163,40 +167,35 @@ function generatePdfReport(lead) {
     doc.text(`Preferred Follow-Up: ${lead.timeframe || "Not provided"}`)
 
     doc.moveDown()
-    doc.fontSize(13).fillColor("#0f172a").text("Top Risk Signals")
+    doc.fontSize(13).fillColor("#0f172a").text("Top Findings")
     doc.moveDown(.4)
-    if (signals.length) {
-      signals.slice(0, 18).forEach((signal) => doc.fontSize(10).fillColor("#111").text(`• ${signal}`))
-    } else {
-      doc.fontSize(10).fillColor("#111").text("• No detailed signals captured.")
-    }
+    findings.slice(0, 8).forEach((item) => doc.fontSize(10).fillColor("#111").text(`• ${item}`, { width: 500 }))
 
     doc.moveDown()
-    doc.fontSize(13).fillColor("#0f172a").text("Recommended Service Path")
+    doc.fontSize(13).fillColor("#0f172a").text("Selected Signals")
     doc.moveDown(.4)
-    doc.fontSize(10).fillColor("#111").text(
-      "SIGL recommends an AI Risk & Audit Readiness Review to validate governance, documentation, testing, oversight, vendor exposure, and evidence readiness."
-    )
+    if (signals.length) {
+      signals.slice(0, 22).forEach((signal) => {
+        doc.fontSize(9).fillColor("#111").text(`• ${String(signal).replace(/\\s+/g, " ").trim()}`, { width: 500 })
+      })
+    } else {
+      doc.fontSize(10).fillColor("#111").text("• No detailed signals captured.", { width: 500 })
+    }
 
     doc.moveDown()
     doc.fontSize(13).fillColor("#0f172a").text("AI-Powered Recommendations")
     doc.moveDown(.4)
-    JSON.parse(lead.recommendedServices || "[]").slice(0, 8).forEach((service) => doc.fontSize(10).fillColor("#111").text(`• ${service}`))
+    services.slice(0, 8).forEach((service) => doc.fontSize(10).fillColor("#111").text(`• ${service}`, { width: 500 }))
 
     doc.moveDown()
     doc.fontSize(13).fillColor("#0f172a").text("Suggested Next Actions")
     doc.moveDown(.4)
-    ;[
-      "Confirm AI system inventory and business owners.",
-      "Review AI data exposure and third-party vendor dependencies.",
-      "Validate prompt injection, output manipulation, privacy, and agent/tool abuse risks.",
-      "Document controls, approvals, testing evidence, and remediation decisions.",
-      "Schedule a SIGL AI compliance consultation."
-    ].forEach((item) => doc.fontSize(10).fillColor("#111").text(`• ${item}`))
+    actions.slice(0, 8).forEach((item) => doc.fontSize(10).fillColor("#111").text(`• ${item}`, { width: 500 }))
 
     doc.moveDown(2)
     doc.fontSize(9).fillColor("#475569").text(
-      "This Pulse Check is an initial screening and does not replace a full security assessment, compliance review, or legal opinion."
+      "This Pulse Check is an initial screening and does not replace a full security assessment, compliance review, or legal opinion.",
+      { width: 500 }
     )
     doc.text("SIGL AI Compliance | info@siglaicompliance.com")
 
@@ -224,23 +223,31 @@ async function uploadPdfReport(storageConn, lead, pdfBuffer) {
 
 function makeVisitorHtml(lead) {
   const label = riskLabel(lead.score)
+  const signals = JSON.parse(lead.selectedSignals || "[]")
+  const services = JSON.parse(lead.recommendedServices || "[]")
+  const actions = JSON.parse(lead.recommendedActions || "[]")
+  const findings = JSON.parse(lead.findings || "[]")
+
   return `
     <div style="font-family:Arial,sans-serif;line-height:1.6;color:#111">
       <h1>Your SIGL AI Risk Pulse Check Results</h1>
       <p>Thank you for completing the AI Risk Pulse Check.</p>
+
       <h2>Score: ${lead.score}/100 — ${label}</h2>
       <p>This score is based on your answers across AI usage, data exposure, governance, documentation, testing, oversight, and vendor reliance.</p>
-      <h3>Recommended next step</h3>
-      <p><strong>${JSON.parse(lead.recommendedServices || "[]")[0] || "AI Risk & Audit Readiness Review"}</strong></p>
-      <p>SIGL can help review your AI governance, documentation, testing controls, vendor exposure, and evidence readiness.</p>
-      <h3>Recommended actions</h3>
-      <ul>
-        ${JSON.parse(lead.recommendedActions || "[]").slice(0, 6).map(x => `<li>${safe(x)}</li>`).join("")}
-      </ul>
-      <h3>Signals captured</h3>
-      <ul>
-        ${JSON.parse(lead.selectedSignals || "[]").slice(0, 20).map(x => `<li>${safe(x)}</li>`).join("")}
-      </ul>
+
+      <h3>Top Findings</h3>
+      <ul>${findings.slice(0, 6).map(x => `<li>${safe(x)}</li>`).join("")}</ul>
+
+      <h3>Recommended SIGL Services</h3>
+      <ul>${services.slice(0, 6).map(x => `<li>${safe(x)}</li>`).join("")}</ul>
+
+      <h3>Recommended Actions</h3>
+      <ul>${actions.slice(0, 6).map(x => `<li>${safe(x)}</li>`).join("")}</ul>
+
+      <h3>Signals Captured</h3>
+      <ul>${signals.slice(0, 20).map(x => `<li>${safe(x)}</li>`).join("")}</ul>
+
       <p>To discuss your results, reply to this email or contact <strong>info@siglaicompliance.com</strong>.</p>
       <p>— SIGL AI Compliance</p>
     </div>
