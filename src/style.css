@@ -2270,3 +2270,124 @@ footer {
 section {
   border-top: 0 !important;
 }
+
+/* SIGL internal dashboard */
+.dashboard-page {
+  min-height: 100vh;
+  background: #020711;
+  color: #f8fbff;
+  padding: 28px;
+}
+
+.dashboard-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 46px;
+}
+
+.dashboard-nav img {
+  width: 180px;
+}
+
+.dashboard-nav a {
+  color: #7cddff;
+  text-decoration: none;
+  font-weight: 900;
+}
+
+.dashboard-shell {
+  max-width: 1250px;
+  margin: 0 auto;
+}
+
+.dashboard-shell h1 {
+  font-size: clamp(3rem, 8vw, 7rem);
+  line-height: .85;
+  letter-spacing: -.07em;
+}
+
+.dashboard-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin: 40px 0;
+}
+
+.dashboard-stats article,
+.dashboard-panel,
+.lead-card {
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 28px;
+  background: linear-gradient(145deg, rgba(255,255,255,.10), rgba(255,255,255,.035));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 30px 90px rgba(0,0,0,.28);
+  backdrop-filter: blur(22px);
+}
+
+.dashboard-stats article {
+  padding: 24px;
+}
+
+.dashboard-stats span {
+  display: block;
+  color: rgba(225,236,250,.68);
+  font-weight: 800;
+}
+
+.dashboard-stats strong {
+  display: block;
+  margin-top: 12px;
+  font-size: 2.2rem;
+}
+
+.dashboard-panel {
+  padding: 30px;
+}
+
+.dashboard-leads {
+  display: grid;
+  gap: 16px;
+}
+
+.lead-card {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 18px;
+  padding: 22px;
+}
+
+.lead-card h3 {
+  margin: 0;
+}
+
+.lead-card p {
+  color: rgba(225,236,250,.72);
+}
+
+.lead-score {
+  display: grid;
+  place-items: center;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: conic-gradient(#7cddff 75%, rgba(124,221,255,.15) 0);
+  color: #fff;
+  font-weight: 950;
+}
+
+.lead-card details {
+  grid-column: 1 / -1;
+}
+
+.report-ref {
+  grid-column: 1 / -1;
+  color: #7cddff !important;
+  font-size: .9rem;
+}
+
+@media (max-width: 900px) {
+  .dashboard-stats,
+  .lead-card {
+    grid-template-columns: 1fr;
+  }
+}

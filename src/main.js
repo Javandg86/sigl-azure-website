@@ -723,3 +723,77 @@ document.getElementById('nextBookingWeek')?.addEventListener('click', () => {
 
 loadBookingSlots()
 
+
+
+function renderDashboard() {
+  document.querySelector('#app').innerHTML = `
+    <div class="dashboard-page">
+      <header class="dashboard-nav">
+        <img src="/sigl-logo-exact.png" alt="SIGL logo" />
+        <a href="/">← Back to Website</a>
+      </header>
+
+      <main class="dashboard-shell">
+        <p class="eyebrow">SIGL Lead Command Center</p>
+        <h1>Pulse Checker Dashboard</h1>
+
+        <section class="dashboard-stats" id="dashboardStats"></section>
+
+        <section class="dashboard-panel">
+          <h2>Latest Leads</h2>
+          <div id="dashboardLeads" class="dashboard-leads">Loading leads...</div>
+        </section>
+      </main>
+    </div>
+  `
+
+  loadDashboard()
+}
+
+async function loadDashboard() {
+  const statsEl = document.getElementById('dashboardStats')
+  const leadsEl = document.getElementById('dashboardLeads')
+
+  try {
+    const res = await fetch('/api/dashboard-leads')
+    const data = await res.json()
+    if (!data.ok) throw new Error('Dashboard API failed')
+
+    const stats = data.stats
+    statsEl.innerHTML = `
+      <article><span>Total Leads</span><strong>${stats.totalLeads}</strong></article>
+      <article><span>Booked Consultations</span><strong>${stats.bookedConsultations}</strong></article>
+      <article><span>Average Score</span><strong>${stats.averageScore}/100</strong></article>
+      <article><span>High-Risk Leads</span><strong>${stats.highRiskLeads}</strong></article>
+    `
+
+    leadsEl.innerHTML = data.leads.map((lead) => {
+      let signals = []
+      try { signals = JSON.parse(lead.selectedSignals || '[]') } catch {}
+
+      return `
+        <article class="lead-card">
+          <div>
+            <h3>${lead.company || 'Unknown Company'}</h3>
+            <p>${lead.name || 'No name'} • ${lead.email || 'No email'}</p>
+            <p>${lead.industry || 'Unknown industry'} • ${lead.role || 'Unknown role'}</p>
+            <p><strong>Preferred Time:</strong> ${lead.timeframe || 'Not selected'}</p>
+          </div>
+          <div class="lead-score">${lead.score || 0}/100</div>
+          <details>
+            <summary>Signals</summary>
+            <ul>${signals.slice(0, 20).map((s) => `<li>${s}</li>`).join('')}</ul>
+          </details>
+          ${lead.reportBlob ? `<p class="report-ref">PDF: ${lead.reportBlob}</p>` : ''}
+        </article>
+      `
+    }).join('')
+  } catch {
+    if (leadsEl) leadsEl.textContent = 'Dashboard could not be loaded.'
+  }
+}
+
+if (window.location.pathname === '/sigl-dashboard') {
+  renderDashboard()
+}
+
