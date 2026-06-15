@@ -22,6 +22,49 @@ function safe(value) {
   return String(value || "").slice(0, 1000)
 }
 
+
+function cleanRiskSignal(signal) {
+  const raw = String(signal || "").trim()
+  const s = raw.toLowerCase()
+
+  if (!raw) return ""
+
+  const replacements = [
+    [/yes, actively/, "AI is currently active in the business"],
+    [/piloting|exploring/, "AI is being piloted or explored"],
+    [/not yet/, "A control or practice is not yet in place"],
+    [/not sure/, "Uncertainty exists around AI governance, data, or oversight"],
+    [/not in place/, "A required AI control is not in place"],
+    [/partial/, "A required AI control is only partially implemented"],
+    [/sometimes/, "AI testing or oversight is inconsistent"],
+    [/regularly/, "AI testing or oversight is performed regularly"],
+    [/customer support chatbot/, "Customer support chatbot use may create customer-facing AI exposure"],
+    [/content generation/, "Content generation AI use may require output review and approval controls"],
+    [/internal copilot/, "Internal copilot use may create knowledge, identity, or data exposure risk"],
+    [/workflow automation/, "Workflow automation may create agentic or tool-use risk"],
+    [/decision support/, "Decision support AI may affect customers, employees, or business outcomes"],
+    [/data analysis|forecasting/, "AI data analysis or forecasting may require model, data, and oversight controls"],
+    [/yes$/, "A risk-relevant condition was confirmed"],
+    [/^no$/, "A control gap, uncertainty, or non-use response was recorded"]
+  ]
+
+  for (const [pattern, label] of replacements) {
+    if (pattern.test(s)) return label
+  }
+
+  return raw
+}
+
+function cleanRiskSignals(signals) {
+  const cleaned = signals
+    .map(cleanRiskSignal)
+    .filter(Boolean)
+    .filter((item, index, arr) => arr.indexOf(item) === index)
+
+  return cleaned.slice(0, 18)
+}
+
+
 function slotRowKey(slotId) {
   return Buffer.from(String(slotId || "")).toString("base64url")
 }
@@ -48,7 +91,7 @@ function riskLabel(score) {
 
 
 function buildRecommendations(lead) {
-  const signals = JSON.parse(lead.selectedSignals || "[]").map((x) => String(x).toLowerCase())
+  const signals = cleanRiskSignals(JSON.parse(lead.selectedSignals || "[]")).map((x) => String(x).toLowerCase())
   const industry = String(lead.industry || "").toLowerCase()
   const score = Number(lead.score || 0)
 
@@ -139,7 +182,7 @@ function generatePdfReport(lead) {
     doc.on("end", () => resolve(Buffer.concat(chunks)))
     doc.on("error", reject)
 
-    const signals = JSON.parse(lead.selectedSignals || "[]")
+    const signals = cleanRiskSignals(JSON.parse(lead.selectedSignals || "[]"))
     const services = JSON.parse(lead.recommendedServices || "[]")
     const actions = JSON.parse(lead.recommendedActions || "[]")
     const findings = JSON.parse(lead.findings || "[]")
@@ -255,7 +298,7 @@ function makeVisitorHtml(lead) {
 }
 
 function makeSiglHtml(lead) {
-  const signals = JSON.parse(lead.selectedSignals || "[]")
+  const signals = cleanRiskSignals(JSON.parse(lead.selectedSignals || "[]"))
   return `
     <div style="font-family:Arial,sans-serif;line-height:1.6;color:#111">
       <h1>New SIGL Pulse Checker Lead</h1>
