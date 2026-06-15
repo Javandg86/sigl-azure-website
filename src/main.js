@@ -25,19 +25,19 @@ document.querySelector('#app').innerHTML = `
         <div id="trustNetwork" class="trust-network" aria-hidden="true"></div>
 
         <div class="hero-copy">
-          <p class="eyebrow">SIGL — The AI Assurance Company</p>
+          <p class="eyebrow">SIGL — The AI Compliance Company</p>
           <h1>Verify trust in AI systems before the world tests them for you.</h1>
           <p>
             SIGL independently validates AI security, governance, architecture, and evidence
             for organizations deploying AI where failure is not acceptable.
           </p>
           <div class="hero-actions">
-            <a class="btn primary" href="#contact">Request AI Assurance Assessment</a>
+            <a class="btn primary" href="#contact">Request AI Compliance Assessment</a>
             <a class="btn secondary" href="#command">Enter Command Center</a>
           </div>
         </div>
 
-        <aside class="hero-cockpit" aria-label="SIGL AI assurance cockpit">
+        <aside class="hero-cockpit" aria-label="SIGL AI compliance cockpit">
           <div class="cockpit-top">
             <span></span><span></span><span></span>
             <strong>LIVE AI ASSURANCE VIEW</strong>
@@ -109,7 +109,7 @@ document.querySelector('#app').innerHTML = `
               </article>
               <article>
                 <h3>The benefits</h3>
-                <p>Organizations can quickly understand AI risk posture, prepare for customer security reviews, strengthen governance, prioritize remediation, and decide whether they need AI pentesting or an AI assurance review.</p>
+                <p>Organizations can quickly understand AI risk posture, prepare for customer security reviews, strengthen governance, prioritize remediation, and decide whether they need AI pentesting or an AI compliance review.</p>
               </article>
             </div>
 
@@ -252,7 +252,7 @@ document.querySelector('#app').innerHTML = `
 
       <section id="command" class="command-center">
         <div class="section-head center">
-          <p class="eyebrow">AI Assurance Command Center</p>
+          <p class="eyebrow">AI Compliance Command Center</p>
           <h2>From unknown AI risk to defensible trust.</h2>
           <p>
             SIGL connects adversarial testing, governance validation, architecture review,
@@ -345,7 +345,7 @@ document.querySelector('#app').innerHTML = `
       <section id="careers" class="careers-section">
         <div class="split-copy">
           <p class="eyebrow">Careers at SIGL</p>
-          <h2>Help build the future of AI Assurance.</h2>
+          <h2>Help build the future of AI Compliance.</h2>
           <p>
             SIGL is interested in connecting with AI security researchers, AI red teamers,
             cloud security professionals, governance specialists, and AI engineers who want
@@ -385,7 +385,7 @@ document.querySelector('#app').innerHTML = `
     <section id="contact-modal" class="contact-modal-section">
       <div class="contact-modal-card">
         <p class="eyebrow">Contact SIGL</p>
-        <h2>Start the AI assurance conversation.</h2>
+        <h2>Start the AI compliance conversation.</h2>
         <p>Send your contact details and SIGL will follow up.</p>
         <form class="contact-us-form" id="contactUsForm">
           <input placeholder="Name" required />
@@ -400,7 +400,7 @@ document.querySelector('#app').innerHTML = `
 
     <footer>
       <img src="${logo}" alt="SIGL logo" />
-      <span>SIGL — The AI Assurance Company</span>
+      <span>SIGL — The AI Compliance Company</span>
     </footer>
   </div>
 `
