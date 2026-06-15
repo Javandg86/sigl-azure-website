@@ -47,6 +47,89 @@ function riskLabel(score) {
 }
 
 
+function buildRecommendations(lead) {
+  const signals = JSON.parse(lead.selectedSignals || "[]").map((x) => String(x).toLowerCase())
+  const industry = String(lead.industry || "").toLowerCase()
+  const score = Number(lead.score || 0)
+
+  const findings = new Set()
+  const services = new Set()
+  const actions = new Set()
+
+  if (score >= 75) {
+    findings.add("High AI risk posture requiring near-term executive review.")
+    services.add("AI Risk & Audit Readiness Review")
+    actions.add("Schedule a SIGL review within 30 days.")
+  } else if (score >= 50) {
+    findings.add("Elevated AI risk signals across governance, testing, documentation, or oversight.")
+    services.add("AI Risk & Audit Readiness Review")
+    actions.add("Prioritize governance, testing, and evidence gaps.")
+  } else {
+    findings.add("Lower initial risk posture, but AI controls should still be documented and reviewed.")
+    services.add("AI Governance Baseline Review")
+    actions.add("Create a lightweight AI governance and evidence baseline.")
+  }
+
+  if (signals.some(s => s.includes("prompt") || s.includes("testing") || s.includes("not yet") || s.includes("sometimes"))) {
+    findings.add("AI testing coverage appears incomplete or inconsistent.")
+    services.add("AI Red Team Assessment")
+    actions.add("Validate prompt injection, unsafe output, evasion, and misuse scenarios.")
+  }
+
+  if (signals.some(s => s.includes("vendor") || s.includes("third-party"))) {
+    findings.add("Third-party AI vendor reliance may create external exposure.")
+    services.add("Vendor AI Risk Review")
+    actions.add("Review vendor data handling, model usage, contracts, retention, and oversight.")
+  }
+
+  if (signals.some(s => s.includes("partial") || s.includes("not in place") || s.includes("documentation"))) {
+    findings.add("AI governance documentation and audit evidence may be incomplete.")
+    services.add("Audit Evidence Support")
+    services.add("AI Governance Program Setup")
+    actions.add("Document AI policies, owners, approvals, inventories, and evidence trails.")
+  }
+
+  if (signals.some(s => s.includes("privacy") || s.includes("sensitive") || s.includes("data"))) {
+    findings.add("Sensitive data or privacy exposure may require deeper review.")
+    services.add("AI Privacy & Data Exposure Review")
+    actions.add("Map sensitive data flows through AI tools, prompts, logs, and vendors.")
+  }
+
+  if (industry.includes("health")) {
+    services.add("Healthcare AI Compliance Review")
+    actions.add("Review PHI exposure, HIPAA-aligned controls, AI vendor use, and audit evidence.")
+  }
+
+  if (industry.includes("financial") || industry.includes("bank")) {
+    services.add("Financial Services AI Governance Review")
+    actions.add("Review model risk, third-party risk, governance evidence, and customer-impacting AI use.")
+  }
+
+  if (industry.includes("law")) {
+    services.add("Legal AI Data Protection Review")
+    actions.add("Review client confidentiality, privileged data exposure, AI tool usage, and evidence controls.")
+  }
+
+  if (industry.includes("startup")) {
+    services.add("Startup AI Governance Foundation")
+    actions.add("Establish a practical AI policy, tool inventory, testing baseline, and customer-ready evidence package.")
+  }
+
+  const priority = score >= 80 ? "Critical — follow up within 24 hours"
+    : score >= 65 ? "High — follow up within 2 business days"
+    : score >= 40 ? "Medium — follow up within 1 week"
+    : "Low — nurture and monitor"
+
+  return {
+    priority,
+    findings: [...findings].slice(0, 8),
+    services: [...services].slice(0, 8),
+    actions: [...actions].slice(0, 8)
+  }
+}
+
+
+
 function generatePdfReport(lead) {
   return new Promise((resolve, reject) => {
     const chunks = []
@@ -96,6 +179,11 @@ function generatePdfReport(lead) {
     )
 
     doc.moveDown()
+    doc.fontSize(13).fillColor("#0f172a").text("AI-Powered Recommendations")
+    doc.moveDown(.4)
+    JSON.parse(lead.recommendedServices || "[]").slice(0, 8).forEach((service) => doc.fontSize(10).fillColor("#111").text(`• ${service}`))
+
+    doc.moveDown()
     doc.fontSize(13).fillColor("#0f172a").text("Suggested Next Actions")
     doc.moveDown(.4)
     ;[
@@ -143,8 +231,12 @@ function makeVisitorHtml(lead) {
       <h2>Score: ${lead.score}/100 — ${label}</h2>
       <p>This score is based on your answers across AI usage, data exposure, governance, documentation, testing, oversight, and vendor reliance.</p>
       <h3>Recommended next step</h3>
-      <p><strong>AI Risk & Audit Readiness Review</strong></p>
+      <p><strong>${JSON.parse(lead.recommendedServices || "[]")[0] || "AI Risk & Audit Readiness Review"}</strong></p>
       <p>SIGL can help review your AI governance, documentation, testing controls, vendor exposure, and evidence readiness.</p>
+      <h3>Recommended actions</h3>
+      <ul>
+        ${JSON.parse(lead.recommendedActions || "[]").slice(0, 6).map(x => `<li>${safe(x)}</li>`).join("")}
+      </ul>
       <h3>Signals captured</h3>
       <ul>
         ${JSON.parse(lead.selectedSignals || "[]").slice(0, 20).map(x => `<li>${safe(x)}</li>`).join("")}
@@ -168,6 +260,11 @@ function makeSiglHtml(lead) {
       <p><strong>Role:</strong> ${lead.role}</p>
       <p><strong>Timeframe:</strong> ${lead.timeframe}</p>
       <p><strong>Score:</strong> ${lead.score}/100 — ${riskLabel(lead.score)}</p>
+      <p><strong>Priority:</strong> ${lead.priority || "Not calculated"}</p>
+      <h3>Recommended Services</h3>
+      <ul>${JSON.parse(lead.recommendedServices || "[]").map(x => `<li>${safe(x)}</li>`).join("")}</ul>
+      <h3>Top Findings</h3>
+      <ul>${JSON.parse(lead.findings || "[]").map(x => `<li>${safe(x)}</li>`).join("")}</ul>
       <h3>Selected Signals</h3>
       <ul>${signals.slice(0, 60).map(x => `<li>${safe(x)}</li>`).join("")}</ul>
       <p><strong>Received:</strong> ${lead.receivedAt}</p>
@@ -231,6 +328,12 @@ export default async function contextHandler(context, req) {
       role: safe(body.role),
       selectedSignals: JSON.stringify(body.selectedSignals || [])
     }
+
+    const recommendations = buildRecommendations(lead)
+    lead.priority = recommendations.priority
+    lead.findings = JSON.stringify(recommendations.findings)
+    lead.recommendedServices = JSON.stringify(recommendations.services)
+    lead.recommendedActions = JSON.stringify(recommendations.actions)
 
     await table.createEntity(lead)
 
