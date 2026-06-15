@@ -1,5 +1,7 @@
 import { TableClient, AzureNamedKeyCredential } from "@azure/data-tables"
 import { EmailClient } from "@azure/communication-email"
+import { BlobServiceClient } from "@azure/storage-blob"
+import PDFDocument from "pdfkit"
 
 function parseConnectionString(conn) {
   const parts = Object.fromEntries(
@@ -44,6 +46,94 @@ function riskLabel(score) {
   return "Lower Risk"
 }
 
+
+function generatePdfReport(lead) {
+  return new Promise((resolve, reject) => {
+    const chunks = []
+    const doc = new PDFDocument({ size: "LETTER", margin: 48 })
+
+    doc.on("data", (chunk) => chunks.push(chunk))
+    doc.on("end", () => resolve(Buffer.concat(chunks)))
+    doc.on("error", reject)
+
+    const signals = JSON.parse(lead.selectedSignals || "[]")
+    const label = riskLabel(lead.score)
+
+    doc.fontSize(22).text("SIGL AI Risk Pulse Report", { align: "center" })
+    doc.moveDown()
+    doc.fontSize(13).fillColor("#0f172a").text("Executive Summary")
+    doc.moveDown(.4)
+    doc.fontSize(10).fillColor("#111").text(
+      `This report summarizes the AI Risk Pulse Check submitted by ${lead.company || lead.name || "the organization"}. ` +
+      `The score is based on AI usage, data exposure, governance, documentation, testing, oversight, and vendor exposure signals.`
+    )
+
+    doc.moveDown()
+    doc.fontSize(18).fillColor("#0f172a").text(`Risk Score: ${lead.score}/100 — ${label}`)
+    doc.moveDown(.5)
+
+    doc.fontSize(11).fillColor("#111")
+    doc.text(`Company: ${lead.company || "Not provided"}`)
+    doc.text(`Industry: ${lead.industry || "Not provided"}`)
+    doc.text(`Company Size: ${lead.companySize || "Not provided"}`)
+    doc.text(`Role: ${lead.role || "Not provided"}`)
+    doc.text(`Preferred Follow-Up: ${lead.timeframe || "Not provided"}`)
+
+    doc.moveDown()
+    doc.fontSize(13).fillColor("#0f172a").text("Top Risk Signals")
+    doc.moveDown(.4)
+    if (signals.length) {
+      signals.slice(0, 18).forEach((signal) => doc.fontSize(10).fillColor("#111").text(`• ${signal}`))
+    } else {
+      doc.fontSize(10).fillColor("#111").text("• No detailed signals captured.")
+    }
+
+    doc.moveDown()
+    doc.fontSize(13).fillColor("#0f172a").text("Recommended Service Path")
+    doc.moveDown(.4)
+    doc.fontSize(10).fillColor("#111").text(
+      "SIGL recommends an AI Risk & Audit Readiness Review to validate governance, documentation, testing, oversight, vendor exposure, and evidence readiness."
+    )
+
+    doc.moveDown()
+    doc.fontSize(13).fillColor("#0f172a").text("Suggested Next Actions")
+    doc.moveDown(.4)
+    ;[
+      "Confirm AI system inventory and business owners.",
+      "Review AI data exposure and third-party vendor dependencies.",
+      "Validate prompt injection, output manipulation, privacy, and agent/tool abuse risks.",
+      "Document controls, approvals, testing evidence, and remediation decisions.",
+      "Schedule a SIGL AI compliance consultation."
+    ].forEach((item) => doc.fontSize(10).fillColor("#111").text(`• ${item}`))
+
+    doc.moveDown(2)
+    doc.fontSize(9).fillColor("#475569").text(
+      "This Pulse Check is an initial screening and does not replace a full security assessment, compliance review, or legal opinion."
+    )
+    doc.text("SIGL AI Compliance | info@siglaicompliance.com")
+
+    doc.end()
+  })
+}
+
+async function uploadPdfReport(storageConn, lead, pdfBuffer) {
+  const blobService = BlobServiceClient.fromConnectionString(storageConn)
+  const container = blobService.getContainerClient("pulse-reports")
+  await container.createIfNotExists()
+
+  const blobName = `${lead.rowKey}.pdf`
+  const blockBlob = container.getBlockBlobClient(blobName)
+
+  await blockBlob.uploadData(pdfBuffer, {
+    blobHTTPHeaders: {
+      blobContentType: "application/pdf"
+    }
+  })
+
+  return blobName
+}
+
+
 function makeVisitorHtml(lead) {
   const label = riskLabel(lead.score)
   return `
@@ -86,10 +176,10 @@ function makeSiglHtml(lead) {
   `
 }
 
-async function sendEmail(client, sender, to, subject, html) {
+async function sendEmail(client, sender, to, subject, html, attachment) {
   if (!to) return
 
-  const poller = await client.beginSend({
+  const message = {
     senderAddress: sender,
     content: {
       subject,
@@ -99,8 +189,13 @@ async function sendEmail(client, sender, to, subject, html) {
     recipients: {
       to: [{ address: to }]
     }
-  })
+  }
 
+  if (attachment) {
+    message.attachments = [attachment]
+  }
+
+  const poller = await client.beginSend(message)
   return await poller.pollUntilDone()
 }
 
@@ -176,6 +271,20 @@ export default async function contextHandler(context, req) {
       }
     }
 
+    const pdfBuffer = await generatePdfReport(lead)
+    const pdfBlobName = await uploadPdfReport(storageConn, lead, pdfBuffer)
+    const pdfAttachment = {
+      name: `SIGL-AI-Risk-Pulse-Report-${lead.rowKey}.pdf`,
+      contentType: "application/pdf",
+      contentInBase64: pdfBuffer.toString("base64")
+    }
+
+    await table.updateEntity({
+      partitionKey: lead.partitionKey,
+      rowKey: lead.rowKey,
+      reportBlob: pdfBlobName
+    }, "Merge")
+
     const emailClient = new EmailClient(emailConn)
 
     const emailResults = await Promise.allSettled([
@@ -184,14 +293,16 @@ export default async function contextHandler(context, req) {
         sender,
         lead.email,
         `Your SIGL AI Risk Pulse Check Results: ${lead.score}/100`,
-        makeVisitorHtml(lead)
+        makeVisitorHtml(lead),
+        pdfAttachment
       ),
       sendEmail(
         emailClient,
         sender,
         siglLeadEmail,
         `New SIGL Pulse Checker Lead: ${lead.company || lead.email}`,
-        makeSiglHtml(lead)
+        makeSiglHtml(lead),
+        pdfAttachment
       )
     ])
 
