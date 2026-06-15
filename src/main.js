@@ -1,7 +1,7 @@
 import './style.css'
 import { initAiTrustNetwork } from './three/aiNetwork.js'
 
-const logo = '/sigl-hero-logo.png'
+const logo = '/sigl-logo-exact.png'
 
 document.querySelector('#app').innerHTML = `
   <div class="site-shell">
@@ -17,7 +17,7 @@ document.querySelector('#app').innerHTML = `
         <a href="#careers">Careers</a>
         <a href="#partnerships">Partnerships</a>
       </nav>
-      <a class="nav-cta" href="#pulse">Pulse Check</a>
+      <a class="nav-cta" href="#contact-modal">Contact Us</a>
     </header>
 
     <main id="home">
@@ -125,7 +125,7 @@ document.querySelector('#app').innerHTML = `
             <p>Help us understand your organization so we can tailor your AI Risk Pulse Check.</p>
             <div class="pulse-form-card">
               <label>Company name <input value="Acme Corp" /></label>
-              <label>Industry <select><option>Healthcare</option><option>Technology</option><option>Law Firms</option><option>Startups</option><option>Financial Services</option><option>Government</option><option>Other</option></select></label>
+              <label>Industry <select><option>Healthcare</option><option>Technology</option><option>Law</option><option>Startups</option><option>Financial Services</option><option>Government</option><option>Other</option></select></label>
               <label>Company size <select><option>11–50 employees</option><option>51–200 employees</option><option>201–1,000 employees</option><option>1,000+ employees</option></select></label>
               <label>Your role <select><option>Founder / Operator</option><option>CISO / Security Leader</option><option>Compliance / Risk</option><option>Executive</option></select></label>
               <div class="pulse-wide">
@@ -232,7 +232,8 @@ document.querySelector('#app').innerHTML = `
                 <input placeholder="Name" />
                 <input placeholder="Company" />
                 <input placeholder="Work Email" />
-                <select><option>Preferred Timeframe</option><option>This week</option><option>Next week</option><option>This month</option></select>
+                <select id="consultDay"><option>Preferred Day</option><option>Monday</option><option>Tuesday</option><option>Wednesday</option><option>Thursday</option></select>
+                <select id="consultTime"><option>Preferred Time</option><option>10:00 AM EST</option><option>11:30 AM EST</option><option>1:00 PM EST</option><option>2:30 PM EST</option><option>4:00 PM EST</option></select>
                 <button class="pulse-btn primary" type="submit">Schedule Free Consultation →</button>
                 <a class="pulse-btn ghost" href="mailto:info@siglaicompliance.com?subject=Email%20My%20AI%20Risk%20Pulse%20Results">Email Results to Me</a>
               </form>
@@ -372,6 +373,22 @@ document.querySelector('#app').innerHTML = `
 
     </main>
 
+
+    <section id="contact-modal" class="contact-modal-section">
+      <div class="contact-modal-card">
+        <p class="eyebrow">Contact SIGL</p>
+        <h2>Start the AI assurance conversation.</h2>
+        <p>Send your contact details and SIGL will follow up.</p>
+        <form class="contact-us-form" id="contactUsForm">
+          <input placeholder="Name" required />
+          <input placeholder="Business" required />
+          <input placeholder="Email" type="email" required />
+          <input placeholder="Phone Number" />
+          <button class="btn primary" type="submit">Send Contact Request</button>
+        </form>
+      </div>
+    </section>
+
     <footer>
       <img src="${logo}" alt="SIGL logo" />
       <span>SIGL — The AI Assurance Company</span>
@@ -462,9 +479,11 @@ function animateRiskScore(finalScore) {
     n += step
     if (n >= finalScore) {
       score.textContent = String(finalScore)
+      score.closest('.risk-ring')?.style.setProperty('--score', `${finalScore * 3.6}deg`)
       clearInterval(timer)
     } else {
       score.textContent = String(n)
+      score.closest('.risk-ring')?.style.setProperty('--score', `${n * 3.6}deg`)
     }
   }, 24)
 }
@@ -528,7 +547,9 @@ pulseLeadForm?.addEventListener('submit', async (event) => {
   event.preventDefault()
 
   const inputs = pulseLeadForm.querySelectorAll('input')
-  const timeframe = pulseLeadForm.querySelector('select')?.value || ''
+  const consultDay = document.getElementById('consultDay')?.value || ''
+  const consultTime = document.getElementById('consultTime')?.value || ''
+  const timeframe = `${consultDay} ${consultTime}`.trim()
   const finalScore = calculateRiskScore()
 
   const selectedSignals = [...document.querySelectorAll('#pulse .selected')]
@@ -585,6 +606,40 @@ pulseLeadForm?.addEventListener('submit', async (event) => {
     status.className = 'pulse-submit-status error'
     status.textContent = 'Something went wrong. Please email info@siglaicompliance.com directly.'
     pulseLeadForm.appendChild(status)
+  }
+})
+
+
+
+const contactUsForm = document.getElementById('contactUsForm')
+contactUsForm?.addEventListener('submit', async (event) => {
+  event.preventDefault()
+  const inputs = contactUsForm.querySelectorAll('input')
+  const payload = {
+    name: inputs[0]?.value || '',
+    company: inputs[1]?.value || '',
+    email: inputs[2]?.value || '',
+    phone: inputs[3]?.value || '',
+    score: 0,
+    industry: 'Contact Request',
+    role: 'Website Contact',
+    timeframe: 'Contact Us',
+    selectedSignals: ['General contact request from website']
+  }
+
+  const btn = contactUsForm.querySelector('button')
+  if (btn) btn.textContent = 'Sending...'
+
+  try {
+    const res = await fetch('/api/pulse-lead', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+    if (!res.ok) throw new Error('Request failed')
+    if (btn) btn.textContent = 'Request Sent ✓'
+  } catch {
+    if (btn) btn.textContent = 'Please Email info@siglaicompliance.com'
   }
 })
 
