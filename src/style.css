@@ -2459,3 +2459,59 @@ section {
   font-size: .9rem;
   width: 100%;
 }
+
+/* Mobile nav reliability fix */
+.mobile-menu-btn {
+  cursor: pointer;
+  position: relative;
+  z-index: 9999;
+}
+
+@media (max-width: 900px) {
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 9998;
+  }
+
+  .nav-links {
+    position: fixed !important;
+    top: 84px;
+    left: 16px;
+    right: 16px;
+    display: none !important;
+    flex-direction: column;
+    gap: 10px;
+    padding: 18px;
+    border-radius: 24px;
+    border: 1px solid rgba(255,255,255,.14);
+    background: rgba(2,7,17,.96);
+    box-shadow: 0 30px 90px rgba(0,0,0,.55);
+    backdrop-filter: blur(24px);
+    z-index: 9999;
+  }
+
+  .nav-links.open {
+    display: flex !important;
+  }
+
+  .nav-links a {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 16px;
+    background: rgba(255,255,255,.06);
+  }
+
+  .nav-cta {
+    position: relative;
+    z-index: 9999;
+  }
+}
+
+.section-start-cta {
+  display: flex;
+  justify-content: center;
+  margin: 34px auto 0;
+  position: relative;
+  z-index: 3;
+}

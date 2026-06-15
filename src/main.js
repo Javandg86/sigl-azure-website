@@ -248,6 +248,11 @@ document.querySelector('#app').innerHTML = `
             </div>
           </div>
         </div>
+      
+        <div class="section-start-cta">
+          <a class="btn primary" href="#pulse">Start Assessment →</a>
+        </div>
+        <!-- hero-start-cta -->
       </section>
 
       <section id="command" class="command-center">
@@ -266,6 +271,11 @@ document.querySelector('#app').innerHTML = `
           <article><span>03</span><strong>Control</strong><p>Verify guardrails, monitoring, logging, approvals, access boundaries, and response paths.</p></article>
           <article><span>04</span><strong>Prove</strong><p>Create executive-ready evidence for customer reviews, audits, procurement, and risk decisions.</p></article>
         </div>
+      
+        <div class="section-start-cta">
+          <a class="btn primary" href="#pulse">Start Assessment →</a>
+        </div>
+        <!-- command-start-cta -->
       </section>
 
       <section id="threats" class="threat-lab">
@@ -287,6 +297,11 @@ document.querySelector('#app').innerHTML = `
           <div class="console-row"><b>AI Privacy Failure</b><span>Reviewed</span></div>
           <div class="console-row"><b>Evidence Package</b><span>Generated</span></div>
         </div>
+      
+        <div class="section-start-cta">
+          <a class="btn primary" href="#pulse">Start Assessment →</a>
+        </div>
+        <!-- threat-start-cta -->
       </section>
 
       <section id="assurance" class="assurance-suite">
@@ -302,6 +317,11 @@ document.querySelector('#app').innerHTML = `
           <article><h3>Evidence Vault</h3><p>Findings, controls, remediation, logs, reports, and executive-ready assurance records.</p></article>
           <article><h3>AI Adversarial Validation</h3><p>Evaluate AI systems against prompt injection, output manipulation, privacy exposure, model evasion, agent abuse, and advanced adversarial techniques before deployment.</p></article>
         </div>
+      
+        <div class="section-start-cta">
+          <a class="btn primary" href="#pulse">Start Assessment →</a>
+        </div>
+        <!-- assurance-start-cta -->
       </section>
 
       <section class="testing-section">
@@ -323,6 +343,11 @@ document.querySelector('#app').innerHTML = `
           <article><strong>Human Oversight Validation</strong><p>Check whether humans can detect, intervene, approve, and document high-risk AI actions.</p></article>
           <article><strong>Evidence Readiness</strong><p>Confirm the organization can prove what was tested, what failed, what changed, and what remains exposed.</p></article>
         </div>
+      
+        <div class="section-start-cta">
+          <a class="btn primary" href="#pulse">Start Assessment →</a>
+        </div>
+        <!-- testing-start-cta -->
       </section>
 
       <section id="proof" class="proof-section">
