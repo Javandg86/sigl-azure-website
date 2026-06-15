@@ -20,6 +20,23 @@ function safe(value) {
   return String(value || "").slice(0, 1000)
 }
 
+function slotRowKey(slotId) {
+  return Buffer.from(String(slotId || "")).toString("base64url")
+}
+
+async function emailAlreadyBooked(table, email) {
+  if (!email) return false
+
+  const cleanEmail = String(email).replace(/'/g, "''")
+  const filter = `PartitionKey eq 'Booking' and email eq '${cleanEmail}'`
+
+  for await (const _ of table.listEntities({ queryOptions: { filter } })) {
+    return true
+  }
+
+  return false
+}
+
 function riskLabel(score) {
   if (score >= 75) return "High Risk"
   if (score >= 50) return "Elevated Risk"
@@ -123,16 +140,40 @@ export default async function contextHandler(context, req) {
     await table.createEntity(lead)
 
     if (body.selectedSlot) {
-      await table.createEntity({
-        partitionKey: "Booking",
-        rowKey: `${Date.now()}-${Math.random().toString(36).slice(2)}`,
-        slotId: safe(body.selectedSlot),
-        leadId: lead.rowKey,
-        name: lead.name,
-        company: lead.company,
-        email: lead.email,
-        bookedAt: now.toISOString()
-      })
+      if (await emailAlreadyBooked(table, lead.email)) {
+        context.res = {
+          status: 409,
+          headers: { "Content-Type": "application/json" },
+          body: {
+            ok: false,
+            message: "This email address already has a consultation slot booked."
+          }
+        }
+        return
+      }
+
+      try {
+        await table.createEntity({
+          partitionKey: "Booking",
+          rowKey: slotRowKey(body.selectedSlot),
+          slotId: safe(body.selectedSlot),
+          leadId: lead.rowKey,
+          name: lead.name,
+          company: lead.company,
+          email: lead.email,
+          bookedAt: now.toISOString()
+        })
+      } catch (bookingError) {
+        context.res = {
+          status: 409,
+          headers: { "Content-Type": "application/json" },
+          body: {
+            ok: false,
+            message: "That consultation slot has already been booked. Please choose another time."
+          }
+        }
+        return
+      }
     }
 
     const emailClient = new EmailClient(emailConn)
