@@ -2444,3 +2444,18 @@ section {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+.report-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  padding-top: 10px;
+}
+
+.report-actions span {
+  color: rgba(225,236,250,.72);
+  font-size: .9rem;
+  width: 100%;
+}

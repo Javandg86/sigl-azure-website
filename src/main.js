@@ -803,7 +803,13 @@ async function loadDashboard() {
             <button class="pulse-btn primary save-lead" data-row="${lead.rowKey}">Save Lead</button>
           </div>
           ${lead.priority ? `<p class="report-ref">Priority: ${lead.priority}</p>` : ''}
-          ${lead.reportBlob ? `<p class="report-ref">PDF: ${lead.reportBlob}</p>` : ''}
+          ${lead.reportBlob ? `
+            <div class="report-actions">
+              <span>PDF Report: ${lead.reportBlob}</span>
+              <a class="pulse-btn ghost" href="/api/report?blob=${encodeURIComponent(lead.reportBlob)}" target="_blank" rel="noopener">View PDF</a>
+              <a class="pulse-btn primary" href="/api/report?blob=${encodeURIComponent(lead.reportBlob)}" download>Download PDF</a>
+            </div>
+          ` : ''}
         </article>
       `
     }).join('')

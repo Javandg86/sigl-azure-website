@@ -2,11 +2,21 @@
   "routes": [
     {
       "route": "/sigl-dashboard*",
-      "allowedRoles": ["sigl_admin"]
+      "allowedRoles": [
+        "sigl_admin"
+      ]
     },
     {
       "route": "/api/dashboard-leads",
-      "allowedRoles": ["sigl_admin"]
+      "allowedRoles": [
+        "sigl_admin"
+      ]
+    },
+    {
+      "route": "/api/report",
+      "allowedRoles": [
+        "sigl_admin"
+      ]
     }
   ],
   "responseOverrides": {
@@ -17,6 +27,9 @@
   },
   "navigationFallback": {
     "rewrite": "/index.html",
-    "exclude": ["/api/*", "/*.{css,scss,js,png,gif,ico,jpg,svg}"]
+    "exclude": [
+      "/api/*",
+      "/*.{css,scss,js,png,gif,ico,jpg,svg}"
+    ]
   }
 }
