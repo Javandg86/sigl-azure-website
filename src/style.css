@@ -2223,3 +2223,50 @@ main,
 #home {
   background: transparent !important;
 }
+
+/* Final override: use original hero-style animation across whole site */
+.site-shell::before,
+.site-shell::after {
+  display: none !important;
+}
+
+body,
+.site-shell,
+main,
+#home {
+  background: #020711 !important;
+}
+
+.trust-network {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: 0 !important;
+  opacity: .72 !important;
+  pointer-events: none !important;
+}
+
+.site-shell > * {
+  position: relative;
+  z-index: 1;
+}
+
+.v5-hero,
+.pulse-section,
+.command-center,
+.threat-lab,
+.assurance-suite,
+.testing-section,
+.proof-section,
+.careers-section,
+.partnerships-section,
+.contact-modal-section,
+footer {
+  background: transparent !important;
+  border-top: 0 !important;
+}
+
+section {
+  border-top: 0 !important;
+}
