@@ -232,8 +232,8 @@ document.querySelector('#app').innerHTML = `
                 <input placeholder="Name" />
                 <input placeholder="Company" />
                 <input placeholder="Work Email" />
-                <select id="consultDay"><option>Preferred Day</option><option>Monday</option><option>Tuesday</option><option>Wednesday</option><option>Thursday</option></select>
-                <select id="consultTime"><option>Preferred Time</option><option>10:00 AM EST</option><option>11:30 AM EST</option><option>1:00 PM EST</option><option>2:30 PM EST</option><option>4:00 PM EST</option></select>
+                <select id="consultDay"><option>Preferred Day</option></select>
+                <select id="consultTime"><option>Preferred Time</option></select>
                 <button class="pulse-btn primary" type="submit">Schedule Free Consultation →</button>
                 <a class="pulse-btn ghost" href="mailto:info@siglaicompliance.com?subject=Email%20My%20AI%20Risk%20Pulse%20Results">Email Results to Me</a>
               </form>
@@ -384,6 +384,7 @@ document.querySelector('#app').innerHTML = `
           <input placeholder="Business" required />
           <input placeholder="Email" type="email" required />
           <input placeholder="Phone Number" />
+          <textarea placeholder="Tell us what you need help with / what this contact is about"></textarea>
           <button class="btn primary" type="submit">Send Contact Request</button>
         </form>
       </div>
@@ -620,6 +621,7 @@ contactUsForm?.addEventListener('submit', async (event) => {
     company: inputs[1]?.value || '',
     email: inputs[2]?.value || '',
     phone: inputs[3]?.value || '',
+    message: contactUsForm.querySelector('textarea')?.value || '',
     score: 0,
     industry: 'Contact Request',
     role: 'Website Contact',
@@ -642,4 +644,51 @@ contactUsForm?.addEventListener('submit', async (event) => {
     if (btn) btn.textContent = 'Please Email info@siglaicompliance.com'
   }
 })
+
+
+
+function populateConsultationAvailability() {
+  const daySelect = document.getElementById('consultDay')
+  const timeSelect = document.getElementById('consultTime')
+  if (!daySelect || !timeSelect || daySelect.dataset.ready) return
+
+  const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
+  const times = [
+    '9:00 AM EST',
+    '9:30 AM EST',
+    '10:00 AM EST',
+    '10:30 AM EST',
+    '11:00 AM EST',
+    '11:30 AM EST',
+    '12:00 PM EST',
+    '12:30 PM EST',
+    '1:00 PM EST',
+    '1:30 PM EST',
+    '2:00 PM EST',
+    '2:30 PM EST',
+    '3:00 PM EST',
+    '3:30 PM EST',
+    '4:00 PM EST',
+    '4:30 PM EST',
+    '5:00 PM EST'
+  ]
+
+  days.forEach((day) => {
+    const option = document.createElement('option')
+    option.value = day
+    option.textContent = day
+    daySelect.appendChild(option)
+  })
+
+  times.forEach((time) => {
+    const option = document.createElement('option')
+    option.value = time
+    option.textContent = time
+    timeSelect.appendChild(option)
+  })
+
+  daySelect.dataset.ready = 'true'
+}
+
+populateConsultationAvailability()
 
