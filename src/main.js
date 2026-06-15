@@ -645,47 +645,4 @@ contactUsForm?.addEventListener('submit', async (event) => {
 
 
 
-  const daySelect = document.getElementById('consultDay')
-  const timeSelect = document.getElementById('consultTime')
-  if (!daySelect || !timeSelect || daySelect.dataset.ready) return
-
-  const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
-  const times = [
-    '9:00 AM EST',
-    '9:30 AM EST',
-    '10:00 AM EST',
-    '10:30 AM EST',
-    '11:00 AM EST',
-    '11:30 AM EST',
-    '12:00 PM EST',
-    '12:30 PM EST',
-    '1:00 PM EST',
-    '1:30 PM EST',
-    '2:00 PM EST',
-    '2:30 PM EST',
-    '3:00 PM EST',
-    '3:30 PM EST',
-    '4:00 PM EST',
-    '4:30 PM EST',
-    '5:00 PM EST'
-  ]
-
-  days.forEach((day) => {
-    const option = document.createElement('option')
-    option.value = day
-    option.textContent = day
-    daySelect.appendChild(option)
-  })
-
-  times.forEach((time) => {
-    const option = document.createElement('option')
-    option.value = time
-    option.textContent = time
-    timeSelect.appendChild(option)
-  })
-
-  daySelect.dataset.ready = 'true'
-}
-
-populateConsultationAvailability()
-
+  
