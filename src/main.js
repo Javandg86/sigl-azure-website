@@ -232,9 +232,17 @@ document.querySelector('#app').innerHTML = `
                 <input placeholder="Name" />
                 <input placeholder="Company" />
                 <input placeholder="Work Email" />
-                <p class="booking-note">Book a 30-minute SIGL AI Risk Review consultation using live Outlook availability. Availability: Monday-Friday, 9:00 AM-4:30 PM EST.</p>
-                <button class="pulse-btn primary" type="submit">Send My Results to SIGL →</button>
-                <a class="pulse-btn ghost" href="https://outlook.live.com/owa/calendar/00000000-0000-0000-0000-000000000000/b991618a-e131-41a7-9998-4dff2346fdc9/cid-FDE762A1380A4424/index.html" target="_blank" rel="noopener">Open Live Calendar Availability →</a>
+                <p class="booking-note">Choose a live 30-minute SIGL AI Risk Review slot. Availability: Monday-Friday, 9:00 AM-4:30 PM EST.</p>
+                <div class="booking-calendar" id="bookingCalendar">
+                  <div class="booking-calendar-head">
+                    <button type="button" class="pulse-btn ghost" id="prevBookingWeek">← Previous</button>
+                    <strong id="bookingWeekLabel">Loading availability...</strong>
+                    <button type="button" class="pulse-btn ghost" id="nextBookingWeek">Next →</button>
+                  </div>
+                  <div class="booking-slots" id="bookingSlots"></div>
+                </div>
+                <input type="hidden" id="selectedSlot" />
+                <button class="pulse-btn primary" type="submit">Send Results & Request Selected Time →</button>
                 <a class="pulse-btn ghost" href="mailto:info@siglaicompliance.com?subject=Email%20My%20AI%20Risk%20Pulse%20Results">Email Results to Me</a>
               </form>
             </div>
@@ -548,7 +556,7 @@ pulseLeadForm?.addEventListener('submit', async (event) => {
   event.preventDefault()
 
   const inputs = pulseLeadForm.querySelectorAll('input')
-  const timeframe = 'Live Outlook calendar booking link offered: Monday-Friday 9:00 AM-4:30 PM EST, 30-minute consultation slots' 
+  const timeframe = document.getElementById('selectedSlot')?.value || 'No consultation slot selected'
   const finalScore = calculateRiskScore()
 
   const selectedSignals = [...document.querySelectorAll('#pulse .selected')]
@@ -563,6 +571,7 @@ pulseLeadForm?.addEventListener('submit', async (event) => {
     company: inputs[1]?.value || orgInputs[0]?.value || '',
     email: inputs[2]?.value || '',
     timeframe,
+    selectedSlot: selectedBookingSlot,
     score: finalScore,
     industry: orgInputs[1]?.value || '',
     companySize: orgInputs[2]?.value || '',
@@ -646,3 +655,71 @@ contactUsForm?.addEventListener('submit', async (event) => {
 
 
   
+
+
+let bookingWeekOffset = 0
+let selectedBookingSlot = ''
+
+function formatDateLabel(date) {
+  return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+}
+
+async function loadBookingSlots() {
+  const slotsEl = document.getElementById('bookingSlots')
+  const labelEl = document.getElementById('bookingWeekLabel')
+  if (!slotsEl || !labelEl) return
+
+  slotsEl.innerHTML = '<p class="booking-loading">Loading available times...</p>'
+
+  try {
+    const res = await fetch(`/api/slots?weekOffset=${bookingWeekOffset}`)
+    const data = await res.json()
+    if (!res.ok || !data.ok) throw new Error('Could not load slots')
+
+    labelEl.textContent = `${data.weekStartLabel} - ${data.weekEndLabel}`
+    slotsEl.innerHTML = ''
+
+    data.days.forEach((day) => {
+      const dayCard = document.createElement('div')
+      dayCard.className = 'booking-day'
+      dayCard.innerHTML = `<h4>${day.label}</h4>`
+
+      const slotWrap = document.createElement('div')
+      slotWrap.className = 'booking-day-slots'
+
+      day.slots.forEach((slot) => {
+        const btn = document.createElement('button')
+        btn.type = 'button'
+        btn.className = slot.available ? 'booking-slot' : 'booking-slot unavailable'
+        btn.textContent = slot.timeLabel
+        btn.disabled = !slot.available
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.booking-slot').forEach((b) => b.classList.remove('selected'))
+          btn.classList.add('selected')
+          selectedBookingSlot = slot.id
+          const hidden = document.getElementById('selectedSlot')
+          if (hidden) hidden.value = `${day.label} ${slot.timeLabel} EST`
+        })
+        slotWrap.appendChild(btn)
+      })
+
+      dayCard.appendChild(slotWrap)
+      slotsEl.appendChild(dayCard)
+    })
+  } catch {
+    slotsEl.innerHTML = '<p class="booking-loading error">Availability could not be loaded. Please submit your request and SIGL will follow up.</p>'
+  }
+}
+
+document.getElementById('prevBookingWeek')?.addEventListener('click', () => {
+  bookingWeekOffset = Math.max(0, bookingWeekOffset - 1)
+  loadBookingSlots()
+})
+
+document.getElementById('nextBookingWeek')?.addEventListener('click', () => {
+  bookingWeekOffset += 1
+  loadBookingSlots()
+})
+
+loadBookingSlots()
+

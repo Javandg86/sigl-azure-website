@@ -122,6 +122,19 @@ export default async function contextHandler(context, req) {
 
     await table.createEntity(lead)
 
+    if (body.selectedSlot) {
+      await table.createEntity({
+        partitionKey: "Booking",
+        rowKey: `${Date.now()}-${Math.random().toString(36).slice(2)}`,
+        slotId: safe(body.selectedSlot),
+        leadId: lead.rowKey,
+        name: lead.name,
+        company: lead.company,
+        email: lead.email,
+        bookedAt: now.toISOString()
+      })
+    }
+
     const emailClient = new EmailClient(emailConn)
 
     const emailResults = await Promise.allSettled([
