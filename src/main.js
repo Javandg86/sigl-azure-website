@@ -31,10 +31,7 @@ document.querySelector('#app').innerHTML = `
             SIGL independently validates AI security, governance, architecture, and evidence
             for organizations deploying AI where failure is not acceptable.
           </p>
-          <div class="hero-actions">
-            <a class="btn primary" href="#contact">Request AI Compliance Assessment</a>
-            <a class="btn secondary" href="#command">Enter Command Center</a>
-          </div>
+
         </div>
 
         <aside class="hero-cockpit" aria-label="SIGL AI compliance cockpit">
@@ -249,10 +246,7 @@ document.querySelector('#app').innerHTML = `
           </div>
         </div>
       
-        <div class="section-start-cta">
-          <a class="btn primary" href="#pulse">Start Assessment →</a>
-        </div>
-        <!-- hero-start-cta -->
+
       </section>
 
       <section id="command" class="command-center">
