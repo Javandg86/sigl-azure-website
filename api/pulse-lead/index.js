@@ -124,7 +124,7 @@ export default async function contextHandler(context, req) {
 
     const emailClient = new EmailClient(emailConn)
 
-    await Promise.allSettled([
+    const emailResults = await Promise.allSettled([
       sendEmail(
         emailClient,
         sender,
@@ -141,13 +141,34 @@ export default async function contextHandler(context, req) {
       )
     ])
 
+    context.log("SIGL Email Results:", JSON.stringify(emailResults))
+
+    const failedEmails = emailResults
+      .filter((result) => result.status === "rejected")
+      .map((result) => result.reason?.message || String(result.reason))
+
+    if (failedEmails.length) {
+      context.res = {
+        status: 207,
+        headers: { "Content-Type": "application/json" },
+        body: {
+          ok: true,
+          message: "Pulse lead stored, but one or more emails failed",
+          leadId: lead.rowKey,
+          emailErrors: failedEmails
+        }
+      }
+      return
+    }
+
     context.res = {
       status: 200,
       headers: { "Content-Type": "application/json" },
       body: {
         ok: true,
         message: "Pulse lead stored and emails sent",
-        leadId: lead.rowKey
+        leadId: lead.rowKey,
+        emailResults: emailResults.map((result) => result.status)
       }
     }
   } catch (error) {
