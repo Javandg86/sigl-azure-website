@@ -232,9 +232,9 @@ document.querySelector('#app').innerHTML = `
                 <input placeholder="Name" />
                 <input placeholder="Company" />
                 <input placeholder="Work Email" />
-                <select id="consultDay"><option>Preferred Day</option></select>
-                <select id="consultTime"><option>Preferred Time</option></select>
-                <button class="pulse-btn primary" type="submit">Schedule Free Consultation →</button>
+                <p class="booking-note">Book a 30-minute SIGL AI Risk Review consultation using live Outlook availability. Availability: Monday-Friday, 9:00 AM-4:30 PM EST.</p>
+                <button class="pulse-btn primary" type="submit">Send My Results to SIGL →</button>
+                <a class="pulse-btn ghost" href="https://outlook.live.com/owa/calendar/00000000-0000-0000-0000-000000000000/b991618a-e131-41a7-9998-4dff2346fdc9/cid-FDE762A1380A4424/index.html" target="_blank" rel="noopener">Open Live Calendar Availability →</a>
                 <a class="pulse-btn ghost" href="mailto:info@siglaicompliance.com?subject=Email%20My%20AI%20Risk%20Pulse%20Results">Email Results to Me</a>
               </form>
             </div>
@@ -548,9 +548,7 @@ pulseLeadForm?.addEventListener('submit', async (event) => {
   event.preventDefault()
 
   const inputs = pulseLeadForm.querySelectorAll('input')
-  const consultDay = document.getElementById('consultDay')?.value || ''
-  const consultTime = document.getElementById('consultTime')?.value || ''
-  const timeframe = `${consultDay} ${consultTime}`.trim()
+  const timeframe = 'Live Outlook calendar booking link offered: Monday-Friday 9:00 AM-4:30 PM EST, 30-minute consultation slots' 
   const finalScore = calculateRiskScore()
 
   const selectedSignals = [...document.querySelectorAll('#pulse .selected')]
@@ -647,7 +645,6 @@ contactUsForm?.addEventListener('submit', async (event) => {
 
 
 
-function populateConsultationAvailability() {
   const daySelect = document.getElementById('consultDay')
   const timeSelect = document.getElementById('consultTime')
   if (!daySelect || !timeSelect || daySelect.dataset.ready) return

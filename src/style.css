@@ -2021,3 +2021,12 @@ body {
 .contact-us-form textarea::placeholder {
   color: rgba(225,236,250,.58);
 }
+
+.booking-note {
+  padding: 16px;
+  border-radius: 16px;
+  border: 1px solid rgba(124,221,255,.18);
+  background: rgba(124,221,255,.07);
+  color: rgba(225,236,250,.78) !important;
+  font-size: .98rem !important;
+}
