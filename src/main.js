@@ -765,6 +765,10 @@ async function loadDashboard() {
       <article><span>Booked Consultations</span><strong>${stats.bookedConsultations}</strong></article>
       <article><span>Average Score</span><strong>${stats.averageScore}/100</strong></article>
       <article><span>High-Risk Leads</span><strong>${stats.highRiskLeads}</strong></article>
+      <article><span>Qualified Leads</span><strong>${stats.qualifiedLeads}</strong></article>
+      <article><span>Won Deals</span><strong>${stats.wonDeals}</strong></article>
+      <article><span>Pipeline Value</span><strong>$${Number(stats.pipelineValue || 0).toLocaleString()}</strong></article>
+      <article><span>Won Revenue</span><strong>$${Number(stats.wonRevenue || 0).toLocaleString()}</strong></article>
     `
 
     leadsEl.innerHTML = data.leads.map((lead) => {

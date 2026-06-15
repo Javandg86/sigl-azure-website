@@ -46,6 +46,12 @@ export default async function contextHandler(context, req) {
           bookedConsultations: bookings.length,
           averageScore,
           highRiskLeads: leads.filter((lead) => Number(lead.score || 0) >= 75).length,
+          qualifiedLeads: leads.filter((lead) => lead.status === "Qualified").length,
+          wonDeals: leads.filter((lead) => lead.status === "Won").length,
+          pipelineValue: leads.reduce((sum, lead) => sum + Number(lead.estimatedValue || 0), 0),
+          wonRevenue: leads
+            .filter((lead) => lead.status === "Won")
+            .reduce((sum, lead) => sum + Number(lead.estimatedValue || 0), 0),
           industryBreakdown
         },
         leads: leads.slice(0, 50).map((lead) => ({
