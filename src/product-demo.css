@@ -159,3 +159,190 @@ conversion-panel {
     padding-bottom: 100px;
   }
 }
+
+/* Product Demo visual correction: match uploaded SaaS dashboard references */
+body:has(.demo-app),
+html:has(.demo-app),
+#app:has(.demo-app) {
+  background: #f8fafc !important;
+  color: #0b1220 !important;
+}
+
+.demo-app {
+  background: #f8fafc !important;
+  grid-template-columns: 260px 1fr !important;
+}
+
+.demo-sidebar {
+  background: linear-gradient(180deg, #05070B 0%, #070B12 55%, #0A0F1A 100%) !important;
+  border-right: 1px solid rgba(255,255,255,.06);
+}
+
+.demo-main {
+  background: #f8fafc !important;
+  color: #0b1220 !important;
+  padding: 34px 34px 80px !important;
+}
+
+.demo-topbar {
+  background: transparent !important;
+  margin-bottom: 24px !important;
+}
+
+.demo-topbar h1 {
+  color: #0b1220 !important;
+  font-size: 2.35rem !important;
+  letter-spacing: -.04em;
+}
+
+.demo-topbar p {
+  color: #64748b !important;
+}
+
+.demo-hero {
+  background: #ffffff !important;
+  border: 1px solid #e5e7eb !important;
+  box-shadow: 0 12px 32px rgba(15,23,42,.06) !important;
+}
+
+.demo-hero h2 {
+  color: #0b1220 !important;
+}
+
+.metric-card,
+.panel,
+.report-templates article {
+  background: #ffffff !important;
+  color: #0b1220 !important;
+  border: 1px solid #e5e7eb !important;
+  box-shadow: 0 10px 28px rgba(15,23,42,.06) !important;
+}
+
+.metric-card p,
+.panel h3,
+.report-templates h3 {
+  color: #0b1220 !important;
+}
+
+.metric-card span,
+.activity,
+.panel p,
+.report-templates p {
+  color: #64748b !important;
+}
+
+.page-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 20px !important;
+}
+
+.wide {
+  grid-column: span 3 !important;
+}
+
+.wide2 {
+  grid-column: span 3 !important;
+}
+
+.report-templates {
+  grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+  gap: 18px !important;
+}
+
+.report-templates article {
+  min-height: 210px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.report-templates button,
+.demo-hero button,
+.primary-action,
+.conversion-panel button,
+.settings-grid button {
+  background: #D89517 !important;
+  color: #ffffff !important;
+  border: 1px solid #C98913 !important;
+  box-shadow: 0 8px 18px rgba(216,149,23,.18);
+}
+
+.table-wrap {
+  background: #ffffff !important;
+  border-radius: 16px;
+}
+
+table {
+  background: #ffffff !important;
+  color: #0b1220 !important;
+}
+
+th {
+  color: #475569 !important;
+  background: #ffffff !important;
+}
+
+td {
+  color: #0b1220 !important;
+}
+
+tbody tr:hover {
+  background: #f8fafc !important;
+}
+
+.conversion-panel {
+  background: #ffffff !important;
+  color: #0b1220 !important;
+  border: 1px solid #e5e7eb !important;
+  box-shadow: 0 10px 28px rgba(15,23,42,.06) !important;
+}
+
+.conversion-panel p {
+  color: #64748b !important;
+}
+
+.demo-disclaimer {
+  color: #64748b !important;
+}
+
+/* Laptop responsiveness while keeping reference look */
+@media (max-width: 1450px) {
+  .page-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  }
+
+  .report-templates {
+    grid-template-columns: repeat(5, minmax(160px, 1fr)) !important;
+  }
+}
+
+@media (max-width: 1250px) {
+  .page-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .wide,
+  .wide2,
+  .conversion-panel {
+    grid-column: 1 / -1 !important;
+  }
+
+  .report-templates {
+    grid-template-columns: repeat(2, minmax(220px, 1fr)) !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .demo-app {
+    grid-template-columns: 1fr !important;
+  }
+
+  .demo-main {
+    padding: 76px 18px 100px !important;
+  }
+
+  .page-grid,
+  .report-templates {
+    grid-template-columns: 1fr !important;
+  }
+}
