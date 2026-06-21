@@ -3,6 +3,10 @@ import { initAiTrustNetwork } from './three/aiNetwork.js'
 
 const logo = '/sigl-logo-exact.png'
 
+if (window.location.pathname === '/product-demo' || window.location.pathname === '/lead-demo-admin') {
+  import('./product-demo.jsx')
+} else {
+
 document.querySelector('#app').innerHTML = `
   <div class="site-shell">
     <header class="nav">
@@ -868,3 +872,5 @@ document.addEventListener('click', async (event) => {
   }
 })
 
+
+}
