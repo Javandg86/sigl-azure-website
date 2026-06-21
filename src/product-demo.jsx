@@ -267,7 +267,75 @@ function Evidence({ setModal, openLead }) {
   </div>
 }
 
+
 function Reports({ setModal, openLead }) {
+  const templates = ['Executive Summary','AI Risk Snapshot','Governance Maturity Report','Red-Team Findings Report','Vendor Risk Report']
+  const activity = [
+    ['Jan', 4],
+    ['Feb', 6],
+    ['Mar', 5],
+    ['Apr', 8],
+    ['May', 7],
+    ['Jun', 10],
+  ]
+
+  return <div className="page-grid reports-layout">
+    <Metric title="Executive Reports" value="18" color="gold" />
+    <Metric title="Audit Reports" value="12" color="purple" />
+    <Metric title="Scheduled Reports" value="7" color="blue" />
+    <Metric title="Exports This Month" value="28" color="green" />
+
+    <section className="panel reports-template-panel">
+      <h3>Report Templates</h3>
+      <div className="report-templates">
+        {templates.map(t=><article key={t}>
+          <h3>{t}</h3>
+          <p>Sample report template using demo data for executive and audit-ready communication.</p>
+          <button onClick={()=>setModal({title:'Report Preview Generated', text:'This demo uses sample data. Sections include executive summary, risk score, top risks, control status, and recommended next steps.', cta:'Book Report Setup Consultation'})}>Generate Report →</button>
+        </article>)}
+      </div>
+    </section>
+
+    <aside className="report-side-stack">
+      <section className="panel report-mini-card">
+        <h3>Reporting Activity</h3>
+        <div className="mini-bar-chart">
+          {activity.map(([month, value]) => (
+            <div className="mini-bar-item" key={month}>
+              <span style={{ height: `${value * 12}px` }}></span>
+              <small>{month}</small>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="panel report-mini-card">
+        <h3>Scheduled Deliveries</h3>
+        <div className="scheduled-row"><span>Executive Summary</span><b>Quarterly</b></div>
+        <div className="scheduled-row"><span>AI Risk Snapshot</span><b>Monthly</b></div>
+        <div className="scheduled-row"><span>Governance Report</span><b>Quarterly</b></div>
+      </section>
+    </aside>
+
+    <section className="panel wide">
+      <h3>Recent Reports</h3>
+      <DataTable
+        headers={['Report Name','Type','Date','Owner','Format','Status']}
+        rows={[
+          ['Q2 Executive Summary','Executive','Jun 24, 2025','Alex Kim','PDF','Completed'],
+          ['AI Risk Snapshot – June 2025','Risk Snapshot','Jun 23, 2025','Maya Lopez','PDF','Completed'],
+          ['Governance Maturity – Q2 2025','Governance','Jun 20, 2025','Jamie Wong','PDF','Completed'],
+          ['Red-Team Findings – v2','Red-Team','Jun 18, 2025','Devon Brooks','PDF','In Review'],
+          ['Vendor Risk Report – Acme NLP','Vendor Risk','Jun 16, 2025','Alex Kim','Excel','Completed'],
+          ['Monthly Audit Report – May 2025','Audit','Jun 12, 2025','Sarah Chen','PDF','Completed'],
+        ]}
+      />
+    </section>
+
+    <CTA onOpen={openLead} />
+  </div>
+}
+) {
   const templates = ['Executive Summary','AI Risk Snapshot','Governance Maturity Report','Red-Team Findings Report','Vendor Risk Report']
   return <div className="page-grid">
     <Metric title="Executive Reports" value="18" color="gold" /><Metric title="Audit Reports" value="12" color="purple" /><Metric title="Scheduled Reports" value="7" color="blue" /><Metric title="Exports This Month" value="28" color="green" />
