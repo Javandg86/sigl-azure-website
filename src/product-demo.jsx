@@ -335,14 +335,6 @@ function Reports({ setModal, openLead }) {
     <CTA onOpen={openLead} />
   </div>
 }
-) {
-  const templates = ['Executive Summary','AI Risk Snapshot','Governance Maturity Report','Red-Team Findings Report','Vendor Risk Report']
-  return <div className="page-grid">
-    <Metric title="Executive Reports" value="18" color="gold" /><Metric title="Audit Reports" value="12" color="purple" /><Metric title="Scheduled Reports" value="7" color="blue" /><Metric title="Exports This Month" value="28" color="green" />
-    <section className="panel wide2 report-templates">{templates.map(t=><article key={t}><h3>{t}</h3><p>Sample report template using demo data for executive and audit-ready communication.</p><button onClick={()=>setModal({title:'Report Preview Generated', text:'This demo uses sample data. Sections include executive summary, risk score, top risks, control status, and recommended next steps.', cta:'Book Report Setup Consultation'})}>Generate Report →</button></article>)}</section>
-    <CTA onOpen={openLead} />
-  </div>
-}
 
 function SettingsPage({ openLead }) {
   const [toast, setToast] = useState('')
