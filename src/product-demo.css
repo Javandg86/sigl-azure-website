@@ -28,3 +28,46 @@
   position: relative;
   z-index: 7;
 }
+
+/* Fix product demo sidebar on smaller laptop screens */
+.demo-sidebar {
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(216,149,23,.55) transparent;
+}
+
+.demo-sidebar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.demo-sidebar::-webkit-scrollbar-thumb {
+  background: rgba(216,149,23,.55);
+  border-radius: 999px;
+}
+
+.demo-sidebar nav {
+  padding-bottom: 120px;
+}
+
+.demo-sidebar button {
+  min-height: 52px;
+  flex-shrink: 0;
+}
+
+@media (max-height: 760px) {
+  .demo-sidebar {
+    padding-top: 18px !important;
+  }
+
+  .demo-sidebar img {
+    width: 150px !important;
+    margin-bottom: 18px !important;
+  }
+
+  .demo-sidebar button {
+    padding-top: 11px !important;
+    padding-bottom: 11px !important;
+    font-size: .92rem !important;
+  }
+}
