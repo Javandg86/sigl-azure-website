@@ -417,3 +417,82 @@ tbody tr:hover {
     grid-column: 1 / -1;
   }
 }
+
+/* Strong responsive fix for Reports page on smaller laptops and mobile */
+@media (max-width: 1600px) {
+  .reports-template-panel,
+  .report-side-stack {
+    grid-column: 1 / -1 !important;
+  }
+
+  .report-side-stack {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .report-templates {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)) !important;
+  }
+
+  .report-templates article {
+    min-height: 220px !important;
+  }
+}
+
+/* Make full demo page scrollable on shorter screens */
+.demo-app,
+.demo-main {
+  height: auto !important;
+  min-height: 100vh !important;
+}
+
+.demo-main {
+  overflow-y: visible !important;
+  overflow-x: hidden !important;
+  padding-bottom: 120px !important;
+}
+
+body:has(.demo-app) {
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+}
+
+/* Small laptop / tablet */
+@media (max-width: 1100px) {
+  .page-grid,
+  .report-side-stack,
+  .report-templates {
+    grid-template-columns: 1fr !important;
+  }
+
+  .reports-template-panel,
+  .report-side-stack,
+  .wide,
+  .wide2,
+  .conversion-panel {
+    grid-column: 1 / -1 !important;
+  }
+
+  .report-templates article,
+  .report-mini-card {
+    min-height: auto !important;
+  }
+}
+
+/* Mobile polish */
+@media (max-width: 700px) {
+  .demo-main {
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+    padding-bottom: 140px !important;
+  }
+
+  .metric-card,
+  .panel,
+  .report-templates article {
+    padding: 18px !important;
+  }
+
+  .report-templates {
+    gap: 14px !important;
+  }
+}
