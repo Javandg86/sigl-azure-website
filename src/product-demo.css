@@ -71,3 +71,91 @@
     font-size: .92rem !important;
   }
 }
+
+/* Fix product demo layout on smaller laptops */
+html,
+body,
+#app {
+  min-height: 100%;
+  overflow-x: hidden;
+}
+
+.demo-app {
+  min-height: 100vh;
+  align-items: stretch;
+}
+
+.demo-main {
+  min-height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Make report cards responsive instead of forcing 5 columns */
+.report-templates {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) !important;
+}
+
+.report-templates article {
+  min-width: 0;
+  overflow: visible;
+  background: #fff !important;
+  color: #0B1220 !important;
+}
+
+/* Prevent cards/tables from clipping on shorter or smaller laptop screens */
+.panel,
+.metric-card,
+.demo-hero,
+conversion-panel {
+  min-width: 0;
+}
+
+.page-grid {
+  align-items: start;
+}
+
+/* Medium laptop layout */
+@media (max-width: 1400px) {
+  .page-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .wide,
+  .wide2,
+  .conversion-panel {
+    grid-column: 1 / -1 !important;
+  }
+
+  .report-templates {
+    grid-template-columns: repeat(2, minmax(220px, 1fr)) !important;
+  }
+}
+
+/* Short screen laptop layout */
+@media (max-height: 820px) {
+  .demo-main {
+    padding-top: 24px;
+    padding-bottom: 80px;
+  }
+
+  .metric-card {
+    padding: 18px;
+  }
+
+  .metric-card strong {
+    font-size: 2rem;
+  }
+}
+
+/* Small laptop / tablet */
+@media (max-width: 900px) {
+  .page-grid,
+  .report-templates {
+    grid-template-columns: 1fr !important;
+  }
+
+  .demo-main {
+    padding-bottom: 100px;
+  }
+}
