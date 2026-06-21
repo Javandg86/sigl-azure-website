@@ -20,6 +20,7 @@ document.querySelector('#app').innerHTML = `
         <a href="#proof">Proof</a>
         <a href="#careers">Careers</a>
         <a href="#partnerships">Partnerships</a>
+        <a href="/product-demo">Product Demo</a>
       </nav>
       <a class="nav-cta" href="#contact-modal">Contact Us</a>
     </header>
