@@ -565,3 +565,16 @@ body:has(.demo-app) {
 .coverage-row i.red { background: #DC2626; }
 .coverage-row i.cyan { background: #0EA5E9; }
 .coverage-row i.slate { background: #94A3B8; }
+
+.inventory-side-stack {
+  grid-column: span 1;
+  display: grid;
+  gap: 20px;
+  align-self: start;
+}
+
+@media (max-width: 1250px) {
+  .inventory-side-stack {
+    grid-column: 1 / -1;
+  }
+}
