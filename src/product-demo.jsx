@@ -224,7 +224,29 @@ function Inventory({ setModal, openLead }) {
         <div className="tools"><div className="chips"><button>All Systems</button><button>High Risk</button><button>Customer-Facing</button><button>Third-Party Vendor</button></div><input placeholder="Search systems..." value={q} onChange={e=>setQ(e.target.value)} /></div>
         <DataTable headers={['System Name','Owner','Vendor','Use Case','Data Sensitivity','Status','Last Review']} rows={filtered} onRow={(r)=>setModal({title:r[0], text:'System Detail Preview', cta:'Request Vendor AI Risk Review', items:[['Vendor',r[2]],['Owner',r[1]],['Risk Level',r[4]],['Recommended Step','Vendor AI Risk Review']]})} />
       </section>
-      <section className="panel"><h3>Recently Added</h3>{['Claims Triage Assistant','Finance Document Parser','IT Helpdesk Copilot','Research Summarizer','Code Review Assistant'].map(x=><p className="activity" key={x}>{x}</p>)}</section>
+      <section className="panel inventory-side-card">
+        <h3>Recently Added</h3>
+        {['Claims Triage Assistant','Finance Document Parser','IT Helpdesk Copilot','Research Summarizer','Code Review Assistant'].map(x=><p className="activity bullet-activity" key={x}>{x}</p>)}
+      </section>
+
+      <section className="panel inventory-side-card coverage-card">
+        <h3>Coverage by Department</h3>
+        {[
+          ['IT', 32, 'blue'],
+          ['Operations', 18, 'gold'],
+          ['Sales', 14, 'green'],
+          ['Marketing', 11, 'purple'],
+          ['Human Resources', 9, 'red'],
+          ['Support', 8, 'cyan'],
+          ['Other', 8, 'slate']
+        ].map(([name, value, color]) => (
+          <div className="coverage-row" key={name}>
+            <div><span>{name}</span><b>{value}%</b></div>
+            <i className={color} style={{ width: `${value}%` }}></i>
+          </div>
+        ))}
+      </section>
+
       <CTA onOpen={openLead} title="Need help reviewing third-party AI systems?" />
     </div>
   )

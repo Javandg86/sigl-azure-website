@@ -496,3 +496,72 @@ body:has(.demo-app) {
     gap: 14px !important;
   }
 }
+
+/* AI Inventory Coverage by Department */
+.inventory-side-card {
+  grid-column: span 1;
+}
+
+.bullet-activity {
+  position: relative;
+  padding-left: 18px;
+}
+
+.bullet-activity::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: .75em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #D89517;
+}
+
+.coverage-card {
+  display: grid;
+  gap: 12px;
+}
+
+.coverage-row {
+  display: grid;
+  gap: 6px;
+}
+
+.coverage-row div {
+  display: flex;
+  justify-content: space-between;
+  color: #64748b;
+  font-size: .92rem;
+}
+
+.coverage-row b {
+  color: #64748b;
+}
+
+.coverage-row::after {
+  content: "";
+  height: 7px;
+  border-radius: 999px;
+  background: #eef2f7;
+  grid-row: 2;
+  grid-column: 1;
+}
+
+.coverage-row i {
+  display: block;
+  height: 7px;
+  border-radius: 999px;
+  grid-row: 2;
+  grid-column: 1;
+  position: relative;
+  z-index: 2;
+}
+
+.coverage-row i.blue { background: #146EF5; }
+.coverage-row i.gold { background: #D89517; }
+.coverage-row i.green { background: #16A34A; }
+.coverage-row i.purple { background: #7C3AED; }
+.coverage-row i.red { background: #DC2626; }
+.coverage-row i.cyan { background: #0EA5E9; }
+.coverage-row i.slate { background: #94A3B8; }
