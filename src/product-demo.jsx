@@ -375,7 +375,16 @@ function App() {
     <div className="demo-app">
       <button className="hamburger" onClick={() => setDrawer(true)}><Menu /></button>
       <aside className={`demo-sidebar ${drawer ? 'open' : ''}`}>
-        <button className="drawer-close" onClick={() => setDrawer(false)}><X /></button>
+        <button
+          className="drawer-close"
+          aria-label="Exit product demo"
+          title="Exit product demo"
+          onClick={() => {
+            window.location.href = '/'
+          }}
+        >
+          <X />
+        </button>
         <img src="/sigl-logo-exact.png" alt="SIGL" />
         <nav>{nav.map(([name, Icon]) => <button key={name} className={active===name?'active':''} onClick={()=>{setActive(name);setDrawer(false)}}><Icon size={20}/>{name}</button>)}</nav>
         <div className="gold-wave" />
