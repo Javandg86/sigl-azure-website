@@ -2663,3 +2663,146 @@ html:has(.demo-app),
     animation: none !important;
   }
 }
+
+/* =====================================================
+   FIX: Animation must stay BEHIND Product Demo content
+   ===================================================== */
+
+/* True black stage */
+body:has(.demo-app),
+html:has(.demo-app),
+#app:has(.demo-app),
+.demo-app,
+.demo-main {
+  background: #000 !important;
+}
+
+/* Put app in its own stacking context */
+.demo-app {
+  position: relative !important;
+  isolation: isolate !important;
+  overflow-x: hidden !important;
+}
+
+/* Remove all previous front overlays */
+.demo-main::before,
+.demo-main::after,
+.fade-page::before,
+.fade-page::after,
+.demo-sidebar::after,
+.metric-card::before,
+.metric-card::after,
+.panel::before,
+.panel::after,
+.demo-hero::before,
+.demo-hero::after,
+.report-templates article::before,
+.report-templates article::after {
+  content: none !important;
+  display: none !important;
+  animation: none !important;
+}
+
+/* Background animation layer ONLY */
+.demo-app::before {
+  content: "" !important;
+  display: block !important;
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: -2 !important;
+  pointer-events: none !important;
+  background:
+    radial-gradient(circle at 18% 24%, rgba(0,191,255,.55) 0 2px, rgba(0,191,255,.24) 3px 22px, transparent 70px),
+    radial-gradient(circle at 72% 28%, rgba(216,149,23,.50) 0 2px, rgba(216,149,23,.20) 3px 24px, transparent 76px),
+    radial-gradient(circle at 42% 76%, rgba(124,58,237,.45) 0 2px, rgba(124,58,237,.18) 3px 26px, transparent 82px),
+    radial-gradient(circle at 86% 72%, rgba(0,191,255,.48) 0 2px, rgba(0,191,255,.18) 3px 24px, transparent 76px),
+    radial-gradient(circle at 50% 50%, rgba(20,110,245,.20), transparent 34%),
+    #000 !important;
+  filter: saturate(1.8) contrast(1.35) brightness(1.08);
+  animation: sigl-bg-core-drift 14s ease-in-out infinite alternate !important;
+}
+
+/* Curved tech energy layer BEHIND content */
+.demo-app::after {
+  content: "" !important;
+  display: block !important;
+  position: fixed !important;
+  inset: -20% !important;
+  z-index: -1 !important;
+  pointer-events: none !important;
+  background:
+    conic-gradient(from 40deg at 25% 35%, transparent 0 16%, rgba(0,191,255,.60) 18%, transparent 23% 100%),
+    conic-gradient(from 210deg at 70% 62%, transparent 0 18%, rgba(216,149,23,.50) 20%, transparent 25% 100%),
+    conic-gradient(from 125deg at 48% 78%, transparent 0 14%, rgba(124,58,237,.44) 16%, transparent 21% 100%),
+    radial-gradient(circle at 50% 50%, transparent 0 44%, rgba(0,191,255,.12) 45%, transparent 48%),
+    radial-gradient(circle at 50% 50%, transparent 0 28%, rgba(216,149,23,.10) 29%, transparent 32%) !important;
+  mix-blend-mode: screen !important;
+  opacity: .95 !important;
+  animation: sigl-bg-orbit 20s linear infinite !important;
+}
+
+/* Content must always be ABOVE animation */
+.demo-sidebar,
+.demo-topbar,
+.demo-hero,
+.page-grid,
+.demo-disclaimer,
+.metric-card,
+.panel,
+.report-templates article,
+.table-wrap,
+table,
+.modal-backdrop {
+  position: relative !important;
+  z-index: 10 !important;
+}
+
+/* Cards are solid so animation never shows through text/cards */
+.metric-card,
+.panel,
+.demo-hero,
+.report-templates article {
+  background: #ffffff !important;
+  backdrop-filter: none !important;
+}
+
+/* Sidebar stays solid too */
+.demo-sidebar {
+  background: linear-gradient(180deg, #05070B 0%, #070B12 55%, #0A0F1A 100%) !important;
+}
+
+/* Text stays readable */
+.demo-topbar h1 {
+  color: #ffffff !important;
+}
+
+.demo-topbar p {
+  color: rgba(226,232,240,.78) !important;
+}
+
+@keyframes sigl-bg-core-drift {
+  0% {
+    transform: scale(1) translate3d(-1.5%, -1%, 0);
+    filter: hue-rotate(0deg) saturate(1.6) contrast(1.25);
+  }
+  100% {
+    transform: scale(1.08) translate3d(1.5%, 1%, 0);
+    filter: hue-rotate(14deg) saturate(2) contrast(1.45);
+  }
+}
+
+@keyframes sigl-bg-orbit {
+  from {
+    transform: rotate(0deg) scale(1);
+  }
+  to {
+    transform: rotate(360deg) scale(1.04);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .demo-app::before,
+  .demo-app::after {
+    animation: none !important;
+  }
+}
