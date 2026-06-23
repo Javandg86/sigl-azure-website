@@ -681,11 +681,6 @@ function SettingsPage({ openLead }) {
 }
 
 function App() {
-  useEffect(() => {
-    window.scrollTo(0, 0)
-    document.documentElement.scrollTop = 0
-    document.body.scrollTop = 0
-  }, [])
   const [active, setActive] = useState('Dashboard')
   const [drawer, setDrawer] = useState(false)
   const [modal, setModal] = useState(null)
