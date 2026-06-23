@@ -3988,3 +3988,61 @@ textarea,
 .page-grid {
   background: transparent !important;
 }
+
+/* FINAL OVERRIDE: make Product Demo sections transparent like main website */
+body .demo-app .metric-card,
+body .demo-app .panel,
+body .demo-app .demo-hero,
+body .demo-app .report-templates article,
+body .demo-app .conversion-panel {
+  background: linear-gradient(145deg, rgba(255,255,255,.08), rgba(255,255,255,.025)) !important;
+  border: 1px solid rgba(255,255,255,.13) !important;
+  backdrop-filter: blur(18px) saturate(155%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(155%) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.10),
+    0 28px 80px rgba(0,0,0,.30) !important;
+}
+
+body .demo-app .table-wrap,
+body .demo-app table,
+body .demo-app thead,
+body .demo-app tbody,
+body .demo-app tr,
+body .demo-app th,
+body .demo-app td {
+  background: transparent !important;
+}
+
+body .demo-app tbody tr {
+  background: rgba(255,255,255,.025) !important;
+}
+
+body .demo-app tbody tr:hover {
+  background: rgba(255,255,255,.07) !important;
+}
+
+body .demo-app input,
+body .demo-app select,
+body .demo-app textarea,
+body .demo-app .chips button,
+body .demo-app .risk-control-row,
+body .demo-app .missing-evidence-row,
+body .demo-app .deadline-row,
+body .demo-app .policy-row,
+body .demo-app .integration-row,
+body .demo-app .team-row,
+body .demo-app .owner-row,
+body .demo-app .scheduled-row,
+body .demo-app .recent-upload-row {
+  background: rgba(0,0,0,.18) !important;
+  border: 1px solid rgba(255,255,255,.11) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+}
+
+body .demo-app .demo-main,
+body .demo-app .fade-page,
+body .demo-app .page-grid {
+  background: transparent !important;
+}
