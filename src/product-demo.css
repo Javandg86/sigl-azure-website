@@ -3700,3 +3700,46 @@ body:has(.demo-app),
     transform-origin: center center !important;
   }
 }
+
+/* MOBILE: keep Product Demo page title visible immediately */
+@media (max-width: 700px) {
+  .demo-topbar {
+    position: fixed !important;
+    top: 76px !important;
+    left: 16px !important;
+    right: 16px !important;
+    z-index: 9998 !important;
+    background: rgba(0,0,0,.72) !important;
+    backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
+    border: 1px solid rgba(255,255,255,.12) !important;
+    border-radius: 18px !important;
+    padding: 16px !important;
+  }
+
+  .demo-topbar h1 {
+    font-size: 2.1rem !important;
+    line-height: 1 !important;
+    margin: 0 !important;
+  }
+
+  .demo-topbar p {
+    font-size: .95rem !important;
+    margin: 8px 0 0 !important;
+  }
+
+  .user {
+    margin-top: 12px !important;
+  }
+
+  .demo-main {
+    padding-top: 300px !important;
+  }
+
+  .hamburger {
+    position: fixed !important;
+    top: 18px !important;
+    left: 18px !important;
+    z-index: 10000 !important;
+  }
+}
