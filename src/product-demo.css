@@ -2371,3 +2371,125 @@ html:has(.demo-app),
     animation: none !important;
   }
 }
+
+/* =====================================================
+   PRODUCT DEMO: Single animated circuit image background
+   ===================================================== */
+
+/* Remove all previous Product Demo animation layers */
+.demo-main::before,
+.demo-main::after,
+.demo-app::before,
+.demo-app::after,
+.fade-page::before,
+.fade-page::after,
+.demo-sidebar::after,
+.metric-card::after,
+.panel::after,
+.report-templates article::after,
+.demo-hero::after {
+  content: none !important;
+  display: none !important;
+  animation: none !important;
+}
+
+/* Deep black background */
+body:has(.demo-app),
+html:has(.demo-app),
+#app:has(.demo-app),
+.demo-app,
+.demo-main {
+  background: #000 !important;
+}
+
+/* Animated circuit image background */
+.demo-app {
+  position: relative;
+  isolation: isolate;
+  overflow-x: hidden;
+}
+
+.demo-app::before {
+  content: "" !important;
+  display: block !important;
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(rgba(0,0,0,.36), rgba(0,0,0,.50)),
+    url("/sigl-circuit-bg.png") center center / cover no-repeat;
+  opacity: .95;
+  filter: saturate(1.55) contrast(1.25) brightness(1.12);
+  animation: sigl-circuit-drift 18s ease-in-out infinite alternate;
+}
+
+/* Moving light sweep over the circuit */
+.demo-app::after {
+  content: "" !important;
+  display: block !important;
+  position: fixed;
+  inset: -20%;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(125,211,252,.62), transparent 10%),
+    linear-gradient(115deg, transparent 0 42%, rgba(0,191,255,.0) 45%, rgba(0,191,255,.72) 49%, rgba(216,149,23,.35) 51%, rgba(0,191,255,.0) 56%, transparent 100%);
+  mix-blend-mode: screen;
+  opacity: .78;
+  filter: blur(.5px);
+  animation: sigl-circuit-light-flow 6s ease-in-out infinite;
+}
+
+/* Keep content readable above background */
+.demo-sidebar,
+.demo-topbar,
+.demo-hero,
+.page-grid,
+.demo-disclaimer {
+  position: relative;
+  z-index: 3;
+}
+
+.metric-card,
+.panel,
+.demo-hero,
+.report-templates article {
+  background: rgba(255,255,255,.95) !important;
+  backdrop-filter: blur(18px);
+}
+
+@keyframes sigl-circuit-drift {
+  0% {
+    transform: scale(1.04) translate3d(-1.5%, -1%, 0);
+    filter: saturate(1.45) contrast(1.2) brightness(1.04) hue-rotate(0deg);
+  }
+  100% {
+    transform: scale(1.12) translate3d(1.5%, 1%, 0);
+    filter: saturate(1.85) contrast(1.35) brightness(1.22) hue-rotate(8deg);
+  }
+}
+
+@keyframes sigl-circuit-light-flow {
+  0% {
+    transform: translateX(-70%) translateY(18%) rotate(0deg);
+    opacity: 0;
+  }
+  25% {
+    opacity: .88;
+  }
+  55% {
+    opacity: .72;
+  }
+  100% {
+    transform: translateX(70%) translateY(-18%) rotate(0deg);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .demo-app::before,
+  .demo-app::after {
+    animation: none !important;
+  }
+}
