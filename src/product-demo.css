@@ -2093,3 +2093,281 @@ body::before,
     padding-right: 18px !important;
   }
 }
+
+/* =====================================================
+   RESET OLD PRODUCT DEMO ANIMATION SYSTEMS
+   ===================================================== */
+.demo-main::before,
+.demo-main::after,
+.demo-app::before,
+.demo-app::after,
+.fade-page::before,
+.fade-page::after,
+.demo-sidebar::after,
+.metric-card::after,
+.panel::after,
+.report-templates article::after,
+.demo-hero::after {
+  content: none !important;
+  animation: none !important;
+  display: none !important;
+}
+
+.metric-icon,
+.metric-icon::before,
+.metric-icon::after {
+  animation: none !important;
+  content: none !important;
+}
+
+/* Keep the deep black background */
+body:has(.demo-app),
+html:has(.demo-app),
+#app:has(.demo-app),
+.demo-app,
+.demo-main {
+  background: #000 !important;
+}
+
+/* =====================================================
+   NEW SIGL NEON CIRCUIT / DATA TUNNEL ANIMATION
+   ===================================================== */
+
+.demo-app {
+  position: relative;
+  isolation: isolate;
+  overflow-x: hidden;
+}
+
+/* Main animated cyber tunnel */
+.demo-app::before {
+  content: "" !important;
+  display: block !important;
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(0,191,255,.40), transparent 8%),
+    radial-gradient(circle at 50% 50%, rgba(216,149,23,.28), transparent 18%),
+    repeating-radial-gradient(circle at 50% 50%, transparent 0 38px, rgba(0,191,255,.18) 39px 40px),
+    linear-gradient(90deg, transparent 0 48%, rgba(0,191,255,.42) 49%, transparent 50%),
+    linear-gradient(0deg, transparent 0 48%, rgba(216,149,23,.32) 49%, transparent 50%),
+    conic-gradient(from 0deg at 50% 50%, transparent, rgba(0,191,255,.35), transparent, rgba(216,149,23,.30), transparent);
+  background-size:
+    100% 100%,
+    100% 100%,
+    100% 100%,
+    220px 220px,
+    220px 220px,
+    100% 100%;
+  transform: perspective(900px) rotateX(62deg) scale(1.55);
+  transform-origin: center center;
+  opacity: .95;
+  filter: saturate(1.5) contrast(1.25);
+  animation: sigl-neon-tunnel 7s linear infinite;
+}
+
+/* Moving circuit traces */
+.demo-app::after {
+  content: "" !important;
+  display: block !important;
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, transparent 0 10%, rgba(0,191,255,.75) 10% 11%, transparent 11% 100%),
+    linear-gradient(90deg, transparent 0 38%, rgba(216,149,23,.70) 38% 39%, transparent 39% 100%),
+    linear-gradient(90deg, transparent 0 72%, rgba(124,58,237,.72) 72% 73%, transparent 73% 100%),
+    linear-gradient(0deg, transparent 0 18%, rgba(0,191,255,.45) 18% 19%, transparent 19% 100%),
+    linear-gradient(0deg, transparent 0 55%, rgba(216,149,23,.40) 55% 56%, transparent 56% 100%),
+    radial-gradient(circle at 12% 22%, #00bfff 0 4px, transparent 5px),
+    radial-gradient(circle at 38% 55%, #d89517 0 4px, transparent 5px),
+    radial-gradient(circle at 66% 32%, #00bfff 0 4px, transparent 5px),
+    radial-gradient(circle at 84% 72%, #7c3aed 0 4px, transparent 5px);
+  background-size:
+    480px 180px,
+    560px 220px,
+    620px 260px,
+    420px 260px,
+    520px 300px,
+    100% 100%,
+    100% 100%,
+    100% 100%,
+    100% 100%;
+  mix-blend-mode: screen;
+  opacity: .85;
+  filter:
+    drop-shadow(0 0 8px rgba(0,191,255,.9))
+    drop-shadow(0 0 18px rgba(216,149,23,.45));
+  animation: sigl-circuit-flow 9s linear infinite;
+}
+
+/* Holographic laser sweep across the page */
+.demo-main {
+  position: relative;
+  isolation: isolate;
+}
+
+.demo-main > .fade-page {
+  position: relative;
+}
+
+.demo-main > .fade-page::before {
+  content: "" !important;
+  display: block !important;
+  position: fixed;
+  inset: -25%;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      115deg,
+      transparent 0 42%,
+      rgba(0,191,255,.00) 44%,
+      rgba(0,191,255,.55) 48%,
+      rgba(216,149,23,.45) 50%,
+      rgba(124,58,237,.45) 52%,
+      rgba(0,191,255,.00) 56%,
+      transparent 60% 100%
+    );
+  opacity: .75;
+  filter: blur(1px);
+  mix-blend-mode: screen;
+  animation: sigl-laser-sweep 5.5s ease-in-out infinite;
+}
+
+/* Floating code particles, bright but not blocking content */
+.demo-main > .fade-page::after {
+  content:
+    "AI_RISK • MODEL_MAP • RED_TEAM • GOVERNANCE • EVIDENCE_HASH • VENDOR_REVIEW • PROMPT_GUARD • ";
+  display: block !important;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 24px;
+  z-index: 1;
+  pointer-events: none;
+  color: rgba(125,211,252,.75);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 18px;
+  letter-spacing: .22em;
+  white-space: nowrap;
+  text-shadow:
+    0 0 10px rgba(0,191,255,.9),
+    0 0 22px rgba(0,191,255,.6);
+  animation: sigl-code-marquee 18s linear infinite;
+}
+
+/* Keep dashboard readable over intense animation */
+.demo-sidebar,
+.demo-topbar,
+.demo-hero,
+.page-grid,
+.demo-disclaimer {
+  position: relative;
+  z-index: 3;
+}
+
+.metric-card,
+.panel,
+.demo-hero,
+.report-templates article {
+  background: rgba(255,255,255,.95) !important;
+  backdrop-filter: blur(18px);
+}
+
+/* Animations */
+@keyframes sigl-neon-tunnel {
+  0% {
+    background-position:
+      center,
+      center,
+      center,
+      0 0,
+      0 0,
+      center;
+    transform: perspective(900px) rotateX(62deg) scale(1.55) translateY(0);
+  }
+  100% {
+    background-position:
+      center,
+      center,
+      center,
+      0 220px,
+      220px 0,
+      center;
+    transform: perspective(900px) rotateX(62deg) scale(1.55) translateY(120px);
+  }
+}
+
+@keyframes sigl-circuit-flow {
+  0% {
+    background-position:
+      0 0,
+      0 0,
+      0 0,
+      0 0,
+      0 0,
+      center,
+      center,
+      center,
+      center;
+  }
+  100% {
+    background-position:
+      480px 0,
+      -560px 0,
+      620px 0,
+      0 260px,
+      0 -300px,
+      center,
+      center,
+      center,
+      center;
+  }
+}
+
+@keyframes sigl-laser-sweep {
+  0%, 18% {
+    transform: translateX(-75%) translateY(18%) rotate(0deg);
+    opacity: 0;
+  }
+  35% {
+    opacity: .9;
+  }
+  70%, 100% {
+    transform: translateX(75%) translateY(-18%) rotate(0deg);
+    opacity: 0;
+  }
+}
+
+@keyframes sigl-code-marquee {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(-120%);
+  }
+}
+
+@media (max-width: 900px) {
+  .demo-app::before {
+    transform: perspective(700px) rotateX(65deg) scale(1.9);
+  }
+
+  .demo-main > .fade-page::after {
+    font-size: 12px;
+    bottom: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .demo-app::before,
+  .demo-app::after,
+  .demo-main > .fade-page::before,
+  .demo-main > .fade-page::after {
+    animation: none !important;
+  }
+}
