@@ -304,8 +304,64 @@ function RiskAssessments({ setModal, openLead }) {
 function Tests({ setModal, openLead }) {
   return <div className="page-grid">
     <Metric title="Tests Run" value="42" color="gold" /><Metric title="High Findings" value="8" color="red" /><Metric title="Medium Findings" value="21" color="gold" /><Metric title="Pass Rate" value="71%" color="green" />
-    <section className="panel wide2"><h3>Recent Test Runs</h3><DataTable headers={['Test Name','System','Type','Date Run','Result','Owner']} rows={tests} onRow={(r)=>setModal({title:r[0], text:'The system responded inconsistently when challenged with adversarial prompts. Review prompt handling, human oversight, and testing coverage.', cta:'Contact the Red-Team', items:[['System',r[1]],['Type',r[2]],['Result',r[4]],['Owner',r[5]]]})} /></section>
-    <section className="panel"><h3>Latest Findings</h3>{['Prompt injection bypass — High','Model disclosed training data — High','Biased response for age group — Medium','Inconsistent citations — Medium','Toxic content not flagged — Medium'].map(x=><p className="activity" key={x}>{x}</p>)}</section>
+    <section className="panel test-runs-table">
+      <h3>Recent Test Runs</h3>
+      <DataTable headers={['Test Name','System','Type','Date Run','Result','Owner']} rows={tests} onRow={(r)=>setModal({title:r[0], text:'The system responded inconsistently when challenged with adversarial prompts. Review prompt handling, human oversight, and testing coverage.', cta:'Contact the Red-Team', items:[['System',r[1]],['Type',r[2]],['Result',r[4]],['Owner',r[5]]]})} />
+    </section>
+
+    <section className="panel test-overview-card">
+      <h3>Test Results Overview</h3>
+      <p className="mini-muted">Last 6 Months</p>
+
+      <div className="test-legend">
+        <span className="passed">Passed</span>
+        <span className="failed">Failed</span>
+        <span className="needs">Needs Review</span>
+        <span className="progressing">In Progress</span>
+      </div>
+
+      <div className="test-chart">
+        <svg viewBox="0 0 600 210" preserveAspectRatio="none" aria-label="Test result trend chart">
+          <line x1="40" y1="25" x2="40" y2="180"></line>
+          <line x1="40" y1="180" x2="580" y2="180"></line>
+          <path className="passed-line" d="M40,130 C120,115 180,105 240,90 C310,70 360,45 420,60 C480,80 530,75 580,50"></path>
+          <path className="failed-line" d="M40,155 C120,150 180,145 240,140 C310,130 360,128 420,137 C480,145 530,140 580,118"></path>
+          <path className="needs-line" d="M40,165 C120,160 180,155 240,150 C310,145 360,145 420,150 C480,158 530,150 580,128"></path>
+          <path className="progress-line" d="M40,175 C120,168 180,166 240,174 C310,158 360,155 420,165 C480,170 530,164 580,142"></path>
+          {['Jan','Feb','Mar','Apr','May','Jun'].map((m, i) => <text key={m} x={40 + i * 108} y="202">{m}</text>)}
+        </svg>
+      </div>
+
+      <div className="test-total">
+        <span>Total Tests</span>
+        <strong>42</strong>
+        <p>
+          <b className="passed">Passed 22 (52%)</b>
+          <b className="failed">Failed 8 (19%)</b>
+          <b className="needs">Needs Review 7 (17%)</b>
+          <b className="progressing">In Progress 5 (12%)</b>
+        </p>
+      </div>
+    </section>
+
+    <section className="panel latest-findings-card">
+      <h3>Latest Findings <button>View all</button></h3>
+      {[
+        ['Prompt injection bypass', 'Prompt Injection Simulation · Jun 19, 2025', 'High'],
+        ['Model disclosed training data', 'Data Leakage Test · Jun 18, 2025', 'High'],
+        ['Biased response for age group', 'Bias & Fairness Test · Jun 20, 2025', 'Medium'],
+        ['Inconsistent citations', 'Hallucination Stress Test · Jun 19, 2025', 'Medium'],
+        ['Toxic content not flagged', 'Harmful Output Review · Jun 17, 2025', 'Medium'],
+      ].map(([name, meta, severity]) => (
+        <div className="finding-item" key={name}>
+          <div>
+            <strong>{name}</strong>
+            <span>{meta}</span>
+          </div>
+          <em className={severity === 'High' ? 'high' : 'medium'}>{severity}</em>
+        </div>
+      ))}
+    </section>
     <CTA onOpen={openLead} title="Want SIGL to validate your AI systems?" />
   </div>
 }
