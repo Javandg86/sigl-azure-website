@@ -578,3 +578,99 @@ body:has(.demo-app) {
     grid-column: 1 / -1;
   }
 }
+
+/* Risk Assessments: Findings + Deadlines */
+.risk-active-table {
+  grid-column: 1 / -1 !important;
+}
+
+.findings-card,
+.deadlines-card {
+  grid-column: span 2;
+}
+
+.finding-row {
+  display: grid;
+  grid-template-columns: 170px 1fr 36px;
+  gap: 12px;
+  align-items: center;
+  margin: 14px 0;
+}
+
+.finding-row span,
+.finding-row b {
+  color: #64748b;
+  font-size: .9rem;
+}
+
+.finding-row div {
+  height: 12px;
+  border-radius: 999px;
+  background: #eef2f7;
+  overflow: hidden;
+}
+
+.finding-row i {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: #146EF5;
+}
+
+.deadline-row {
+  display: grid;
+  grid-template-columns: 70px 1fr auto;
+  gap: 16px;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.deadline-row:last-child {
+  border-bottom: 0;
+}
+
+.deadline-row b {
+  color: #D89517;
+  background: #fff7ed;
+  border-radius: 8px;
+  padding: 6px 8px;
+  font-size: .85rem;
+}
+
+.deadline-row span {
+  color: #0b1220;
+}
+
+.deadline-row em {
+  font-style: normal;
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: .8rem;
+  font-weight: 900;
+}
+
+.deadline-row em.high {
+  background: #fee2e2;
+  color: #DC2626;
+}
+
+.deadline-row em.medium {
+  background: #fff7ed;
+  color: #C98913;
+}
+
+@media (max-width: 900px) {
+  .findings-card,
+  .deadlines-card {
+    grid-column: 1 / -1;
+  }
+
+  .finding-row {
+    grid-template-columns: 1fr;
+  }
+
+  .deadline-row {
+    grid-template-columns: 1fr;
+  }
+}

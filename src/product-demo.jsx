@@ -257,8 +257,46 @@ function Inventory({ setModal, openLead }) {
 function RiskAssessments({ setModal, openLead }) {
   return <div className="page-grid">
     <Metric title="Open Assessments" value="14" color="gold" /><Metric title="High Severity Findings" value="27" color="red" /><Metric title="Mitigations In Progress" value="18" color="blue" /><Metric title="Assessments Completed" value="42" color="green" />
-    <section className="panel wide2"><DataTable headers={['Assessment Name','System','Category','Severity','Owner','Due Date','Status']} rows={assessments} onRow={(r)=>setModal({title:r[0], text:'Assessment Detail: sample finding and mitigation preview.', cta:'Book AI Risk & Audit Readiness Review', items:[['System',r[1]],['Category',r[2]],['Severity',r[3]],['Status',r[6]]]})} /></section>
-    <section className="panel"><h3>Upcoming Deadlines</h3>{['Jun 25 — Bias & Fairness Review — High','Jun 28 — Prompt Injection Review — High','Jul 02 — Vendor Risk Review — Medium','Jul 05 — Data Privacy Review — Medium'].map(x=><p className="activity" key={x}>{x}</p>)}</section>
+    <section className="panel wide2 risk-active-table">
+      <h3>Active Risk Assessments</h3>
+      <DataTable headers={['Assessment Name','System','Category','Severity','Owner','Due Date','Status']} rows={assessments} onRow={(r)=>setModal({title:r[0], text:'Assessment Detail: sample finding and mitigation preview.', cta:'Book AI Risk & Audit Readiness Review', items:[['System',r[1]],['Category',r[2]],['Severity',r[3]],['Status',r[6]]]})} />
+    </section>
+
+    <section className="panel findings-card">
+      <h3>Findings by Category</h3>
+      {[
+        ['Model Transparency', 78],
+        ['Data Management', 72],
+        ['Human Oversight', 69],
+        ['Systematic Updates', 71],
+        ['Security', 58],
+        ['Privacy', 54],
+        ['Third-Party', 39],
+      ].map(([name, value]) => (
+        <div className="finding-row" key={name}>
+          <span>{name}</span>
+          <div><i style={{ width: `${value}%` }}></i></div>
+          <b>{value}</b>
+        </div>
+      ))}
+    </section>
+
+    <section className="panel deadlines-card">
+      <h3>Upcoming Deadlines</h3>
+      {[
+        ['Jun 25', 'Bias & Fairness Review', 'High'],
+        ['Jun 28', 'Prompt Injection Review', 'High'],
+        ['Jul 2', 'Vendor Risk Review', 'Medium'],
+        ['Jul 5', 'Data Privacy Review', 'Medium'],
+        ['Jul 10', 'Human Oversight Review', 'Medium'],
+      ].map(([date, name, severity]) => (
+        <div className="deadline-row" key={name}>
+          <b>{date}</b>
+          <span>{name}</span>
+          <em className={severity === 'High' ? 'high' : 'medium'}>{severity}</em>
+        </div>
+      ))}
+    </section>
     <CTA onOpen={openLead} />
   </div>
 }
