@@ -462,7 +462,44 @@ function Evidence({ setModal, openLead }) {
   return <div className="page-grid">
     <Metric title="Evidence Files" value="128" color="gold" /><Metric title="Policies Uploaded" value="32" color="gold" /><Metric title="Reports Attached" value="46" color="blue" /><Metric title="Collection Progress" value="72%" color="green" progress={72} />
     <section className="panel wide2"><div className="chips"><button>All Types</button><button>Policies</button><button>Test Reports</button><button>Vendor Docs</button><button>Procedures</button></div><DataTable headers={['File Name','Category','Linked System','Owner','Version','Updated','Status']} rows={evidence} /></section>
-    <section className="panel"><h3>Missing Evidence</h3>{['Model Risk Management Policy — Overdue','Red Teaming Report — Overdue','Vendor Security Assessment — Due in 3 days','Data Retention & Deletion Policy — Due in 7 days'].map(x=><p onClick={()=>setModal({title:x, text:'Evidence Gap Detail: Missing records can slow procurement, audit response, and executive assurance.', cta:'Request Audit Evidence Support'})} className="activity clickable" key={x}>{x}</p>)}</section>
+    <aside className="evidence-side-stack">
+      <section className="panel missing-evidence-card">
+        <h3>Missing Evidence</h3>
+        {[
+          ['Model Risk Management Policy', 'Overdue'],
+          ['Red Teaming Report', 'Overdue'],
+          ['Vendor Security Assessment', 'Due in 3 days'],
+          ['Data Retention & Deletion Policy', 'Due in 7 days'],
+          ['Change Management Log', 'Due in 10 days']
+        ].map(([name, status])=>(
+          <button
+            className="missing-evidence-row"
+            key={name}
+            onClick={()=>setModal({title:name, text:'Evidence Gap Detail: Missing records can slow procurement, audit response, and executive assurance.', cta:'Request Audit Evidence Support'})}
+          >
+            <span>{name}</span>
+            <em className={status === 'Overdue' ? 'overdue' : 'due'}>{status}</em>
+          </button>
+        ))}
+      </section>
+
+      <section className="panel recent-uploads-card">
+        <h3>Recent Uploads</h3>
+        {[
+          ['Bias & Fairness Report', '5h ago'],
+          ['Enterprise AI Policy v2.1', '2h ago'],
+          ['Vendor Assessment Report', '1d ago'],
+          ['Data Handling Standard', '2d ago'],
+          ['Incident Log Template', '3d ago']
+        ].map(([name, time])=>(
+          <div className="recent-upload-row" key={name}>
+            <span>{name}</span>
+            <em>{time}</em>
+          </div>
+        ))}
+      </section>
+    </aside>
+
     <CTA onOpen={openLead} />
   </div>
 }
