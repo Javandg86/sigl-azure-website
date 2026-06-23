@@ -2806,3 +2806,107 @@ table,
     animation: none !important;
   }
 }
+
+/* =====================================================
+   Glassmorphism Panels
+   ===================================================== */
+
+.metric-card,
+.panel,
+.demo-hero,
+.report-templates article {
+  background: rgba(255,255,255,.08) !important;
+  border: 1px solid rgba(255,255,255,.12) !important;
+
+  backdrop-filter: blur(24px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+
+  box-shadow:
+    0 8px 32px rgba(0,0,0,.35),
+    inset 0 1px 0 rgba(255,255,255,.08);
+}
+
+/* Tables */
+table,
+th,
+td {
+  background: transparent !important;
+}
+
+/* Keep text readable */
+.panel h3,
+.metric-card p,
+.metric-card strong,
+.panel strong,
+.panel label,
+.panel span,
+.panel div,
+.panel td,
+.panel th {
+  color: #ffffff !important;
+}
+
+/* Secondary text */
+.activity,
+.demo-topbar p,
+.panel p,
+.panel em,
+.panel small {
+  color: rgba(255,255,255,.72) !important;
+}
+
+/* Table borders */
+th,
+td {
+  border-bottom: 1px solid rgba(255,255,255,.08) !important;
+}
+
+/* Hover effect */
+.metric-card:hover,
+.panel:hover {
+  background: rgba(255,255,255,.12) !important;
+  transform: translateY(-2px);
+}
+
+/* Hero panel slightly brighter */
+.demo-hero {
+  background: rgba(255,255,255,.10) !important;
+}
+
+
+/* Let Product Demo animation show through black page space */
+.demo-main,
+.fade-page,
+.page-grid {
+  background: transparent !important;
+}
+
+/* Keep the animated background visible behind everything */
+.demo-app::before,
+.demo-app::after {
+  display: block !important;
+  opacity: 1 !important;
+}
+
+/* Make cards frosted/see-through instead of solid white */
+.metric-card,
+.panel,
+.demo-hero,
+.report-templates article {
+  background: rgba(255,255,255,.86) !important;
+  backdrop-filter: blur(18px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(160%) !important;
+}
+
+/* Keep text readable */
+.metric-card *,
+.panel *,
+.demo-hero *,
+.report-templates article * {
+  color: inherit;
+}
+
+/* Slightly expose more animation through big hero */
+.demo-hero {
+  background: rgba(255,255,255,.80) !important;
+}
