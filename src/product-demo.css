@@ -2493,3 +2493,173 @@ html:has(.demo-app),
     animation: none !important;
   }
 }
+
+/* =====================================================
+   PRODUCT DEMO: Remove image background + custom black animation
+   ===================================================== */
+
+/* Kill every previous product demo animation/image layer */
+.demo-main::before,
+.demo-main::after,
+.demo-app::before,
+.demo-app::after,
+.fade-page::before,
+.fade-page::after,
+.demo-sidebar::after,
+.metric-card::after,
+.panel::after,
+.report-templates article::after,
+.demo-hero::after {
+  content: none !important;
+  display: none !important;
+  animation: none !important;
+  background-image: none !important;
+}
+
+/* True black demo stage */
+body:has(.demo-app),
+html:has(.demo-app),
+#app:has(.demo-app),
+.demo-app,
+.demo-main {
+  background: #000 !important;
+}
+
+/* Keep all dashboard content solid/readable */
+.demo-sidebar,
+.demo-topbar,
+.demo-hero,
+.page-grid,
+.demo-disclaimer {
+  position: relative;
+  z-index: 5;
+}
+
+.metric-card,
+.panel,
+.demo-hero,
+.report-templates article {
+  background: rgba(255,255,255,.98) !important;
+  backdrop-filter: none !important;
+}
+
+/* Custom animated AI-core background: no full-page straight lines */
+.demo-app {
+  position: relative;
+  isolation: isolate;
+  overflow-x: hidden;
+}
+
+.demo-app::before {
+  content: "" !important;
+  display: block !important;
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 18% 22%, rgba(0,191,255,.55) 0 2px, rgba(0,191,255,.20) 3px 18px, transparent 42px),
+    radial-gradient(circle at 33% 72%, rgba(216,149,23,.55) 0 2px, rgba(216,149,23,.20) 3px 20px, transparent 46px),
+    radial-gradient(circle at 62% 26%, rgba(0,191,255,.50) 0 2px, rgba(0,191,255,.18) 3px 24px, transparent 54px),
+    radial-gradient(circle at 79% 68%, rgba(124,58,237,.55) 0 2px, rgba(124,58,237,.20) 3px 22px, transparent 50px),
+    radial-gradient(circle at 48% 50%, rgba(20,110,245,.18), transparent 24%),
+    radial-gradient(circle at 74% 18%, rgba(216,149,23,.12), transparent 22%),
+    radial-gradient(circle at 25% 80%, rgba(0,191,255,.16), transparent 26%),
+    #000;
+  filter: saturate(1.6) contrast(1.25);
+  animation: sigl-ai-core-drift 14s ease-in-out infinite alternate;
+}
+
+/* Moving curved energy arcs, not straight lines */
+.demo-app::after {
+  content: "" !important;
+  display: block !important;
+  position: fixed;
+  inset: -20%;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    conic-gradient(from 20deg at 25% 35%, transparent 0 18%, rgba(0,191,255,.55) 19%, transparent 23% 100%),
+    conic-gradient(from 210deg at 68% 58%, transparent 0 20%, rgba(216,149,23,.45) 21%, transparent 25% 100%),
+    conic-gradient(from 130deg at 48% 72%, transparent 0 15%, rgba(124,58,237,.42) 16%, transparent 21% 100%),
+    radial-gradient(circle at 50% 50%, transparent 0 52%, rgba(0,191,255,.10) 53%, transparent 56%),
+    radial-gradient(circle at 50% 50%, transparent 0 35%, rgba(216,149,23,.09) 36%, transparent 39%);
+  mix-blend-mode: screen;
+  opacity: .85;
+  filter: blur(.2px) drop-shadow(0 0 18px rgba(0,191,255,.45));
+  animation: sigl-ai-core-orbit 18s linear infinite;
+}
+
+/* Extra depth layer behind page content only */
+.demo-main {
+  position: relative;
+  isolation: isolate;
+}
+
+.demo-main > .fade-page::before {
+  content: "" !important;
+  display: block !important;
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 15% 60%, rgba(0,191,255,.18), transparent 18%),
+    radial-gradient(circle at 90% 38%, rgba(216,149,23,.16), transparent 18%),
+    radial-gradient(circle at 52% 82%, rgba(124,58,237,.14), transparent 22%);
+  animation: sigl-ai-pulse-field 7s ease-in-out infinite alternate;
+}
+
+/* No animation overlays inside cards/text */
+.metric-card::before,
+.panel::before,
+.demo-hero::before,
+.report-templates article::before {
+  display: none !important;
+  content: none !important;
+}
+
+@keyframes sigl-ai-core-drift {
+  0% {
+    transform: scale(1) translate3d(-1%, -1%, 0);
+    filter: hue-rotate(0deg) saturate(1.45) contrast(1.15);
+  }
+  100% {
+    transform: scale(1.08) translate3d(1%, 1%, 0);
+    filter: hue-rotate(12deg) saturate(1.9) contrast(1.35);
+  }
+}
+
+@keyframes sigl-ai-core-orbit {
+  from {
+    transform: rotate(0deg) scale(1);
+  }
+  to {
+    transform: rotate(360deg) scale(1.04);
+  }
+}
+
+@keyframes sigl-ai-pulse-field {
+  0% {
+    opacity: .35;
+    transform: scale(1);
+  }
+  100% {
+    opacity: .9;
+    transform: scale(1.08);
+  }
+}
+
+@media (max-width: 900px) {
+  .demo-app::after {
+    opacity: .55;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .demo-app::before,
+  .demo-app::after,
+  .demo-main > .fade-page::before {
+    animation: none !important;
+  }
+}
