@@ -4046,3 +4046,115 @@ body .demo-app .fade-page,
 body .demo-app .page-grid {
   background: transparent !important;
 }
+
+/* =====================================================
+   FINAL: Product Demo match main-site transparency/glass
+   ===================================================== */
+
+/* Page itself stays fully transparent over network animation */
+body:has(.demo-app),
+html:has(.demo-app),
+#app:has(.demo-app),
+.demo-app,
+.demo-main,
+.fade-page,
+.page-grid {
+  background: transparent !important;
+}
+
+/* Main website-style animated network must stay visible */
+.product-demo-network {
+  display: block !important;
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+  background: #000 !important;
+}
+
+.product-demo-network canvas {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  opacity: 1 !important;
+}
+
+/* Main-site glass panel style */
+body .demo-app .metric-card,
+body .demo-app .panel,
+body .demo-app .demo-hero,
+body .demo-app .report-templates article,
+body .demo-app .conversion-panel {
+  background: linear-gradient(145deg, rgba(255,255,255,.095), rgba(255,255,255,.035)) !important;
+  border: 1px solid rgba(255,255,255,.14) !important;
+  backdrop-filter: blur(18px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(160%) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.10),
+    0 28px 80px rgba(0,0,0,.32) !important;
+}
+
+/* Inner rows/cards also translucent */
+body .demo-app .table-wrap,
+body .demo-app table,
+body .demo-app thead,
+body .demo-app tbody,
+body .demo-app tr,
+body .demo-app th,
+body .demo-app td,
+body .demo-app .integration-row,
+body .demo-app .team-row,
+body .demo-app .owner-row,
+body .demo-app .policy-row,
+body .demo-app .deadline-row,
+body .demo-app .risk-control-row,
+body .demo-app .missing-evidence-row,
+body .demo-app .recent-upload-row,
+body .demo-app .scheduled-row {
+  background: rgba(255,255,255,.025) !important;
+}
+
+/* Keep content above animation */
+.demo-sidebar,
+.demo-main,
+.demo-topbar,
+.demo-hero,
+.page-grid,
+.metric-card,
+.panel,
+.report-templates article,
+.conversion-panel {
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+/* Text readability */
+body .demo-app,
+body .demo-app * {
+  color: #f8fbff !important;
+}
+
+body .demo-app p,
+body .demo-app span,
+body .demo-app small,
+body .demo-app td,
+body .demo-app th {
+  color: rgba(225,236,250,.82) !important;
+}
+
+/* Main-site style buttons */
+body .demo-app button,
+body .demo-app .primary-action {
+  background: rgba(124,221,255,.10) !important;
+  border: 1px solid rgba(124,221,255,.28) !important;
+  color: #f8fbff !important;
+}
+
+/* Inputs stay glass */
+body .demo-app input,
+body .demo-app select,
+body .demo-app textarea {
+  background: rgba(0,0,0,.24) !important;
+  border: 1px solid rgba(255,255,255,.16) !important;
+  color: #f8fbff !important;
+}
