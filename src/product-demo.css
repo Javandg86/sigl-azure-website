@@ -1414,3 +1414,155 @@ body:has(.demo-app) {
     animation: none !important;
   }
 }
+
+/* Remove metric icon/dot animations completely */
+.metric-icon,
+.metric-icon::before,
+.metric-icon::after,
+.metric-card::after,
+.panel::after,
+.report-templates article::after,
+.demo-hero::after {
+  animation: none !important;
+}
+
+.metric-icon {
+  background: transparent !important;
+  border: 1px solid rgba(216,149,23,.28) !important;
+  box-shadow: none !important;
+}
+
+.metric-icon::before,
+.metric-icon::after {
+  content: none !important;
+}
+
+/* Dark animated technology background for entire Product Demo */
+body:has(.demo-app),
+html:has(.demo-app),
+#app:has(.demo-app),
+.demo-app,
+.demo-main {
+  background: #02040a !important;
+}
+
+.demo-main {
+  position: relative;
+  isolation: isolate;
+  color: #0b1220;
+}
+
+.demo-main::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -2;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(20,110,245,.28), transparent 28%),
+    radial-gradient(circle at 75% 15%, rgba(216,149,23,.22), transparent 24%),
+    radial-gradient(circle at 70% 85%, rgba(124,58,237,.20), transparent 28%),
+    linear-gradient(115deg, transparent 0 45%, rgba(20,110,245,.18) 46%, transparent 47%),
+    linear-gradient(65deg, transparent 0 52%, rgba(216,149,23,.16) 53%, transparent 54%),
+    repeating-linear-gradient(90deg, rgba(125,211,252,.09) 0 1px, transparent 1px 92px),
+    repeating-linear-gradient(0deg, rgba(125,211,252,.07) 0 1px, transparent 1px 92px);
+  background-size: 100% 100%,100% 100%,100% 100%,260% 260%,240% 240%,92px 92px,92px 92px;
+  animation: sigl-dark-grid-shift 14s linear infinite;
+}
+
+.demo-main::after {
+  content:
+    "01001010  SIGL::AI_RISK_SCAN  /governance/control-map  {prompt_injection:false}  audit.ready=true  "
+    "vendor.review.queue  evidence.hash:9F3A  model.card.check  policy.owner=assigned  "
+    "red_team.signal  access.boundary  data.flow.map  █▓▒░  ";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  color: rgba(125,211,252,.22);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 13px;
+  line-height: 2.4;
+  letter-spacing: .12em;
+  word-spacing: 1.2em;
+  overflow: hidden;
+  opacity: .85;
+  transform: rotate(-8deg) scale(1.18);
+  text-shadow: 0 0 16px rgba(20,110,245,.35);
+  animation: sigl-code-rain 18s linear infinite;
+}
+
+/* Keep cards readable on dark animated background */
+.demo-topbar h1 {
+  color: #f8fafc !important;
+}
+
+.demo-topbar p {
+  color: rgba(226,232,240,.76) !important;
+}
+
+.demo-hero,
+.metric-card,
+.panel,
+.report-templates article {
+  background: rgba(255,255,255,.94) !important;
+  backdrop-filter: blur(16px);
+}
+
+/* Futuristic moving network lines */
+.fade-page {
+  position: relative;
+}
+
+.fade-page::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background:
+    conic-gradient(from 90deg at 20% 30%, transparent, rgba(20,110,245,.22), transparent 18%),
+    conic-gradient(from 220deg at 80% 65%, transparent, rgba(216,149,23,.20), transparent 16%),
+    radial-gradient(circle at 30% 40%, rgba(125,211,252,.35) 0 2px, transparent 3px),
+    radial-gradient(circle at 60% 30%, rgba(216,149,23,.35) 0 2px, transparent 3px),
+    radial-gradient(circle at 78% 72%, rgba(124,58,237,.35) 0 2px, transparent 3px),
+    radial-gradient(circle at 42% 80%, rgba(22,163,74,.30) 0 2px, transparent 3px);
+  animation: sigl-network-pulse 9s ease-in-out infinite alternate;
+}
+
+@keyframes sigl-dark-grid-shift {
+  0% {
+    background-position: center,center,center,0% 0%,100% 0%,0 0,0 0;
+  }
+  100% {
+    background-position: center,center,center,100% 100%,0% 100%,92px 46px,46px 92px;
+  }
+}
+
+@keyframes sigl-code-rain {
+  0% {
+    transform: translateY(-10%) rotate(-8deg) scale(1.18);
+  }
+  100% {
+    transform: translateY(18%) rotate(-8deg) scale(1.18);
+  }
+}
+
+@keyframes sigl-network-pulse {
+  0% {
+    opacity: .45;
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    opacity: .9;
+    filter: hue-rotate(16deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .demo-main::before,
+  .demo-main::after,
+  .fade-page::before {
+    animation: none !important;
+  }
+}
