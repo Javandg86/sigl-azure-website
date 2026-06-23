@@ -3251,3 +3251,97 @@ tbody tr:hover {
   border: 1px solid rgba(216,149,23,.55) !important;
   box-shadow: none !important;
 }
+
+/* Prevent Product Demo sections from being cut off on Windows/smaller screens */
+.demo-main,
+.fade-page,
+.page-grid,
+.panel,
+.metric-card,
+.demo-hero,
+.report-templates article,
+.conversion-panel {
+  min-width: 0 !important;
+  max-width: 100% !important;
+  overflow: visible !important;
+}
+
+/* Tables can scroll horizontally instead of clipping page */
+.table-wrap {
+  overflow-x: auto !important;
+  overflow-y: visible !important;
+  max-width: 100% !important;
+}
+
+/* Fix Settings integrations clipping */
+.integration-row,
+.team-row,
+.owner-row,
+scheduled-row,
+.toggle-row {
+  min-width: 0 !important;
+  max-width: 100% !important;
+}
+
+.integration-row {
+  grid-template-columns: auto minmax(0, 1fr) auto auto !important;
+}
+
+.integration-row div,
+.team-row div,
+.owner-row div {
+  min-width: 0 !important;
+}
+
+.integration-row strong,
+.integration-row span,
+.team-row strong,
+team-row span,
+.owner-row strong,
+.owner-row span {
+  overflow-wrap: anywhere !important;
+  word-break: normal !important;
+}
+
+.integration-row button {
+  white-space: nowrap !important;
+  max-width: 100% !important;
+}
+
+/* Make settings cards stack sooner on smaller desktops */
+@media (max-width: 1500px) {
+  .settings-grid-full {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .integrations-card {
+    grid-column: 1 / -1 !important;
+  }
+}
+
+@media (max-width: 1050px) {
+  .settings-grid-full,
+  .page-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .integration-row {
+    grid-template-columns: auto minmax(0, 1fr) !important;
+  }
+
+  .integration-row em,
+  .integration-row button {
+    grid-column: 2 !important;
+    justify-self: start !important;
+  }
+}
+
+/* Make buttons wrap instead of clipping */
+button,
+.primary-action,
+.conversion-panel button,
+.settings-grid button,
+.settings-grid-full button {
+  max-width: 100% !important;
+  white-space: normal !important;
+}
