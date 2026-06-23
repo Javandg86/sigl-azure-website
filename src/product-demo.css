@@ -3907,3 +3907,84 @@ body:has(.demo-app),
   position: relative;
   z-index: 2;
 }
+
+/* Match main website transparent glass look on Product Demo */
+.metric-card,
+.panel,
+.demo-hero,
+.report-templates article,
+.conversion-panel {
+  background: linear-gradient(145deg, rgba(255,255,255,.10), rgba(255,255,255,.035)) !important;
+  border: 1px solid rgba(255,255,255,.12) !important;
+  backdrop-filter: blur(22px) !important;
+  -webkit-backdrop-filter: blur(22px) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.12),
+    0 30px 90px rgba(0,0,0,.28) !important;
+}
+
+/* Keep Product Demo text readable on transparent panels */
+.metric-card,
+.metric-card *,
+.panel,
+.panel *,
+.demo-hero,
+.demo-hero *,
+.report-templates article,
+.report-templates article *,
+.conversion-panel,
+.conversion-panel * {
+  color: #f8fbff !important;
+}
+
+/* Softer muted text like main site */
+.activity,
+.panel p,
+.panel span,
+.panel small,
+.demo-hero p,
+.metric-card span,
+.conversion-panel p,
+td,
+th {
+  color: rgba(225,236,250,.78) !important;
+}
+
+/* Transparent table rows */
+tbody tr {
+  background: rgba(255,255,255,.035) !important;
+}
+
+tbody tr:hover {
+  background: rgba(255,255,255,.08) !important;
+}
+
+/* Inputs and filters match glass style */
+input,
+select,
+textarea,
+.chips button {
+  background: rgba(0,0,0,.22) !important;
+  color: #f8fbff !important;
+  border: 1px solid rgba(255,255,255,.14) !important;
+}
+
+/* Keep main-site style blue/gold action accents */
+.demo-hero button,
+.primary-action,
+.report-templates button,
+.settings-grid button,
+.settings-grid-full button,
+.conversion-panel button {
+  background: linear-gradient(135deg, #fff, #7cddff, #5d8dff) !important;
+  color: #020711 !important;
+  border: 0 !important;
+  box-shadow: 0 18px 42px rgba(124,221,255,.22) !important;
+}
+
+/* Make page stage fully transparent over network animation */
+.demo-main,
+.fade-page,
+.page-grid {
+  background: transparent !important;
+}
