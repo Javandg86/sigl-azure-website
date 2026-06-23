@@ -88,7 +88,7 @@ function Badge({ value }) {
 function Metric({ title, value, sub, color = 'gold', progress }) {
   return (
     <article className="metric-card">
-      <div className={`metric-icon ${color}`}>●</div>
+      <div className={`metric-icon ${color}`} aria-hidden="true"></div>
       <p>{title}</p>
       <strong>{value}</strong>
       {sub && <span>{sub}</span>}

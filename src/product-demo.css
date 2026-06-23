@@ -1267,3 +1267,150 @@ body:has(.demo-app) {
     grid-template-columns: 1fr;
   }
 }
+
+/* Remove old dot visuals */
+.gold-wave {
+  display: none !important;
+}
+
+.metric-icon {
+  position: relative;
+  overflow: hidden;
+  font-size: 0 !important;
+}
+
+.metric-icon::before {
+  content: "";
+  width: 18px;
+  height: 18px;
+  border-radius: 6px;
+  border: 2px solid currentColor;
+  transform: rotate(45deg);
+  opacity: .9;
+}
+
+.metric-icon::after {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border-radius: 50%;
+  border: 1px solid currentColor;
+  opacity: .22;
+  animation: sigl-orbit 3.5s linear infinite;
+}
+
+/* Futuristic SIGL technology atmosphere */
+.demo-main {
+  position: relative;
+  isolation: isolate;
+}
+
+.demo-main::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background:
+    linear-gradient(115deg, transparent 0 42%, rgba(20,110,245,.055) 43%, transparent 44% 100%),
+    linear-gradient(65deg, transparent 0 52%, rgba(216,149,23,.06) 53%, transparent 54% 100%),
+    radial-gradient(circle at 20% 15%, rgba(20,110,245,.13), transparent 26%),
+    radial-gradient(circle at 85% 8%, rgba(216,149,23,.11), transparent 24%),
+    radial-gradient(circle at 70% 90%, rgba(124,58,237,.10), transparent 28%),
+    repeating-linear-gradient(90deg, rgba(11,18,32,.035) 0 1px, transparent 1px 90px),
+    repeating-linear-gradient(0deg, rgba(11,18,32,.025) 0 1px, transparent 1px 90px);
+  background-size:
+    220% 220%,
+    240% 240%,
+    100% 100%,
+    100% 100%,
+    100% 100%,
+    90px 90px,
+    90px 90px;
+  animation: sigl-tech-field 18s ease-in-out infinite alternate;
+}
+
+.demo-main::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background:
+    conic-gradient(from 180deg at 50% 50%,
+      transparent,
+      rgba(20,110,245,.08),
+      transparent,
+      rgba(216,149,23,.07),
+      transparent);
+  mask-image: radial-gradient(circle at 55% 50%, black, transparent 62%);
+  animation: sigl-holo-rotate 26s linear infinite;
+  opacity: .75;
+}
+
+/* Add a clean holographic shimmer to cards */
+.metric-card,
+.panel,
+.report-templates article,
+.demo-hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.metric-card::after,
+.panel::after,
+.report-templates article::after,
+.demo-hero::after {
+  content: "";
+  position: absolute;
+  inset: -80%;
+  background: linear-gradient(115deg, transparent 42%, rgba(255,255,255,.42), transparent 58%);
+  transform: translateX(-55%) rotate(8deg);
+  animation: sigl-card-sweep 9s ease-in-out infinite;
+  pointer-events: none;
+  opacity: .22;
+}
+
+@keyframes sigl-tech-field {
+  0% {
+    background-position: 0% 0%, 100% 0%, center, center, center, 0 0, 0 0;
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    background-position: 100% 100%, 0% 100%, center, center, center, 90px 45px, 45px 90px;
+    filter: hue-rotate(8deg);
+  }
+}
+
+@keyframes sigl-holo-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes sigl-card-sweep {
+  0%, 72% {
+    transform: translateX(-60%) rotate(8deg);
+  }
+  100% {
+    transform: translateX(60%) rotate(8deg);
+  }
+}
+
+@keyframes sigl-orbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .demo-main::before,
+  .demo-main::after,
+  .metric-card::after,
+  .panel::after,
+  .report-templates article::after,
+  .demo-hero::after,
+  .metric-icon::after {
+    animation: none !important;
+  }
+}
