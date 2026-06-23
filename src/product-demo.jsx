@@ -575,6 +575,111 @@ function Reports({ setModal, openLead }) {
 
 function SettingsPage({ openLead }) {
   const [toast, setToast] = useState('')
+  const notify = () => { setToast('Demo setting updated.'); setTimeout(()=>setToast(''),1800) }
+
+  return <div className="page-grid settings-grid-full">
+    {toast && <div className="toast">{toast}</div>}
+
+    <section className="panel settings-card workspace-profile">
+      <h3>Workspace Profile</h3>
+      <p>Manage your organization and workspace details.</p>
+      <label>Workspace Name<input defaultValue="Acme Corp"/></label>
+      <label>Workspace ID<input defaultValue="acme-corp"/></label>
+      <div className="settings-two-col">
+        <label>Industry<select defaultValue="Technology"><option>Technology</option><option>Healthcare</option><option>Financial Services</option><option>Legal</option></select></label>
+        <label>Region<select defaultValue="North America"><option>North America</option><option>Europe</option><option>Global</option></select></label>
+      </div>
+      <label>Timezone<select defaultValue="Eastern"><option value="Eastern">(UTC-05:00) Eastern Time (US & Canada)</option></select></label>
+      <button onClick={notify}>Save Changes</button>
+    </section>
+
+    <section className="panel settings-card team-members">
+      <div className="settings-card-head">
+        <div><h3>Team Members</h3><p>Manage users and their access.</p></div>
+        <button onClick={notify}>Invite Member</button>
+      </div>
+      {[
+        ['AK','Alex Kim','alex.kim@acme.com','Admin','2h ago'],
+        ['JD','Jamie Davis','jamie.davis@acme.com','Analyst','5h ago'],
+        ['SP','Sam Patel','sam.patel@acme.com','Reviewer','1d ago'],
+        ['LM','Lee Morgan','lee.morgan@acme.com','Viewer','2d ago']
+      ].map(([initials,name,email,role,time])=>(
+        <div className="team-row" key={email}>
+          <b>{initials}</b>
+          <div><strong>{name}</strong><span>{email}</span></div>
+          <em className={role.toLowerCase()}>{role}</em>
+          <small>{time}</small>
+        </div>
+      ))}
+    </section>
+
+    <section className="panel settings-card integrations-card">
+      <h3>Connected Integrations</h3>
+      <p>Connect and manage third-party integrations.</p>
+      {[
+        ['S','Slack','Receive alerts and notifications in Slack'],
+        ['G','Google Drive','Store and manage documents and evidence'],
+        ['M','Microsoft Teams','Receive updates in Microsoft Teams'],
+        ['J','Jira','Sync issues and track risk remediation'],
+        ['O','OneDrive','Backup and store evidence securely']
+      ].map(([icon,name,desc])=>(
+        <div className="integration-row" key={name}>
+          <b>{icon}</b>
+          <div><strong>{name}</strong><span>{desc}</span></div>
+          <em>Connected</em>
+          <button onClick={notify}>Configure</button>
+        </div>
+      ))}
+      <button className="browse-integrations" onClick={()=>openLead('Request Retainer Consultation')}>Browse Integrations</button>
+    </section>
+
+    <section className="panel settings-card">
+      <h3>Roles & Permissions</h3>
+      <label>Default Role<select defaultValue="Analyst"><option>Analyst</option><option>Reviewer</option><option>Admin</option></select></label>
+      <label>Permission Model<select defaultValue="Role-Based Access Control (RBAC)"><option>Role-Based Access Control (RBAC)</option></select></label>
+      <button onClick={notify}>Manage Roles</button>
+    </section>
+
+    <section className="panel settings-card">
+      <h3>Notifications</h3>
+      {[
+        ['Risk alerts','Important risk changes and escalations', true],
+        ['Test reminders','Upcoming and overdue test notifications', true],
+        ['Policy updates','Governance and policy changes', true],
+        ['System updates','Product updates and maintenance', false]
+      ].map(([title,desc,on])=>(
+        <div className="toggle-row" key={title}>
+          <div><strong>{title}</strong><span>{desc}</span></div>
+          <button className={`toggle ${on ? 'on' : ''}`} onClick={notify} aria-label={`${title} toggle`}></button>
+        </div>
+      ))}
+    </section>
+
+    <section className="panel settings-card">
+      <h3>Data Retention</h3>
+      <label>Retention Period<select defaultValue="7 years"><option>7 years</option><option>5 years</option><option>3 years</option></select></label>
+      <label>Archived Data Access<select defaultValue="Read-only"><option>Read-only</option><option>Restricted</option></select></label>
+      <div className="toggle-row">
+        <div><strong>Auto-archive Evidence</strong><span>Automatically archive evidence after retention period</span></div>
+        <button className="toggle on" onClick={notify}></button>
+      </div>
+    </section>
+
+    <section className="panel settings-card security-access">
+      <h3>Security & Access</h3>
+      <div className="toggle-row">
+        <div><strong>Multi-factor Authentication (MFA)</strong><span>Require MFA for all users</span></div>
+        <button className="toggle on" onClick={notify}></button>
+      </div>
+      <label>Session Timeout<select defaultValue="8 hours"><option>8 hours</option><option>4 hours</option><option>12 hours</option></select></label>
+      <div className="toggle-row">
+        <div><strong>IP Allowlist</strong><span>Restrict access to trusted IP addresses</span></div>
+        <button className="toggle" onClick={notify}></button>
+      </div>
+    </section>
+  </div>
+}) {
+  const [toast, setToast] = useState('')
   const toggle = () => { setToast('Demo setting updated.'); setTimeout(()=>setToast(''),1800) }
   return <div className="page-grid settings-grid">
     {toast && <div className="toast">{toast}</div>}
