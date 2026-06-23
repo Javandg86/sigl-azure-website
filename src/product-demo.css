@@ -3230,3 +3230,24 @@ tbody tr:hover {
   color: #f8fafc !important;
   font-weight: 950 !important;
 }
+
+/* Fix bottom CTA conversion panel glass styling */
+.conversion-panel {
+  background: rgba(2,6,23,.22) !important;
+  border: 1px solid rgba(255,255,255,.18) !important;
+  backdrop-filter: blur(18px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(180%) !important;
+  box-shadow: 0 8px 40px rgba(0,0,0,.35) !important;
+}
+
+.conversion-panel h3,
+.conversion-panel p {
+  color: #f8fafc !important;
+}
+
+.conversion-panel button {
+  background: rgba(216,149,23,.22) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(216,149,23,.55) !important;
+  box-shadow: none !important;
+}
