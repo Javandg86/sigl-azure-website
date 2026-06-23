@@ -456,14 +456,6 @@ function Governance({ setModal, openLead }) {
 
     <CTA onOpen={openLead} />
   </div>
-}) {
-  const rows = [['Policy Management','6','5 (83%)','Implemented','↗'],['Human Oversight','7','5 (71%)','Partial','↗'],['Model Transparency','6','4 (67%)','Partial','—'],['Incident Response','5','2 (40%)','Missing','↘'],['Vendor Management','6','3 (50%)','Partial','↘']]
-  return <div className="page-grid">
-    <Metric title="Policies Active" value="24" color="gold" /><Metric title="Controls Implemented" value="64%" color="gold" /><Metric title="Owners Assigned" value="38" color="blue" /><Metric title="Reviews Due" value="7" color="red" />
-    <section className="panel wide"><h3>Control Framework Overview</h3><DataTable headers={['Domain','Controls','Implemented','Status','Trend']} rows={rows} onRow={(r)=>setModal({title:r[0], text:'Control Gap Detail: This control impacts accountability, oversight, audit evidence, and defensible AI operations.', cta:'Start AI Governance Sprint', items:[['Controls',r[1]],['Implemented',r[2]],['Status',r[3]]]})}/></section>
-    <section className="panel"><h3>At Risk Controls</h3>{['IR-02 Incident Escalation — Missing','TR-03 Model Documentation — Partial','HO-02 Human-in-the-Loop — Partial','VM-01 Vendor Due Diligence — Partial'].map(x=><p className="activity" key={x}>{x}</p>)}</section>
-    <CTA onOpen={openLead} />
-  </div>
 }
 
 function Evidence({ setModal, openLead }) {
