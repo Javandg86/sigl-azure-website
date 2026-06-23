@@ -3093,3 +3093,140 @@ option {
   background: #020617 !important;
   color: #ffffff !important;
 }
+
+/* =====================================================
+   REMOVE REMAINING WHITE BLOCKS
+   ===================================================== */
+
+/* chips / filters */
+.chips button,
+button,
+.scheduled-row b,
+.policy-row em,
+.deadline-row em,
+.owner-count,
+.status-pill,
+.finding-severity,
+.review-badge {
+  background: rgba(255,255,255,.08) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255,255,255,.12) !important;
+  backdrop-filter: blur(12px);
+}
+
+/* white cards inside cards */
+.control-owner,
+.risk-control-row,
+.policy-row,
+.deadline-row,
+.upload-row,
+.integration-row,
+.member-row,
+.missing-evidence-row {
+  background: rgba(255,255,255,.04) !important;
+  border: 1px solid rgba(255,255,255,.08) !important;
+}
+
+/* table rows */
+tbody tr {
+  background: rgba(255,255,255,.02) !important;
+}
+
+tbody tr:hover {
+  background: rgba(255,255,255,.07) !important;
+}
+
+/* search boxes */
+.tools input,
+.settings-grid input,
+.settings-grid select,
+.lead-form input,
+.lead-form textarea,
+.lead-form select {
+  background: rgba(0,0,0,.25) !important;
+  color: #fff !important;
+  border: 1px solid rgba(255,255,255,.15) !important;
+}
+
+/* action buttons */
+.primary-action,
+.report-templates button,
+.settings-grid button,
+.conversion-panel button {
+  background: rgba(216,149,23,.22) !important;
+  border: 1px solid rgba(216,149,23,.4) !important;
+  color: #fff !important;
+}
+
+/* owner circles */
+.owner-avatar,
+.member-avatar {
+  background: rgba(20,110,245,.15) !important;
+  color: #fff !important;
+}
+
+/* remove any hidden white backgrounds */
+.panel * {
+  box-shadow: none;
+}
+
+/* preserve severity colors */
+.high {
+  background: rgba(220,38,38,.18) !important;
+  color: #fecaca !important;
+}
+
+.medium,
+.partial {
+  background: rgba(216,149,23,.18) !important;
+  color: #fde68a !important;
+}
+
+.low,
+.completed {
+  background: rgba(22,163,74,.18) !important;
+  color: #bbf7d0 !important;
+}
+
+.open,
+.active {
+  background: rgba(20,110,245,.18) !important;
+  color: #bfdbfe !important;
+}
+
+
+/* Fix white date pills in Upcoming Deadlines and similar cards */
+.deadline-row b,
+.policy-row em,
+.scheduled-row b,
+.owner-row em,
+.team-row em,
+.missing-evidence-row em,
+.risk-control-row em {
+  background: rgba(2,6,23,.42) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255,255,255,.22) !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+
+/* Keep severity labels readable but not white */
+.deadline-row em.high,
+.finding-item em.high,
+.demo-badge.red {
+  background: rgba(220,38,38,.24) !important;
+  color: #fecaca !important;
+}
+
+.deadline-row em.medium,
+.finding-item em.medium,
+.demo-badge.orange {
+  background: rgba(216,149,23,.24) !important;
+  color: #fde68a !important;
+}
+
+/* Stronger readable date label */
+.deadline-row b {
+  color: #f8fafc !important;
+  font-weight: 950 !important;
+}
