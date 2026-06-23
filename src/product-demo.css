@@ -838,3 +838,127 @@ body:has(.demo-app) {
     flex-direction: column;
   }
 }
+
+/* Governance: control owners, at-risk controls, policy calendar */
+.governance-framework {
+  grid-column: 1 / -1 !important;
+}
+
+.governance-small-card {
+  grid-column: span 1;
+  align-self: start;
+}
+
+.owner-row,
+.policy-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+}
+
+.owner-row b {
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: #0B1220;
+  color: #fff;
+  font-size: .82rem;
+}
+
+.owner-row strong,
+.policy-row strong {
+  display: block;
+  color: #0b1220;
+  font-size: .92rem;
+}
+
+.owner-row span,
+.policy-row span {
+  color: #64748b;
+  font-size: .82rem;
+}
+
+.owner-row em {
+  font-style: normal;
+  color: #D89517;
+  background: #fff7ed;
+  padding: 5px 9px;
+  border-radius: 8px;
+  font-weight: 900;
+}
+
+.risk-control-row {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  border: 1px solid #e5e7eb;
+  background: #fff;
+  border-radius: 12px;
+  padding: 14px;
+  margin: 9px 0;
+  cursor: pointer;
+  text-align: left;
+}
+
+.risk-control-row:hover {
+  background: #f8fafc;
+}
+
+.risk-control-row span {
+  color: #0b1220;
+  font-weight: 800;
+  font-size: .9rem;
+}
+
+.risk-control-row span b {
+  color: #D89517;
+  margin-right: 6px;
+}
+
+.risk-control-row em,
+.policy-row em {
+  font-style: normal;
+  border-radius: 999px;
+  padding: 5px 9px;
+  font-size: .78rem;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.risk-control-row em.missing,
+.policy-row em.overdue {
+  background: #fee2e2;
+  color: #DC2626;
+}
+
+.risk-control-row em.partial,
+.policy-row em.due {
+  background: #fff7ed;
+  color: #C98913;
+}
+
+.policy-row em.upcoming {
+  background: #eef2f7;
+  color: #64748b;
+}
+
+.policy-row {
+  grid-template-columns: 82px 1fr;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.policy-row:last-child {
+  border-bottom: 0;
+}
+
+@media (max-width: 1250px) {
+  .governance-small-card {
+    grid-column: 1 / -1;
+  }
+}

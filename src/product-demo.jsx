@@ -367,6 +367,96 @@ function Tests({ setModal, openLead }) {
 }
 
 function Governance({ setModal, openLead }) {
+  const rows = [
+    ['Policy Management','6','5/6','Implemented','↗'],
+    ['Human Oversight','7','5/7','Partial','↗'],
+    ['Model Transparency','6','4/6','Partial','—'],
+    ['Incident Response','5','2/5','Missing','↘'],
+    ['Vendor Management','6','3/6','Partial','↘'],
+    ['Data Retention','4','3/4','Implemented','↗']
+  ]
+
+  return <div className="page-grid governance-layout">
+    <Metric title="Policies Active" value="24" color="gold" />
+    <Metric title="Controls Implemented" value="64%" color="gold" />
+    <Metric title="Owners Assigned" value="38" color="blue" />
+    <Metric title="Reviews Due" value="7" color="red" />
+
+    <section className="panel governance-framework">
+      <h3>Control Framework Overview</h3>
+      <DataTable
+        headers={['Domain','Controls','Implemented','Status','Trend']}
+        rows={rows}
+        onRow={(r)=>setModal({
+          title:r[0],
+          text:'Control Gap Detail: This control impacts accountability, oversight, audit evidence, and defensible AI operations.',
+          cta:'Start AI Governance Sprint',
+          items:[['Controls',r[1]],['Implemented',r[2]],['Status',r[3]]]
+        })}
+      />
+    </section>
+
+    <section className="panel governance-small-card control-owners-card">
+      <h3>Control Owners</h3>
+      {[
+        ['SB','Sarah Bennett','Chief Risk Officer','12'],
+        ['MJ','Michael Johnson','Head of Data Science','9'],
+        ['ER','Emily Rodriguez','Compliance Manager','7'],
+        ['DP','David Park','IT Security Lead','6'],
+        ['LT','Laura Thompson','Legal Counsel','5']
+      ].map(([initials, name, role, count]) => (
+        <div className="owner-row" key={name}>
+          <b>{initials}</b>
+          <div><strong>{name}</strong><span>{role}</span></div>
+          <em>{count}</em>
+        </div>
+      ))}
+    </section>
+
+    <section className="panel governance-small-card at-risk-card">
+      <h3>At Risk Controls</h3>
+      {[
+        ['IR-02','Incident Escalation','Missing'],
+        ['TR-03','Model Documentation','Partial'],
+        ['HO-02','Human-in-the-Loop','Partial'],
+        ['VM-01','Vendor Due Diligence','Partial'],
+        ['DR-01','Data Retention Schedule','Missing']
+      ].map(([code, name, status]) => (
+        <button
+          className="risk-control-row"
+          key={code}
+          onClick={()=>setModal({
+            title:`${code} ${name}`,
+            text:'This control gap may affect governance defensibility, audit readiness, ownership clarity, and AI risk oversight.',
+            cta:'Start AI Governance Sprint',
+            items:[['Control', name], ['Status', status], ['Recommended Action', 'Document ownership, evidence, and review cadence']]
+          })}
+        >
+          <span><b>{code}</b> {name}</span>
+          <em className={status === 'Missing' ? 'missing' : 'partial'}>{status}</em>
+        </button>
+      ))}
+    </section>
+
+    <section className="panel governance-small-card policy-calendar-card">
+      <h3>Policy Review Calendar</h3>
+      {[
+        ['Overdue','AI Governance Policy','Jul 15, 2025'],
+        ['Due Soon','Model Risk Management Policy','Jul 22, 2025'],
+        ['Upcoming','Data Privacy & Protection Policy','Aug 5, 2025'],
+        ['Upcoming','Vendor Management Policy','Aug 18, 2025'],
+        ['Upcoming','Human Oversight Policy','Sep 2, 2025']
+      ].map(([status, policy, date]) => (
+        <div className="policy-row" key={policy}>
+          <em className={status === 'Overdue' ? 'overdue' : status === 'Due Soon' ? 'due' : 'upcoming'}>{status}</em>
+          <div><strong>{policy}</strong><span>{date}</span></div>
+        </div>
+      ))}
+    </section>
+
+    <CTA onOpen={openLead} />
+  </div>
+}) {
   const rows = [['Policy Management','6','5 (83%)','Implemented','↗'],['Human Oversight','7','5 (71%)','Partial','↗'],['Model Transparency','6','4 (67%)','Partial','—'],['Incident Response','5','2 (40%)','Missing','↘'],['Vendor Management','6','3 (50%)','Partial','↘']]
   return <div className="page-grid">
     <Metric title="Policies Active" value="24" color="gold" /><Metric title="Controls Implemented" value="64%" color="gold" /><Metric title="Owners Assigned" value="38" color="blue" /><Metric title="Reviews Due" value="7" color="red" />
