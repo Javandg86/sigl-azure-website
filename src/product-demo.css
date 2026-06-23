@@ -2910,3 +2910,186 @@ td {
 .demo-hero {
   background: rgba(255,255,255,.80) !important;
 }
+
+/* Permanent glass effect across Product Demo */
+
+.metric-card,
+.panel,
+.demo-hero,
+.report-templates article {
+  background: rgba(15,23,42,.35) !important;
+  backdrop-filter: blur(22px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(180%) !important;
+  border: 1px solid rgba(255,255,255,.12) !important;
+  box-shadow:
+    0 8px 40px rgba(0,0,0,.35),
+    inset 0 1px 0 rgba(255,255,255,.08) !important;
+}
+
+/* Bright readable text on dark glass */
+.metric-card,
+.panel,
+.demo-hero,
+.report-templates article {
+  color: #F8FAFC !important;
+}
+
+.metric-card h1,
+.metric-card h2,
+.metric-card h3,
+.metric-card strong,
+.panel h1,
+.panel h2,
+.panel h3,
+.demo-hero h1,
+.demo-hero h2 {
+  color: #FFFFFF !important;
+}
+
+/* Secondary text */
+.metric-card p,
+.panel p,
+.panel span,
+.panel td,
+.panel th,
+.demo-hero p {
+  color: rgba(255,255,255,.78) !important;
+}
+
+/* Inputs and tables match glass theme */
+input,
+select,
+textarea {
+  background: rgba(255,255,255,.06) !important;
+  color: #fff !important;
+  border: 1px solid rgba(255,255,255,.12) !important;
+}
+
+table {
+  background: transparent !important;
+}
+
+/* Make animation visible through page */
+.demo-main,
+.page-grid,
+.fade-page {
+  background: transparent !important;
+}
+
+
+/* Ultra-transparent glass, but readable content */
+.metric-card,
+.panel,
+.demo-hero,
+.report-templates article {
+  background: rgba(2,6,23,.18) !important;
+  border: 1px solid rgba(255,255,255,.18) !important;
+  backdrop-filter: blur(18px) saturate(190%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(190%) !important;
+}
+
+/* Make all Product Demo text readable */
+.metric-card,
+.metric-card *,
+.panel,
+.panel *,
+.demo-hero,
+.demo-hero *,
+.report-templates article,
+.report-templates article * {
+  color: #f8fafc !important;
+}
+
+/* Muted text still readable */
+.activity,
+.panel p,
+.panel span,
+.panel small,
+.demo-hero p,
+.metric-card span {
+  color: rgba(226,232,240,.86) !important;
+}
+
+/* Fix tables specifically */
+.table-wrap,
+table,
+thead,
+tbody,
+tr,
+th,
+td {
+  background: transparent !important;
+  color: #f8fafc !important;
+}
+
+th {
+  color: rgba(226,232,240,.95) !important;
+  font-weight: 900 !important;
+}
+
+td {
+  color: #ffffff !important;
+  font-weight: 700 !important;
+}
+
+tbody tr {
+  background: rgba(255,255,255,.045) !important;
+}
+
+tbody tr:hover {
+  background: rgba(255,255,255,.09) !important;
+}
+
+/* Keep badges readable */
+.demo-badge,
+.finding-item em,
+.deadline-row em,
+.risk-control-row em,
+.missing-evidence-row em,
+.scheduled-row b {
+  color: inherit !important;
+  font-weight: 950 !important;
+}
+
+/* Restore badge colors over dark glass */
+.demo-badge.red,
+.finding-item em.high,
+.deadline-row em.high,
+.risk-control-row em.missing,
+.missing-evidence-row em.overdue {
+  background: rgba(220,38,38,.22) !important;
+  color: #fecaca !important;
+}
+
+.demo-badge.orange,
+.finding-item em.medium,
+.deadline-row em.medium,
+.risk-control-row em.partial,
+.missing-evidence-row em.due {
+  background: rgba(216,149,23,.22) !important;
+  color: #fde68a !important;
+}
+
+.demo-badge.green {
+  background: rgba(22,163,74,.22) !important;
+  color: #bbf7d0 !important;
+}
+
+.demo-badge.blue {
+  background: rgba(20,110,245,.22) !important;
+  color: #bfdbfe !important;
+}
+
+/* Inputs/selects readable */
+input,
+select,
+textarea {
+  background: rgba(2,6,23,.42) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255,255,255,.22) !important;
+}
+
+option {
+  background: #020617 !important;
+  color: #ffffff !important;
+}
