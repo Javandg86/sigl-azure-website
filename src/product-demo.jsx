@@ -678,21 +678,6 @@ function SettingsPage({ openLead }) {
       </div>
     </section>
   </div>
-}) {
-  const [toast, setToast] = useState('')
-  const toggle = () => { setToast('Demo setting updated.'); setTimeout(()=>setToast(''),1800) }
-  return <div className="page-grid settings-grid">
-    {toast && <div className="toast">{toast}</div>}
-    <section className="panel"><h3>Workspace Profile</h3><label>Workspace Name<input defaultValue="Acme Corp"/></label><label>Industry<select defaultValue="Technology"><option>Technology</option></select></label><button onClick={toggle}>Save Changes</button></section>
-    <section className="panel"><h3>Team Members</h3>{['Alex Kim — Admin — Active','Jamie Davis — Analyst — Active','Sam Patel — Reviewer — Active','Lee Morgan — Viewer — Active'].map(x=><p className="activity" key={x}>{x}</p>)}</section>
-    <section className="panel"><h3>Connected Integrations</h3>{['Slack — Connected','Google Drive — Connected','Microsoft Teams — Connected','Jira — Connected','OneDrive — Connected'].map(x=><p className="activity" key={x}>{x}</p>)}</section>
-    <section className="panel"><h3>Security & Access</h3><p>MFA enabled</p><p>Session Timeout: 8 hours</p><button onClick={()=>openLead('Request Retainer Consultation')}>Request Retainer Consultation</button></section>
-  </div>
-}
-
-function LeadAdmin() {
-  const leads = JSON.parse(localStorage.getItem('siglDemoLeads') || '[]')
-  return <div className="lead-admin"><h1>Demo Lead Admin</h1>{leads.map((l,i)=><article className="panel" key={i}><strong>{l.company}</strong><p>{l.name} — {l.email}</p><p>{l.serviceInterest}</p><small>{l.timestamp}</small></article>)}</div>
 }
 
 function App() {
