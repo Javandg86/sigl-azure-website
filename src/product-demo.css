@@ -1566,3 +1566,530 @@ html:has(.demo-app),
     animation: none !important;
   }
 }
+
+/* Kill previous demo background effects */
+
+.demo-main::before,
+.demo-main::after,
+.fade-page::before,
+.metric-card::after,
+.panel::after,
+.report-templates article::after,
+.demo-hero::after {
+  animation:none !important;
+  content:none !important;
+}
+
+
+/* ================================
+   SIGL AI COMMAND NETWORK
+   ================================ */
+
+.demo-app{
+  background:#010409 !important;
+}
+
+.demo-main{
+  position:relative;
+  background:#010409 !important;
+  isolation:isolate;
+}
+
+/* Layer 1: cyber grid */
+
+.demo-main::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-3;
+  pointer-events:none;
+
+  background:
+
+  repeating-linear-gradient(
+    90deg,
+    rgba(0,180,255,.12) 0px,
+    rgba(0,180,255,.12) 1px,
+    transparent 1px,
+    transparent 80px
+  ),
+
+  repeating-linear-gradient(
+    0deg,
+    rgba(0,180,255,.08) 0px,
+    rgba(0,180,255,.08) 1px,
+    transparent 1px,
+    transparent 80px
+  );
+
+  animation:sigl-grid-move 12s linear infinite;
+}
+
+/* Layer 2: moving AI network */
+
+.demo-main::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-2;
+  pointer-events:none;
+
+  background:
+
+  radial-gradient(circle at 15% 25%, #00bfff 0 4px, transparent 5px),
+  radial-gradient(circle at 35% 60%, #00bfff 0 4px, transparent 5px),
+  radial-gradient(circle at 55% 30%, #d89517 0 4px, transparent 5px),
+  radial-gradient(circle at 75% 55%, #00bfff 0 4px, transparent 5px),
+  radial-gradient(circle at 88% 18%, #d89517 0 4px, transparent 5px),
+
+  linear-gradient(35deg,
+  transparent 49%,
+  rgba(0,191,255,.35) 50%,
+  transparent 51%),
+
+  linear-gradient(120deg,
+  transparent 49%,
+  rgba(216,149,23,.25) 50%,
+  transparent 51%);
+
+  background-size:
+  auto,
+  auto,
+  auto,
+  auto,
+  auto,
+  600px 600px,
+  700px 700px;
+
+  animation:
+    sigl-network-flow 8s linear infinite;
+}
+
+/* scanning beam */
+
+.demo-sidebar::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  height:180px;
+
+  background:
+  linear-gradient(
+    to bottom,
+    transparent,
+    rgba(0,191,255,.16),
+    transparent
+  );
+
+  animation:sigl-scan 6s linear infinite;
+
+  pointer-events:none;
+}
+
+/* floating code */
+
+body::before{
+  content:
+  "AI-GOVERNANCE   THREAT-SCAN   MODEL-RISK   RED-TEAM   VENDOR-RISK   EVIDENCE-COLLECTION   ";
+
+  position:fixed;
+  inset:0;
+
+  color:rgba(0,191,255,.16);
+
+  font-family:monospace;
+  font-size:14px;
+
+  letter-spacing:.25em;
+
+  z-index:-1;
+
+  pointer-events:none;
+
+  white-space:nowrap;
+
+  animation:sigl-code-scroll 22s linear infinite;
+}
+
+/* animations */
+
+@keyframes sigl-grid-move{
+  from{
+    transform:translateY(0);
+  }
+  to{
+    transform:translateY(80px);
+  }
+}
+
+@keyframes sigl-network-flow{
+  from{
+    background-position:
+      0 0,
+      0 0,
+      0 0,
+      0 0,
+      0 0,
+      0 0,
+      0 0;
+  }
+
+  to{
+    background-position:
+      0 0,
+      0 0,
+      0 0,
+      0 0,
+      0 0,
+      600px 600px,
+      -700px 700px;
+  }
+}
+
+@keyframes sigl-scan{
+  from{
+    top:-220px;
+  }
+  to{
+    top:100%;
+  }
+}
+
+@keyframes sigl-code-scroll{
+  from{
+    transform:translateX(100%);
+  }
+
+  to{
+    transform:translateX(-100%);
+  }
+}
+
+/* keep cards readable */
+
+.metric-card,
+.panel,
+.demo-hero,
+.report-templates article{
+  background:rgba(255,255,255,.96) !important;
+  backdrop-filter:blur(14px);
+}
+
+
+/* Kill previous background systems */
+
+body::before,
+.demo-main::before,
+.demo-main::after,
+.fade-page::before,
+.demo-sidebar::after {
+  content:none !important;
+  animation:none !important;
+}
+
+
+/* ===================================
+   SIGL SPACE COMMAND CENTER
+   =================================== */
+
+.demo-app,
+.demo-main{
+  background:#000000 !important;
+}
+
+/* Deep space layer */
+
+.demo-main::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:-4;
+
+  background:
+
+  radial-gradient(circle at 15% 20%,
+    rgba(0,191,255,.35),
+    transparent 30%),
+
+  radial-gradient(circle at 75% 15%,
+    rgba(216,149,23,.30),
+    transparent 28%),
+
+  radial-gradient(circle at 70% 85%,
+    rgba(124,58,237,.25),
+    transparent 35%),
+
+  radial-gradient(circle at 30% 70%,
+    rgba(0,191,255,.20),
+    transparent 30%),
+
+  #000;
+
+  animation:sigl-space-drift 20s ease-in-out infinite alternate;
+}
+
+/* Bright moving network */
+
+.demo-main::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:-3;
+
+  background:
+
+  radial-gradient(circle at 10% 20%, #00bfff 0 6px, transparent 7px),
+  radial-gradient(circle at 25% 60%, #00bfff 0 6px, transparent 7px),
+  radial-gradient(circle at 40% 35%, #d89517 0 6px, transparent 7px),
+  radial-gradient(circle at 55% 75%, #00bfff 0 6px, transparent 7px),
+  radial-gradient(circle at 72% 25%, #d89517 0 6px, transparent 7px),
+  radial-gradient(circle at 85% 55%, #00bfff 0 6px, transparent 7px),
+
+  linear-gradient(
+    45deg,
+    transparent 49.8%,
+    rgba(0,191,255,.65) 50%,
+    transparent 50.2%
+  ),
+
+  linear-gradient(
+    130deg,
+    transparent 49.8%,
+    rgba(216,149,23,.55) 50%,
+    transparent 50.2%
+  );
+
+  background-size:
+    auto,auto,auto,auto,auto,auto,
+    500px 500px,
+    600px 600px;
+
+  animation:sigl-network-flow 7s linear infinite;
+}
+
+/* floating AI telemetry */
+
+.demo-app::before{
+  content:
+  "MODEL-RISK • PROMPT-INJECTION • AI-GOVERNANCE • RED-TEAM • VENDOR-RISK • EVIDENCE • SECURITY-CONTROLS • ";
+
+  position:fixed;
+  top:15%;
+  left:0;
+
+  white-space:nowrap;
+
+  font-family:monospace;
+  font-size:20px;
+
+  color:rgba(0,191,255,.55);
+
+  text-shadow:
+    0 0 10px rgba(0,191,255,.8),
+    0 0 30px rgba(0,191,255,.6);
+
+  z-index:-2;
+  pointer-events:none;
+
+  animation:sigl-telemetry 16s linear infinite;
+}
+
+/* second telemetry lane */
+
+.demo-app::after{
+  content:
+  "SIGL AI COMMAND • THREAT MONITORING • CONTROL VALIDATION • AUDIT READY • ";
+
+  position:fixed;
+  bottom:18%;
+  right:0;
+
+  white-space:nowrap;
+
+  font-family:monospace;
+  font-size:22px;
+
+  color:rgba(216,149,23,.65);
+
+  text-shadow:
+    0 0 12px rgba(216,149,23,.9),
+    0 0 35px rgba(216,149,23,.7);
+
+  z-index:-2;
+  pointer-events:none;
+
+  animation:sigl-telemetry-reverse 18s linear infinite;
+}
+
+@keyframes sigl-space-drift{
+  from{
+    filter:hue-rotate(0deg);
+    transform:scale(1);
+  }
+  to{
+    filter:hue-rotate(18deg);
+    transform:scale(1.05);
+  }
+}
+
+@keyframes sigl-network-flow{
+  from{
+    background-position:
+      0 0,0 0,0 0,0 0,0 0,0 0,
+      0 0,
+      0 0;
+  }
+  to{
+    background-position:
+      0 0,0 0,0 0,0 0,0 0,0 0,
+      500px 500px,
+      -600px 600px;
+  }
+}
+
+@keyframes sigl-telemetry{
+  from{
+    transform:translateX(100%);
+  }
+  to{
+    transform:translateX(-120%);
+  }
+}
+
+@keyframes sigl-telemetry-reverse{
+  from{
+    transform:translateX(-120%);
+  }
+  to{
+    transform:translateX(100%);
+  }
+}
+
+
+/* Visible AI Security SOC rail for Product Demo */
+.demo-main {
+  padding-right: 330px !important;
+}
+
+.demo-main .soc-rail {
+  display: none;
+}
+
+.demo-main::before {
+  opacity: 1 !important;
+}
+
+.demo-app::after {
+  z-index: 1 !important;
+}
+
+.demo-main::after {
+  z-index: 1 !important;
+}
+
+.demo-app::before {
+  z-index: 1 !important;
+}
+
+/* Create permanent right-side command rail */
+.demo-main > .fade-page::after {
+  content: "SIGL AI COMMAND\\A\\A● AI RISK: 72/100\\A● GOVERNANCE: 64%\\A● TESTING: ACTIVE\\A● EVIDENCE: 72%\\A\\A LIVE TELEMETRY\\A model-risk.scan()\\A prompt-guard.check()\\A vendor-ai.review()\\A audit-evidence.hash()\\A red-team.signal()\\A policy.owner.map()\\A\\A STATUS: MONITORING";
+  white-space: pre-line;
+  position: fixed;
+  top: 92px;
+  right: 22px;
+  width: 275px;
+  height: calc(100vh - 120px);
+  padding: 22px;
+  border: 1px solid rgba(0,191,255,.55);
+  border-radius: 24px;
+  background:
+    linear-gradient(180deg, rgba(0,0,0,.88), rgba(2,6,23,.92)),
+    repeating-linear-gradient(0deg, rgba(0,191,255,.10) 0 1px, transparent 1px 28px);
+  color: rgba(125, 211, 252, .95);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 13px;
+  line-height: 1.7;
+  letter-spacing: .04em;
+  box-shadow:
+    0 0 25px rgba(0,191,255,.35),
+    inset 0 0 30px rgba(0,191,255,.12);
+  text-shadow: 0 0 12px rgba(0,191,255,.75);
+  z-index: 3;
+  pointer-events: none;
+  overflow: hidden;
+  animation: soc-rail-glow 3s ease-in-out infinite alternate;
+}
+
+.demo-main > .fade-page::before {
+  content: "";
+  position: fixed;
+  top: 108px;
+  right: 42px;
+  width: 235px;
+  height: calc(100vh - 154px);
+  border-radius: 20px;
+  background:
+    linear-gradient(180deg, transparent, rgba(0,191,255,.32), transparent),
+    radial-gradient(circle at 50% 18%, rgba(216,149,23,.9) 0 3px, transparent 4px),
+    radial-gradient(circle at 25% 42%, rgba(0,191,255,.9) 0 3px, transparent 4px),
+    radial-gradient(circle at 78% 66%, rgba(124,58,237,.9) 0 3px, transparent 4px),
+    radial-gradient(circle at 48% 86%, rgba(22,163,74,.9) 0 3px, transparent 4px);
+  opacity: .75;
+  z-index: 4;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  animation: soc-scan-beam 4s linear infinite;
+}
+
+/* Keep content above background but below rail */
+.demo-topbar,
+.demo-hero,
+.page-grid,
+.demo-disclaimer {
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes soc-rail-glow {
+  from {
+    box-shadow:
+      0 0 18px rgba(0,191,255,.28),
+      inset 0 0 24px rgba(0,191,255,.10);
+  }
+  to {
+    box-shadow:
+      0 0 38px rgba(0,191,255,.55),
+      inset 0 0 38px rgba(216,149,23,.14);
+  }
+}
+
+@keyframes soc-scan-beam {
+  from {
+    transform: translateY(-55%);
+  }
+  to {
+    transform: translateY(55%);
+  }
+}
+
+/* Hide rail on smaller laptops/tablets/mobile so layout stays clean */
+@media (max-width: 1500px) {
+  .demo-main {
+    padding-right: 34px !important;
+  }
+
+  .demo-main > .fade-page::before,
+  .demo-main > .fade-page::after {
+    display: none !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .demo-main {
+    padding-right: 18px !important;
+  }
+}
