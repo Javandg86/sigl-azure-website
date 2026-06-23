@@ -3857,3 +3857,53 @@ body:has(.demo-app),
     margin-top: 18px !important;
   }
 }
+
+/* Replace Product Demo custom animation with main-site network animation */
+.demo-app::before,
+.demo-app::after,
+.demo-main::before,
+.demo-main::after,
+.fade-page::before,
+.fade-page::after {
+  content: none !important;
+  display: none !important;
+  animation: none !important;
+  background: none !important;
+}
+
+.demo-app,
+.demo-main {
+  background: #000 !important;
+}
+
+.product-demo-network {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 20% 10%, rgba(124,221,255,.16), transparent 28%),
+    radial-gradient(circle at 80% 30%, rgba(93,141,255,.13), transparent 30%),
+    #000;
+}
+
+.product-demo-network canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  opacity: .92;
+}
+
+.demo-sidebar,
+.demo-main,
+.demo-topbar,
+.demo-hero,
+.page-grid,
+.demo-disclaimer,
+.metric-card,
+.panel,
+.report-templates article {
+  position: relative;
+  z-index: 2;
+}

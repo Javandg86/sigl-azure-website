@@ -9,6 +9,7 @@ import {
   PieChart, Pie, Cell
 } from 'recharts'
 import './product-demo.css'
+import { initAiTrustNetwork } from './three/aiNetwork.js'
 
 /* Force Product Demo to open at the top on mobile/browser back-forward cache */
 if (typeof window !== 'undefined') {
@@ -720,8 +721,19 @@ function App() {
 
   if (window.location.pathname === '/lead-demo-admin') return <LeadAdmin />
 
+  setTimeout(() => {
+    const canvas = document.getElementById('productDemoNetwork')
+    if (canvas && !canvas.dataset.ready) {
+      canvas.dataset.ready = 'true'
+      initAiTrustNetwork('productDemoNetwork')
+    }
+  }, 0)
+
   return (
     <div className="demo-app">
+      <div className="product-demo-network">
+        <canvas id="productDemoNetwork"></canvas>
+      </div>
       <button className="hamburger" onClick={() => setDrawer(true)}><Menu /></button>
       <aside className={`demo-sidebar ${drawer ? 'open' : ''}`}>
         <button
