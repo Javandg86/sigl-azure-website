@@ -10,6 +10,28 @@ import {
 } from 'recharts'
 import './product-demo.css'
 
+/* Force Product Demo to open at the top on mobile/browser back-forward cache */
+if (typeof window !== 'undefined') {
+  if ('scrollRestoration' in window.history) {
+    window.history.scrollRestoration = 'manual'
+  }
+
+  const resetProductDemoScroll = () => {
+    if (window.location.pathname.includes('/product-demo')) {
+      window.scrollTo(0, 0)
+      document.documentElement.scrollTop = 0
+      document.body.scrollTop = 0
+    }
+  }
+
+  resetProductDemoScroll()
+  window.addEventListener('load', resetProductDemoScroll)
+  window.addEventListener('pageshow', resetProductDemoScroll)
+  setTimeout(resetProductDemoScroll, 50)
+  setTimeout(resetProductDemoScroll, 250)
+}
+
+
 const nav = [
   ['Dashboard', LayoutDashboard],
   ['AI Inventory', Database],
