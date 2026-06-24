@@ -11,6 +11,22 @@ import {
 import './product-demo.css'
 import { initAiTrustNetwork } from './three/aiNetwork.js'
 
+if (typeof window !== 'undefined') {
+  let productDemoNetworkAttempts = 0
+  const productDemoNetworkTimer = window.setInterval(() => {
+    const canvas = document.getElementById('productDemoNetwork')
+    if (!canvas || canvas.dataset.ready) {
+      productDemoNetworkAttempts++
+      if (productDemoNetworkAttempts > 40) window.clearInterval(productDemoNetworkTimer)
+      return
+    }
+    canvas.dataset.ready = 'true'
+    initAiTrustNetwork('productDemoNetwork')
+    window.clearInterval(productDemoNetworkTimer)
+  }, 100)
+}
+
+
 /* Force Product Demo to open at the top on mobile/browser back-forward cache */
 if (typeof window !== 'undefined') {
   if ('scrollRestoration' in window.history) {
