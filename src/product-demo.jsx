@@ -747,9 +747,7 @@ function App() {
 
   return (
     <div className="demo-app">
-      <div className="product-demo-network">
-        <canvas id="productDemoNetwork"></canvas>
-      </div>
+      <div className="product-demo-network" id="productDemoNetwork"></div>
       <button className="hamburger" onClick={() => setDrawer(true)}><Menu /></button>
       <aside className={`demo-sidebar ${drawer ? 'open' : ''}`}>
         <button

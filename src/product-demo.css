@@ -4300,3 +4300,36 @@ body .demo-app .report-templates article {
 .page-grid {
   background: transparent !important;
 }
+
+/* Correct Product Demo main-site animation container */
+.product-demo-network {
+  display: block !important;
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+  background: #000 !important;
+  overflow: hidden !important;
+}
+
+.product-demo-network canvas {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  opacity: 1 !important;
+  filter: brightness(1.6) contrast(1.2) saturate(1.4) !important;
+}
+
+.demo-main,
+.demo-sidebar,
+.demo-topbar,
+.page-grid,
+.demo-hero,
+.metric-card,
+.panel,
+.conversion-panel {
+  position: relative !important;
+  z-index: 2 !important;
+}
