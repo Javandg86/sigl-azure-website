@@ -4431,3 +4431,328 @@ body .demo-app .report-templates article {
     gap: 54px;
   }
 }
+
+/* =====================================================
+   SIGL Product Demo — dark SaaS dashboard redesign
+   matches generated reference direction
+   ===================================================== */
+
+.product-scroll-mode,
+.demo-app {
+  background: #050b12 !important;
+  color: #f8fbff !important;
+}
+
+.product-demo-network {
+  opacity: .85 !important;
+}
+
+.product-scroll-mode .demo-sidebar,
+.product-scroll-mode .hamburger {
+  display: none !important;
+}
+
+/* Main layout */
+.product-scroll-mode .demo-main {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 34px 80px !important;
+}
+
+/* Top navigation like reference image */
+.product-top-tabs {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 80 !important;
+  margin: 0 -34px 34px !important;
+  padding: 18px 34px !important;
+  border-radius: 0 !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 26px !important;
+  background: rgba(5, 11, 18, .88) !important;
+  border: 0 !important;
+  border-bottom: 1px solid rgba(124,221,255,.16) !important;
+  backdrop-filter: blur(22px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(160%) !important;
+}
+
+.product-top-tabs::before {
+  content: "SIGL";
+  margin-right: auto;
+  font-size: 2.35rem;
+  font-weight: 950;
+  letter-spacing: -.08em;
+  color: #fff;
+}
+
+.product-top-tabs a {
+  background: transparent !important;
+  border: 0 !important;
+  border-bottom: 3px solid transparent !important;
+  border-radius: 0 !important;
+  color: rgba(248,251,255,.86) !important;
+  font-size: .95rem !important;
+  font-weight: 950 !important;
+  padding: 12px 4px 16px !important;
+  box-shadow: none !important;
+}
+
+.product-top-tabs a:hover {
+  color: #fff !important;
+  border-bottom-color: #d89517 !important;
+  background: transparent !important;
+}
+
+/* Dashboard heading */
+.demo-topbar {
+  max-width: 1540px !important;
+  margin: 0 auto 28px !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: flex-start !important;
+}
+
+.demo-topbar h1 {
+  color: #fff !important;
+  font-size: clamp(2rem, 3vw, 3rem) !important;
+  letter-spacing: -.05em !important;
+}
+
+.demo-topbar p {
+  color: rgba(225,236,250,.75) !important;
+  font-size: 1.05rem !important;
+}
+
+/* Remove old hero block from dashboard */
+.demo-hero {
+  display: none !important;
+}
+
+/* Section spacing */
+.product-scroll-sections {
+  max-width: 1540px !important;
+  margin: 0 auto !important;
+  gap: 70px !important;
+}
+
+.product-scroll-section {
+  scroll-margin-top: 110px !important;
+}
+
+.product-scroll-section > h2 {
+  color: #fff !important;
+  font-size: clamp(2rem, 3vw, 3rem) !important;
+  margin: 0 0 20px !important;
+  letter-spacing: -.05em !important;
+}
+
+/* Cards like the generated screenshot */
+.metric-card,
+.panel,
+.report-templates article,
+.conversion-panel {
+  background:
+    linear-gradient(145deg, rgba(18, 29, 42, .76), rgba(8, 15, 24, .62)) !important;
+  border: 1px solid rgba(124,221,255,.18) !important;
+  border-radius: 18px !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.08),
+    0 22px 70px rgba(0,0,0,.34) !important;
+  backdrop-filter: blur(18px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(150%) !important;
+}
+
+.metric-card {
+  min-height: 126px !important;
+}
+
+.metric-card strong {
+  font-size: clamp(2rem, 3vw, 3.2rem) !important;
+  color: #fff !important;
+}
+
+.metric-card p,
+.panel h3 {
+  color: #fff !important;
+  font-weight: 950 !important;
+}
+
+.metric-card span,
+.panel p,
+.panel span,
+.activity {
+  color: rgba(225,236,250,.72) !important;
+}
+
+/* Icon chips */
+.metric-icon {
+  background: rgba(216,149,23,.18) !important;
+  border: 1px solid rgba(216,149,23,.38) !important;
+  box-shadow: 0 0 28px rgba(216,149,23,.18) !important;
+}
+
+.metric-icon.blue {
+  background: rgba(20,110,245,.18) !important;
+  border-color: rgba(20,110,245,.42) !important;
+}
+
+.metric-icon.green {
+  background: rgba(22,163,74,.18) !important;
+  border-color: rgba(22,163,74,.42) !important;
+}
+
+.metric-icon.red {
+  background: rgba(220,38,38,.18) !important;
+  border-color: rgba(220,38,38,.42) !important;
+}
+
+/* Dashboard grid closer to screenshot */
+.page-grid {
+  gap: 22px !important;
+}
+
+.product-scroll-section#dashboard .page-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+}
+
+.product-scroll-section#dashboard .panel.wide {
+  grid-column: span 2 !important;
+}
+
+.product-scroll-section#dashboard .panel:not(.wide) {
+  min-height: 280px !important;
+}
+
+/* Tables */
+.table-wrap {
+  border-radius: 16px !important;
+}
+
+table,
+thead,
+tbody,
+tr,
+th,
+td {
+  background: transparent !important;
+}
+
+th {
+  color: rgba(225,236,250,.72) !important;
+  font-size: .78rem !important;
+  letter-spacing: .08em !important;
+  text-transform: uppercase !important;
+}
+
+td {
+  color: rgba(248,251,255,.9) !important;
+}
+
+tbody tr {
+  background: rgba(255,255,255,.025) !important;
+}
+
+tbody tr:hover {
+  background: rgba(124,221,255,.07) !important;
+}
+
+/* Buttons */
+button,
+.primary-action,
+.conversion-panel button,
+.report-templates button {
+  background: rgba(124,221,255,.10) !important;
+  color: #f8fbff !important;
+  border: 1px solid rgba(124,221,255,.28) !important;
+  box-shadow: 0 0 28px rgba(124,221,255,.10) !important;
+}
+
+button:hover,
+.primary-action:hover,
+.conversion-panel button:hover,
+.report-templates button:hover {
+  background: rgba(216,149,23,.18) !important;
+  border-color: rgba(216,149,23,.42) !important;
+}
+
+/* Progress bars */
+.progress {
+  background: rgba(255,255,255,.11) !important;
+}
+
+/* Badges */
+.demo-badge {
+  background: rgba(255,255,255,.08) !important;
+  border: 1px solid rgba(255,255,255,.10) !important;
+}
+
+.demo-badge.red {
+  color: #fecaca !important;
+  background: rgba(220,38,38,.22) !important;
+}
+
+.demo-badge.orange {
+  color: #fed7aa !important;
+  background: rgba(216,149,23,.22) !important;
+}
+
+.demo-badge.green {
+  color: #bbf7d0 !important;
+  background: rgba(22,163,74,.22) !important;
+}
+
+.demo-badge.blue {
+  color: #bfdbfe !important;
+  background: rgba(20,110,245,.22) !important;
+}
+
+/* Top-right user */
+.user b {
+  background: rgba(255,255,255,.92) !important;
+  color: #0b1220 !important;
+}
+
+.user em {
+  color: rgba(225,236,250,.76) !important;
+}
+
+/* Hide bottom funnel panels for cleaner SaaS screenshot look */
+.conversion-panel {
+  display: none !important;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+  .product-scroll-mode .demo-main {
+    padding: 0 16px 70px !important;
+  }
+
+  .product-top-tabs {
+    margin: 0 -16px 24px !important;
+    justify-content: flex-start !important;
+    overflow-x: auto !important;
+    flex-wrap: nowrap !important;
+    padding: 12px 16px !important;
+  }
+
+  .product-top-tabs::before {
+    font-size: 1.9rem !important;
+    margin-right: 18px !important;
+  }
+
+  .product-scroll-section#dashboard .page-grid,
+  .page-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .product-scroll-section#dashboard .panel.wide {
+    grid-column: span 1 !important;
+  }
+
+  table {
+    min-width: 760px !important;
+  }
+}
