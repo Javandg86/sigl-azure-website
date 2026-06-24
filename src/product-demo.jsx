@@ -758,6 +758,24 @@ function App() {
       >
         ×
       </button>
+
+      <details className="product-mobile-nav-v2">
+        <summary aria-label="Open product demo sections">☰</summary>
+        <nav aria-label="Mobile product demo sections">
+          {nav.map(([name, Icon]) => (
+            <a
+              key={name}
+              href={`#${name.toLowerCase().replaceAll(' ', '-')}`}
+              onClick={(e) => {
+                const box = e.currentTarget.closest('details')
+                if (box) box.open = false
+              }}
+            >
+              <Icon size={18} /> <span>{name}</span>
+            </a>
+          ))}
+        </nav>
+      </details>
       <button className="hamburger" onClick={() => setDrawer(true)}><Menu /></button>
       <aside className={`demo-sidebar ${drawer ? 'open' : ''}`}>
         <button
