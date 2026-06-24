@@ -2515,3 +2515,67 @@ section {
   position: relative;
   z-index: 3;
 }
+
+/* Main site mobile fixed dropdown menu like Product Demo */
+@media (max-width: 900px) {
+  .mobile-menu-btn {
+    display: grid !important;
+    position: fixed !important;
+    top: 18px !important;
+    right: 16px !important;
+    z-index: 2147483647 !important;
+    width: 46px !important;
+    height: 46px !important;
+    place-items: center !important;
+    border-radius: 999px !important;
+    background: rgba(5,11,18,.96) !important;
+    color: #fff !important;
+    border: 1px solid rgba(124,221,255,.42) !important;
+    font-size: 1.65rem !important;
+    font-weight: 950 !important;
+    box-shadow: 0 0 30px rgba(124,221,255,.22) !important;
+  }
+
+  .nav-links {
+    position: fixed !important;
+    top: 76px !important;
+    right: 16px !important;
+    left: auto !important;
+    z-index: 2147483646 !important;
+    width: 230px !important;
+    display: none !important;
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+    padding: 10px !important;
+    border-radius: 18px !important;
+    background: rgba(5,11,18,.96) !important;
+    border: 1px solid rgba(124,221,255,.30) !important;
+    backdrop-filter: blur(22px) saturate(160%) !important;
+    -webkit-backdrop-filter: blur(22px) saturate(160%) !important;
+    box-shadow: 0 24px 70px rgba(0,0,0,.55) !important;
+  }
+
+  .nav-links.open {
+    display: grid !important;
+  }
+
+  .nav-links a {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    padding: 12px !important;
+    border-radius: 13px !important;
+    text-decoration: none !important;
+    background: rgba(255,255,255,.06) !important;
+    border: 1px solid rgba(255,255,255,.10) !important;
+    color: #fff !important;
+    font-weight: 900 !important;
+    font-size: .9rem !important;
+  }
+
+  .nav-links a:hover,
+  .nav-links a:focus {
+    background: rgba(124,221,255,.14) !important;
+    border-color: rgba(124,221,255,.34) !important;
+  }
+}
