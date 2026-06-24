@@ -2579,3 +2579,42 @@ section {
     border-color: rgba(124,221,255,.34) !important;
   }
 }
+
+/* FORCE main website mobile menu to stay visible while scrolling */
+@media (max-width: 900px) {
+  header,
+  .site-header,
+  .nav,
+  .navbar {
+    overflow: visible !important;
+  }
+
+  .mobile-menu-btn {
+    position: fixed !important;
+    top: 18px !important;
+    right: 16px !important;
+    z-index: 2147483647 !important;
+    display: grid !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+
+  .nav-links {
+    position: fixed !important;
+    top: 76px !important;
+    right: 16px !important;
+    left: auto !important;
+    z-index: 2147483646 !important;
+    transform: none !important;
+    max-height: calc(100dvh - 95px) !important;
+    overflow-y: auto !important;
+  }
+
+  .nav-links.open {
+    display: grid !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+}
