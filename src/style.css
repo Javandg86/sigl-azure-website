@@ -2702,3 +2702,52 @@ section {
     pointer-events: none !important;
   }
 }
+
+/* Main website desktop: move top tabs to left-side vertical tabs */
+@media (min-width: 901px) {
+  body:not(:has(.demo-app)) #siteNav.nav-links {
+    position: fixed !important;
+    left: 18px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    z-index: 9998 !important;
+
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+
+    width: 190px !important;
+    padding: 10px !important;
+    border-radius: 22px !important;
+
+    background: rgba(5, 11, 18, .88) !important;
+    border: 1px solid rgba(124,221,255,.22) !important;
+    backdrop-filter: blur(22px) saturate(160%) !important;
+    -webkit-backdrop-filter: blur(22px) saturate(160%) !important;
+    box-shadow: 0 24px 70px rgba(0,0,0,.38) !important;
+  }
+
+  body:not(:has(.demo-app)) #siteNav.nav-links a {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+
+    padding: 11px 13px !important;
+    border-radius: 14px !important;
+
+    color: rgba(248,251,255,.88) !important;
+    text-decoration: none !important;
+    font-weight: 900 !important;
+    font-size: .9rem !important;
+
+    background: rgba(255,255,255,.055) !important;
+    border: 1px solid rgba(255,255,255,.08) !important;
+  }
+
+  body:not(:has(.demo-app)) #siteNav.nav-links a:hover,
+  body:not(:has(.demo-app)) #siteNav.nav-links a:focus {
+    background: rgba(124,221,255,.14) !important;
+    border-color: rgba(124,221,255,.34) !important;
+    color: #fff !important;
+  }
+}
