@@ -4229,3 +4229,74 @@ body .demo-app tbody tr {
 body .demo-app * {
   color: #f8fbff !important;
 }
+
+/* ABSOLUTE FINAL: force Product Demo network canvas visible */
+body:has(.demo-app),
+html:has(.demo-app),
+#app:has(.demo-app) {
+  background: #000 !important;
+}
+
+.demo-app {
+  position: relative !important;
+  isolation: isolate !important;
+  background: transparent !important;
+}
+
+.product-demo-network {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+  background: #000 !important;
+}
+
+.product-demo-network canvas,
+#productDemoNetwork {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  min-width: 100vw !important;
+  min-height: 100vh !important;
+  filter: brightness(3) contrast(1.8) saturate(2.4) !important;
+}
+
+/* Content above canvas */
+.demo-sidebar,
+.demo-main,
+.demo-topbar,
+.demo-hero,
+.page-grid,
+.metric-card,
+.panel,
+.conversion-panel,
+.report-templates article {
+  position: relative !important;
+  z-index: 5 !important;
+}
+
+/* Make panels truly see-through */
+body .demo-app .metric-card,
+body .demo-app .panel,
+body .demo-app .demo-hero,
+body .demo-app .conversion-panel,
+body .demo-app .report-templates article {
+  background: rgba(255,255,255,.055) !important;
+  border: 1px solid rgba(255,255,255,.14) !important;
+  backdrop-filter: blur(16px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(160%) !important;
+}
+
+/* Remove black page layers that may cover canvas */
+.demo-main,
+.fade-page,
+.page-grid {
+  background: transparent !important;
+}
