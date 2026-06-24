@@ -2690,3 +2690,15 @@ section {
     border-color: rgba(124,221,255,.34) !important;
   }
 }
+
+/* Hide old main-site mobile nav now that floating mobile nav is active */
+@media (max-width: 900px) {
+  .mobile-menu-btn,
+  #mobileMenuBtn,
+  #siteNav.nav-links,
+  .nav-links#siteNav {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+}
