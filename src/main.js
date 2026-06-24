@@ -908,3 +908,25 @@ function initFloatingMobileNav() {
 }
 
 initFloatingMobileNav()
+
+// Desktop-only floating left navigation that stays visible while scrolling
+function initFloatingDesktopNav() {
+  if (document.getElementById('siglFloatingDesktopNav')) return
+
+  const sourceNav = document.getElementById('siteNav')
+  if (!sourceNav) return
+
+  const nav = document.createElement('nav')
+  nav.id = 'siglFloatingDesktopNav'
+  nav.className = 'sigl-floating-desktop-nav'
+  nav.setAttribute('aria-label', 'Desktop site navigation')
+
+  sourceNav.querySelectorAll('a').forEach((link) => {
+    const a = link.cloneNode(true)
+    nav.appendChild(a)
+  })
+
+  document.body.appendChild(nav)
+}
+
+initFloatingDesktopNav()
