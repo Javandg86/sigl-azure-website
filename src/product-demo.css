@@ -5049,3 +5049,93 @@ body .demo-app .scheduled-row {
     padding-top: 70px !important;
   }
 }
+
+/* =====================================================
+   Product Demo mobile fixed tabs under X button
+   ===================================================== */
+
+@media (max-width: 1199px) {
+  /* Show Product Demo tabs on mobile/tablet */
+  .product-side-tabs {
+    display: flex !important;
+    position: fixed !important;
+    top: 72px !important;
+    left: 14px !important;
+    right: 14px !important;
+    transform: none !important;
+    z-index: 9997 !important;
+
+    width: auto !important;
+    max-width: calc(100vw - 28px) !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+
+    gap: 8px !important;
+    padding: 10px !important;
+    border-radius: 18px !important;
+
+    background: rgba(5, 11, 18, .88) !important;
+    border: 1px solid rgba(124,221,255,.24) !important;
+    backdrop-filter: blur(22px) saturate(160%) !important;
+    -webkit-backdrop-filter: blur(22px) saturate(160%) !important;
+    box-shadow: 0 18px 55px rgba(0,0,0,.35) !important;
+  }
+
+  .product-side-tabs a {
+    min-width: max-content !important;
+    width: auto !important;
+    flex: 0 0 auto !important;
+
+    padding: 10px 12px !important;
+    border-radius: 14px !important;
+    font-size: .82rem !important;
+    font-weight: 900 !important;
+
+    color: #f8fbff !important;
+    text-decoration: none !important;
+    background: rgba(255,255,255,.055) !important;
+    border: 1px solid rgba(255,255,255,.10) !important;
+  }
+
+  .product-side-tabs a:hover,
+  .product-side-tabs a:focus {
+    background: rgba(124,221,255,.14) !important;
+    border-color: rgba(124,221,255,.34) !important;
+  }
+
+  .product-side-tabs svg {
+    flex: 0 0 auto !important;
+  }
+
+  .product-side-tabs span {
+    display: inline !important;
+  }
+
+  /* Make room so fixed mobile tabs don't cover the page title */
+  .product-scroll-mode .demo-topbar {
+    padding-top: 132px !important;
+  }
+
+  .product-scroll-section {
+    scroll-margin-top: 150px !important;
+  }
+}
+
+@media (max-width: 520px) {
+  .product-side-tabs {
+    top: 66px !important;
+    left: 10px !important;
+    right: 10px !important;
+    max-width: calc(100vw - 20px) !important;
+    padding: 8px !important;
+  }
+
+  .product-side-tabs a {
+    padding: 9px 10px !important;
+    font-size: .78rem !important;
+  }
+
+  .product-scroll-mode .demo-topbar {
+    padding-top: 126px !important;
+  }
+}
