@@ -21,7 +21,7 @@ if (typeof window !== 'undefined') {
       return
     }
     canvas.dataset.ready = 'true'
-    initAiTrustNetwork('productDemoNetwork')
+    initAiTrustNetwork(document.getElementById('productDemoNetwork'))
     window.clearInterval(productDemoNetworkTimer)
   }, 100)
 }
@@ -741,7 +741,7 @@ function App() {
     const canvas = document.getElementById('productDemoNetwork')
     if (canvas && !canvas.dataset.ready) {
       canvas.dataset.ready = 'true'
-      initAiTrustNetwork('productDemoNetwork')
+      initAiTrustNetwork(document.getElementById('productDemoNetwork'))
     }
   }, 0)
 
