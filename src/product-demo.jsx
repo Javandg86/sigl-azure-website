@@ -746,7 +746,7 @@ function App() {
   }, 0)
 
   return (
-    <div className="demo-app">
+    <div className="demo-app product-scroll-mode">
       <div className="product-demo-network" id="productDemoNetwork"></div>
       <button className="hamburger" onClick={() => setDrawer(true)}><Menu /></button>
       <aside className={`demo-sidebar ${drawer ? 'open' : ''}`}>
@@ -773,7 +773,24 @@ function App() {
           <div className="user"><Bell /><span>2</span><b>AK</b><p>Alex Kim<br/><em>Acme Corp</em></p></div>
         </header>
         {active === 'Dashboard' && <section className="demo-hero"><h2>See How SIGL Turns AI Risk Into Audit-Ready Clarity</h2><p>Explore a sample AI risk dashboard built for organizations using AI tools, copilots, chatbots, automations, or customer-facing systems.</p><button onClick={()=>setLeadInterest('Book AI Risk Review')}>Book AI Risk Review</button><button onClick={()=>setActive('Reports')}>View Services</button></section>}
-        <div className="fade-page">{Page[active]}</div>
+        <nav className="product-top-tabs" aria-label="Product demo sections">
+          {nav.map(([name, Icon]) => (
+            <a key={name} href={`#${name.toLowerCase().replaceAll(' ', '-')}`}>
+              <Icon size={18} /> {name}
+            </a>
+          ))}
+        </nav>
+
+        <div className="fade-page product-scroll-sections">
+          <section id="dashboard" className="product-scroll-section"><Dashboard openLead={setLeadInterest} /></section>
+          <section id="ai-inventory" className="product-scroll-section"><h2>AI Inventory</h2><Inventory setModal={setModal} openLead={setLeadInterest} /></section>
+          <section id="risk-assessments" className="product-scroll-section"><h2>Risk Assessments</h2><RiskAssessments setModal={setModal} openLead={setLeadInterest} /></section>
+          <section id="tests" className="product-scroll-section"><h2>Tests</h2><Tests setModal={setModal} openLead={setLeadInterest} /></section>
+          <section id="governance" className="product-scroll-section"><h2>Governance</h2><Governance setModal={setModal} openLead={setLeadInterest} /></section>
+          <section id="evidence" className="product-scroll-section"><h2>Evidence</h2><Evidence setModal={setModal} openLead={setLeadInterest} /></section>
+          <section id="reports" className="product-scroll-section"><h2>Reports</h2><Reports setModal={setModal} openLead={setLeadInterest} /></section>
+          <section id="settings" className="product-scroll-section"><h2>Settings</h2><SettingsPage openLead={setLeadInterest} /></section>
+        </div>
         <footer className="demo-disclaimer">This interactive dashboard uses sample data for demonstration purposes. It does not perform live scans, security testing, legal analysis, or compliance certification.</footer>
       </main>
       <Modal modal={modal} close={()=>setModal(null)} openLead={setLeadInterest}/>

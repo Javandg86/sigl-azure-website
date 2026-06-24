@@ -4333,3 +4333,101 @@ body .demo-app .report-templates article {
   position: relative !important;
   z-index: 2 !important;
 }
+
+/* =====================================================
+   Product Demo one-page scroll test mode
+   ===================================================== */
+
+.product-scroll-mode {
+  display: block !important;
+  grid-template-columns: none !important;
+}
+
+.product-scroll-mode .demo-sidebar,
+.product-scroll-mode .hamburger {
+  display: none !important;
+}
+
+.product-scroll-mode .demo-main {
+  width: min(1480px, calc(100vw - 44px)) !important;
+  margin: 0 auto !important;
+  padding: 34px 0 90px !important;
+}
+
+.product-top-tabs {
+  position: sticky;
+  top: 16px;
+  z-index: 50;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 12px;
+  margin: 24px 0 28px;
+  border-radius: 24px;
+  background: linear-gradient(145deg, rgba(255,255,255,.10), rgba(255,255,255,.035));
+  border: 1px solid rgba(255,255,255,.14);
+  backdrop-filter: blur(22px) saturate(160%);
+  -webkit-backdrop-filter: blur(22px) saturate(160%);
+}
+
+.product-top-tabs a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  padding: 12px 14px;
+  border-radius: 16px;
+  color: #f8fbff !important;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(0,0,0,.18);
+  font-weight: 900;
+}
+
+.product-top-tabs a:hover {
+  background: rgba(124,221,255,.14);
+  border-color: rgba(124,221,255,.34);
+}
+
+.product-scroll-sections {
+  display: grid;
+  gap: 80px;
+}
+
+.product-scroll-section {
+  scroll-margin-top: 110px;
+}
+
+.product-scroll-section > h2 {
+  color: #f8fbff;
+  font-size: clamp(2.2rem, 5vw, 4.5rem);
+  line-height: .95;
+  margin: 0 0 24px;
+  letter-spacing: -.05em;
+}
+
+.product-scroll-mode .demo-topbar {
+  margin-bottom: 0 !important;
+}
+
+@media (max-width: 900px) {
+  .product-scroll-mode .demo-main {
+    width: calc(100vw - 28px) !important;
+    padding-top: 22px !important;
+  }
+
+  .product-top-tabs {
+    top: 8px;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    border-radius: 18px;
+  }
+
+  .product-top-tabs a {
+    white-space: nowrap;
+    min-width: max-content;
+  }
+
+  .product-scroll-sections {
+    gap: 54px;
+  }
+}
