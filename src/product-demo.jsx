@@ -748,6 +748,14 @@ function App() {
   return (
     <div className="demo-app product-scroll-mode">
       <div className="product-demo-network" id="productDemoNetwork"></div>
+      <button
+        className="product-demo-exit"
+        aria-label="Exit product demo"
+        title="Back to main website"
+        onClick={() => { window.location.href = '/' }}
+      >
+        ×
+      </button>
       <button className="hamburger" onClick={() => setDrawer(true)}><Menu /></button>
       <aside className={`demo-sidebar ${drawer ? 'open' : ''}`}>
         <button
