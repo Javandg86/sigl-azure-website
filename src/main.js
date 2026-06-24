@@ -875,3 +875,36 @@ document.addEventListener('click', async (event) => {
 
 
 }
+
+// Mobile-only floating navigation that stays visible while scrolling
+function initFloatingMobileNav() {
+  if (document.getElementById('siglFloatingMobileNav')) return
+
+  const sourceNav = document.getElementById('siteNav')
+  if (!sourceNav) return
+
+  const wrapper = document.createElement('details')
+  wrapper.id = 'siglFloatingMobileNav'
+  wrapper.className = 'sigl-floating-mobile-nav'
+
+  const summary = document.createElement('summary')
+  summary.setAttribute('aria-label', 'Open navigation menu')
+  summary.textContent = '☰'
+
+  const menu = document.createElement('nav')
+  menu.setAttribute('aria-label', 'Mobile site navigation')
+
+  sourceNav.querySelectorAll('a').forEach((link) => {
+    const a = link.cloneNode(true)
+    a.addEventListener('click', () => {
+      wrapper.open = false
+    })
+    menu.appendChild(a)
+  })
+
+  wrapper.appendChild(summary)
+  wrapper.appendChild(menu)
+  document.body.appendChild(wrapper)
+}
+
+initFloatingMobileNav()
