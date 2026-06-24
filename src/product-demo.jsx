@@ -789,6 +789,15 @@ function App() {
           ))}
         </nav>
 
+        <nav className="product-side-tabs" aria-label="Quick product demo navigation">
+          {nav.map(([name, Icon]) => (
+            <a key={name} href={`#${name.toLowerCase().replaceAll(' ', '-')}`} title={name}>
+              <Icon size={17} />
+              <span>{name}</span>
+            </a>
+          ))}
+        </nav>
+
         <div className="fade-page product-scroll-sections">
           <section id="dashboard" className="product-scroll-section"><Dashboard openLead={setLeadInterest} /></section>
           <section id="ai-inventory" className="product-scroll-section"><h2>AI Inventory</h2><Inventory setModal={setModal} openLead={setLeadInterest} /></section>

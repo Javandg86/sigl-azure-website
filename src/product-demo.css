@@ -4886,3 +4886,101 @@ body .demo-app tbody tr:hover {
     gap: 14px !important;
   }
 }
+
+/* =====================================================
+   Product Demo polish: centered animation, darker glass, side tabs
+   ===================================================== */
+
+/* Return network animation to original size and keep it centered */
+.product-demo-network {
+  inset: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  display: grid !important;
+  place-items: center !important;
+}
+
+.product-demo-network canvas {
+  width: 100vw !important;
+  height: 100vh !important;
+  min-width: 100vw !important;
+  min-height: 100vh !important;
+  transform: none !important;
+  transform-origin: center center !important;
+  filter: brightness(1.55) contrast(1.22) saturate(1.35) !important;
+}
+
+/* Slightly darker translucent glass — readable, but still see-through */
+body .demo-app .metric-card,
+body .demo-app .panel,
+body .demo-app .demo-hero,
+body .demo-app .conversion-panel,
+body .demo-app .report-templates article,
+body .demo-app .table-wrap,
+body .demo-app .integration-row,
+body .demo-app .team-row,
+body .demo-app .owner-row,
+body .demo-app .policy-row,
+body .demo-app .deadline-row,
+body .demo-app .risk-control-row,
+body .demo-app .missing-evidence-row,
+body .demo-app .recent-upload-row,
+body .demo-app .scheduled-row {
+  background: rgba(5, 11, 18, .90) !important;
+  border: 1px solid rgba(124,221,255,.22) !important;
+  backdrop-filter: blur(24px) saturate(165%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(165%) !important;
+}
+
+/* Floating right-side section tabs */
+.product-side-tabs {
+  position: fixed;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 90;
+  display: grid;
+  gap: 8px;
+  padding: 10px;
+  border-radius: 22px;
+  background: rgba(5, 11, 18, .88);
+  border: 1px solid rgba(124,221,255,.22);
+  backdrop-filter: blur(22px) saturate(160%);
+  -webkit-backdrop-filter: blur(22px) saturate(160%);
+  box-shadow: 0 24px 70px rgba(0,0,0,.38);
+}
+
+.product-side-tabs a {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  min-width: 170px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  color: rgba(248,251,255,.86) !important;
+  text-decoration: none;
+  font-weight: 900;
+  font-size: .88rem;
+  border: 1px solid transparent;
+}
+
+.product-side-tabs a:hover {
+  background: rgba(124,221,255,.13);
+  border-color: rgba(124,221,255,.30);
+  color: #fff !important;
+}
+
+/* Add right breathing room so floating tabs don't cover content */
+@media (min-width: 1200px) {
+  .product-scroll-mode .demo-main {
+    padding-right: 230px !important;
+  }
+}
+
+/* On tablet/mobile, keep top tabs only */
+@media (max-width: 1199px) {
+  .product-side-tabs {
+    display: none !important;
+  }
+}
