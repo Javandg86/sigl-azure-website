@@ -722,6 +722,7 @@ function SettingsPage({ openLead }) {
 function App() {
   const [active, setActive] = useState('Dashboard')
   const [drawer, setDrawer] = useState(false)
+  const [mobileNavOpen, setMobileNavOpen] = useState(false)
   const [modal, setModal] = useState(null)
   const [leadInterest, setLeadInterest] = useState('')
   const Page = useMemo(() => ({
