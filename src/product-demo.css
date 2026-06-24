@@ -5139,3 +5139,47 @@ body .demo-app .scheduled-row {
     padding-top: 126px !important;
   }
 }
+
+/* Mobile/tablet: vertical section tabs directly under X button */
+@media (max-width: 1199px) {
+  .product-side-tabs {
+    display: flex !important;
+    flex-direction: column !important;
+    position: fixed !important;
+    top: 72px !important;
+    right: 12px !important;
+    left: auto !important;
+    width: 170px !important;
+    gap: 8px !important;
+    padding: 10px !important;
+    z-index: 9997 !important;
+    background: rgba(5,11,18,.88) !important;
+    border: 1px solid rgba(124,221,255,.22) !important;
+    border-radius: 18px !important;
+    backdrop-filter: blur(22px) saturate(160%) !important;
+    -webkit-backdrop-filter: blur(22px) saturate(160%) !important;
+  }
+
+  .product-side-tabs a {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    padding: 10px 12px !important;
+    border-radius: 12px !important;
+    background: rgba(255,255,255,.05) !important;
+    border: 1px solid rgba(255,255,255,.08) !important;
+    color: #fff !important;
+    font-size: .8rem !important;
+    font-weight: 800 !important;
+  }
+
+  .product-side-tabs span {
+    display: inline !important;
+  }
+
+  .product-scroll-mode .demo-topbar {
+    padding-top: 0 !important;
+  }
+}
