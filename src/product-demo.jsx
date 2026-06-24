@@ -748,6 +748,7 @@ function App() {
   return (
     <div className="demo-app product-scroll-mode">
       <div className="product-demo-network" id="productDemoNetwork"></div>
+      <a className="product-demo-corner-logo" href="/" aria-label="Return to SIGL homepage">SIGL</a>
       <button
         className="product-demo-exit"
         aria-label="Exit product demo"

@@ -4984,3 +4984,68 @@ body .demo-app .scheduled-row {
     display: none !important;
   }
 }
+
+/* =====================================================
+   Product Demo: remove top tabs, add top-left logo, move tabs left
+   ===================================================== */
+
+/* Remove top tabs bar completely */
+.product-top-tabs {
+  display: none !important;
+}
+
+/* SIGL logo at top-left */
+.product-demo-corner-logo {
+  position: fixed !important;
+  top: 24px !important;
+  left: 28px !important;
+  z-index: 9998 !important;
+  color: #ffffff !important;
+  text-decoration: none !important;
+  font-size: 2.8rem !important;
+  font-weight: 950 !important;
+  letter-spacing: -.09em !important;
+  line-height: 1 !important;
+}
+
+/* Move floating section tabs to the left side */
+.product-side-tabs {
+  left: 18px !important;
+  right: auto !important;
+}
+
+/* Add left spacing so tabs do not cover content */
+@media (min-width: 1200px) {
+  .product-scroll-mode .demo-main {
+    padding-left: 230px !important;
+    padding-right: 34px !important;
+  }
+}
+
+/* Give dashboard heading room under SIGL logo */
+.product-scroll-mode .demo-topbar {
+  padding-top: 72px !important;
+}
+
+/* Mobile: hide side tabs and keep logo small */
+@media (max-width: 1199px) {
+  .product-side-tabs {
+    display: none !important;
+  }
+
+  .product-demo-corner-logo {
+    position: absolute !important;
+    top: 18px !important;
+    left: 18px !important;
+    font-size: 2.2rem !important;
+  }
+
+  .product-scroll-mode .demo-main {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  .product-scroll-mode .demo-topbar {
+    padding-top: 70px !important;
+  }
+}
